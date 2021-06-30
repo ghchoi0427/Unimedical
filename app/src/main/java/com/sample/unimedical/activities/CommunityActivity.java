@@ -1,8 +1,10 @@
-package com.sample.unimedical;
+package com.sample.unimedical.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sample.unimedical.R;
 
 public class CommunityActivity extends AppCompatActivity {
 

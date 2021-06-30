@@ -1,8 +1,10 @@
-package com.sample.unimedical;
+package com.sample.unimedical.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sample.unimedical.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

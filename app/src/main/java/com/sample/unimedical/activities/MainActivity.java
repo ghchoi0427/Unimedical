@@ -1,4 +1,4 @@
-package com.sample.unimedical;
+package com.sample.unimedical.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.Account;
+import com.sample.unimedical.R;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "사용자";
