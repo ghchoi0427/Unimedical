@@ -26,11 +26,12 @@
             android:text="Medi.com" />
 
         <ImageButton
-            android:id="@+id/btn_profile"
+            android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:srcCompat="@android:drawable/ic_dialog_info" />
+            app:srcCompat="@android:drawable/ic_menu_info_details" />
+
     </LinearLayout>
 
     <ImageView
