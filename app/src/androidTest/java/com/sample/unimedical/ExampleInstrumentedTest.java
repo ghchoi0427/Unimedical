@@ -1,6 +1,7 @@
 package com.sample.unimedical;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -57,6 +58,9 @@ public class ExampleInstrumentedTest {
         }
         rd.close();
         conn.disconnect();
-        System.out.println(sb.toString());
+        //System.out.println(sb.toString());
+        Log.d("result",sb.toString());
+
+
     }
 }
