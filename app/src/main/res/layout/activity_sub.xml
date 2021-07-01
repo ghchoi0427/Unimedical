@@ -46,7 +46,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_search_engine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
