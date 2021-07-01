@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Unimedical">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,10 +33,10 @@
                     android:scheme="0cfe9165fbf7d7069b488e119b2e8d6c"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SubActivity"/>
-        <activity android:name=".SettingActivity"/>
-        <activity android:name=".SearchActivity"/>
-        <activity android:name=".CommunityActivity"/>
+        <activity android:name=".activities.SubActivity"/>
+        <activity android:name=".activities.SettingActivity"/>
+        <activity android:name=".activities.SearchActivity"/>
+        <activity android:name=".activities.CommunityActivity"/>
 
     </application>
 
