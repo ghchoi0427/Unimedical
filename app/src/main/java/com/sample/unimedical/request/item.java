@@ -1,6 +1,6 @@
 package com.sample.unimedical.request;
 
-public class appliance {
+public class item {
 
     String MDEQ_PRDLST_SN;
     String SIZE_INFO;
