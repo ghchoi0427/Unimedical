@@ -63,7 +63,8 @@ public class SearchActivity extends AppCompatActivity {
         while ((line = rd.readLine()) != null) {
             sb.append(line);
         }
-        result.append(sb.toString());
+        runOnUiThread(() -> result.append(sb.toString()));
+
         rd.close();
         conn.disconnect();
     }
