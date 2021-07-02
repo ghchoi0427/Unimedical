@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.sample.unimedical.R;
-import com.sample.unimedical.request.Response;
+import com.sample.unimedical.device.Response;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
