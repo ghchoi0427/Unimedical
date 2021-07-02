@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
         urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + URLEncoder.encode("uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("3", "UTF-8")); /*한 페이지 결과 수*/
-        urlBuilder.append("&" + URLEncoder.encode("PRDLST_NM", "UTF-8") + "=" + URLEncoder.encode("의료용침대", "UTF-8")); /*품목명*/
+        urlBuilder.append("&" + URLEncoder.encode("PRDLST_NM", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(edit.getText()), "UTF-8")); /*품목명*/
         urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*응답데이터 형식(xml/json) Default: xml*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -67,6 +67,7 @@ public class SearchActivity extends AppCompatActivity {
             sb.append(line);
         }
 
+        runOnUiThread(()->result.setText(""));
         runOnUiThread(() -> result.append(sb.toString()));
 
         Log.d("testing", processResponse(sb.toString())+"");
