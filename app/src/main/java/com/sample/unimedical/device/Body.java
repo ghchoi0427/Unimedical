@@ -1,4 +1,4 @@
-package com.sample.unimedical.request;
+package com.sample.unimedical.device;
 
 import java.util.ArrayList;
 

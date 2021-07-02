@@ -1,4 +1,4 @@
-package com.sample.unimedical.request;
+package com.sample.unimedical.device;
 
 public class Response {
     Header header;
