@@ -1,13 +1,16 @@
 package com.sample.unimedical.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.sample.unimedical.R;
+import com.sample.unimedical.request.Response;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -63,11 +66,20 @@ public class SearchActivity extends AppCompatActivity {
         while ((line = rd.readLine()) != null) {
             sb.append(line);
         }
+
         runOnUiThread(() -> result.append(sb.toString()));
 
+        Log.d("testing", processResponse(sb.toString())+"");
         rd.close();
         conn.disconnect();
     }
+
+    private String processResponse(String response) {
+        Gson gson = new Gson();
+        Response response1 = gson.fromJson(response, Response.class);
+        return response1.getBody().getItems().get(0).getPRDLST_NM();
+    }
+
 
 }
 
