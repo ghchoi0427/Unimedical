@@ -27,9 +27,9 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/result"
@@ -37,8 +37,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textStyle="bold" />
-
-    </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
 
 
 </LinearLayout>
