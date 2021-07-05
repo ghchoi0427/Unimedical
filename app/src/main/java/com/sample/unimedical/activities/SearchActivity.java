@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
 
         search.setOnClickListener(v -> new Thread(() -> {
             try {
-                request();
+                startSearch();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -54,19 +54,33 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    private void startSearch() throws Exception {
+        String responseJson = request();
+        processResponse(responseJson);
+    }
+
     public void processResponse(String response) {
         Gson gson = new Gson();
         Response fromJson = gson.fromJson(response, Response.class);
 
-        adapter.clearItem();
-        for (int i = 0; i < fromJson.getBody().getItems().size(); i++) {
-            adapter.addItem(fromJson.getBody().getItems().get(i));
+        clearItemList(adapter);
+
+        for(Item i : fromJson.getBody().getItems()){
+            adapter.addItem(i);
         }
 
+        notifyDataSetChanged(adapter);
+    }
+
+    private void clearItemList(DeviceAdapter adapter) {
+        adapter.clearItem();
+    }
+
+    private void notifyDataSetChanged(DeviceAdapter adapter) {
         runOnUiThread(() -> adapter.notifyDataSetChanged());
     }
 
-    private void request() throws Exception {
+    private String request() throws Exception {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471000/MdeqPrdlstInfoService/getMdeqPrdlstInfoInq"); /*URL*/
         urlBuilder.append("?").append(URLEncoder.encode("serviceKey", "UTF-8")).append("=").append(URLEncoder.encode("uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&").append(URLEncoder.encode("pageNo", "UTF-8")).append("=").append(URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
@@ -89,10 +103,10 @@ public class SearchActivity extends AppCompatActivity {
             sb.append(line);
         }
 
-        processResponse(sb.toString());
-
         rd.close();
         conn.disconnect();
+
+        return sb.toString();
     }
 
 }
