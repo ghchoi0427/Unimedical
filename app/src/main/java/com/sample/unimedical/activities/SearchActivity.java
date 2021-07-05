@@ -1,6 +1,7 @@
 package com.sample.unimedical.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -23,11 +24,14 @@ import java.net.URLEncoder;
 public class SearchActivity extends AppCompatActivity {
     EditText edit;
     Button search;
+    Button previous;
+    Button next;
     RecyclerView recyclerView;
     DeviceAdapter adapter;
 
     private int pageNumber = 1;
     private int numberOfRows = 30;
+    private final int firstPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,11 @@ public class SearchActivity extends AppCompatActivity {
         search = findViewById(R.id.btn_search_result);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new DeviceAdapter();
+        previous = findViewById(R.id.btn_previous);
+        next = findViewById(R.id.btn_next);
+
+        previous.setVisibility(View.INVISIBLE);
+        next.setVisibility(View.INVISIBLE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -45,6 +54,29 @@ public class SearchActivity extends AppCompatActivity {
 
 
         search.setOnClickListener(v -> new Thread(() -> {
+            runOnUiThread(()->previous.setVisibility(View.VISIBLE));
+            runOnUiThread(()->next.setVisibility(View.VISIBLE));
+
+            try {
+                startSearch();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start());
+
+        previous.setOnClickListener(v -> new Thread(() -> {
+            if (pageNumber > firstPage) {
+                pageNumber--;
+                try {
+                    startSearch();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start());
+
+        next.setOnClickListener(v -> new Thread(() -> {
+            pageNumber++;
             try {
                 startSearch();
             } catch (Exception e) {
@@ -56,6 +88,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private void startSearch() throws Exception {
         processResponse(request());
+        //previous.setVisibility(View.VISIBLE);
+        //next.setVisibility(View.VISIBLE);
     }
 
     public void processResponse(String response) {
@@ -64,7 +98,7 @@ public class SearchActivity extends AppCompatActivity {
 
         clearItemList(adapter);
 
-        for(Item i : fromJson.getBody().getItems()){
+        for (Item i : fromJson.getBody().getItems()) {
             adapter.addItem(i);
         }
 
