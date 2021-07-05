@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +31,10 @@ public class SearchActivity extends AppCompatActivity {
     Button next;
     RecyclerView recyclerView;
     DeviceAdapter adapter;
+    RadioButton loadTen;
+    RadioButton loadFifty;
+    RadioButton loadHundred;
+    RadioGroup radioGroup;
 
     private int pageNumber = 1;
     private int numberOfRows = 30;
@@ -48,16 +55,18 @@ public class SearchActivity extends AppCompatActivity {
         previous.setVisibility(View.INVISIBLE);
         next.setVisibility(View.INVISIBLE);
 
+        radioGroup = findViewById(R.id.radio_group);
+        loadTen = findViewById(R.id.load_ten);
+        loadFifty = findViewById(R.id.load_fifty);
+        loadHundred = findViewById(R.id.load_hundred);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-
-
-
         search.setOnClickListener(v -> new Thread(() -> {
-            runOnUiThread(()->previous.setVisibility(View.VISIBLE));
-            runOnUiThread(()->next.setVisibility(View.VISIBLE));
+            runOnUiThread(() -> previous.setVisibility(View.VISIBLE));
+            runOnUiThread(() -> next.setVisibility(View.VISIBLE));
 
             try {
                 startSearch();
@@ -85,6 +94,23 @@ public class SearchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start());
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.load_ten) {
+                    numberOfRows = 10;
+                }
+                if (checkedId == R.id.load_fifty) {
+                    numberOfRows = 50;
+                }
+
+                if (checkedId == R.id.load_hundred) {
+                    numberOfRows = 100;
+                }
+            }
+        });
+
 
     }
 
