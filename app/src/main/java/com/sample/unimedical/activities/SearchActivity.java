@@ -27,7 +27,6 @@ import java.net.URLEncoder;
 
 public class SearchActivity extends AppCompatActivity {
     EditText edit;
-    TextView result;
     Button search;
 
     RecyclerView recyclerView;
@@ -68,7 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void processResponse2(String response) {
+    public void processResponse(String response) {
         Gson gson = new Gson();
         Response fromJson = gson.fromJson(response, Response.class);
 
@@ -84,7 +83,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void testAdapter(){
+    private void testAdapter() {
         int a = 0;
         for (Item i : adapter.getItems()) {
             Log.d("testing" + a + " ", i.getPRDLST_NM() + "\n" + i.getUSE_PURPS_CONT());
@@ -115,22 +114,11 @@ public class SearchActivity extends AppCompatActivity {
             sb.append(line);
         }
 
-        processResponse2(sb.toString());
-
-        // runOnUiThread(()->result.setText(""));
-        // runOnUiThread(() -> result.append(sb.toString()));
-        //Log.d("testing", processResponse(sb.toString())+"");
+        processResponse(sb.toString());
 
         rd.close();
         conn.disconnect();
     }
-
-    private String processResponse(String response) {
-        Gson gson = new Gson();
-        Response response1 = gson.fromJson(response, Response.class);
-        return response1.getBody().getItems().get(0).getPRDLST_NM();
-    }
-
 
 }
 
