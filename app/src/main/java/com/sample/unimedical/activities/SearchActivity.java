@@ -26,23 +26,18 @@ import java.net.URLEncoder;
 public class SearchActivity extends AppCompatActivity {
     EditText edit;
     Button search;
-
     RecyclerView recyclerView;
     DeviceAdapter adapter;
-
-    static RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
         edit = findViewById(R.id.edit);
         search = findViewById(R.id.btn_search_result);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new DeviceAdapter();
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -57,10 +52,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         }).start());
 
-
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
     }
 
     public void processResponse(String response) {
@@ -72,19 +63,7 @@ public class SearchActivity extends AppCompatActivity {
             adapter.addItem(fromJson.getBody().getItems().get(i));
         }
 
-
         runOnUiThread(() -> adapter.notifyDataSetChanged());
-
-        testAdapter();
-
-    }
-
-    private void testAdapter() {
-        int a = 0;
-        for (Item i : adapter.getItems()) {
-            Log.d("testing" + a + " ", i.getPRDLST_NM() + "\n" + i.getUSE_PURPS_CONT());
-            a++;
-        }
     }
 
     private void request() throws Exception {
