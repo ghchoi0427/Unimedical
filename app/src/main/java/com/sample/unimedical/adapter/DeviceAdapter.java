@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
     ArrayList<Item> items = new ArrayList<>();
+    static final String textSerialNumber = "시리얼번호 : ";
 
     public ArrayList<Item> getItems() {
         return items;
@@ -52,24 +53,27 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         return items.get(position);
     }
 
-    public void clearItem(){
+    public void clearItem() {
         items.clear();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemPurpose;
+        TextView serialNumber;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            itemName = itemView.findViewById(R.id.textItemName);
-            itemPurpose = itemView.findViewById(R.id.textItemPurpose);
+            itemName = itemView.findViewById(R.id.text_item_name);
+            itemPurpose = itemView.findViewById(R.id.text_item_purpose);
+            serialNumber = itemView.findViewById(R.id.text_serial_number);
         }
 
         public void setItem(Item item) {
             itemName.setText(item.getPRDLST_NM());
             itemPurpose.setText(item.getUSE_PURPS_CONT());
+            serialNumber.setText(textSerialNumber+item.getMDEQ_PRDLST_SN());
         }
     }
 }
