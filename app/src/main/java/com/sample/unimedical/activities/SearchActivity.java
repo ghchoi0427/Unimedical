@@ -53,6 +53,8 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+
+
         search.setOnClickListener(v -> new Thread(() -> {
             runOnUiThread(()->previous.setVisibility(View.VISIBLE));
             runOnUiThread(()->next.setVisibility(View.VISIBLE));
@@ -88,8 +90,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void startSearch() throws Exception {
         processResponse(request());
-        //previous.setVisibility(View.VISIBLE);
-        //next.setVisibility(View.VISIBLE);
     }
 
     public void processResponse(String response) {
