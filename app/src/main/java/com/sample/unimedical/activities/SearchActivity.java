@@ -52,8 +52,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void startSearch() throws Exception {
-        String responseJson = request();
-        processResponse(responseJson);
+        processResponse(request());
     }
 
     public void processResponse(String response) {
@@ -74,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void notifyDataSetChanged(DeviceAdapter adapter) {
-        runOnUiThread(() -> adapter.notifyDataSetChanged());
+        runOnUiThread(adapter::notifyDataSetChanged);
     }
 
     private String request() throws Exception {
