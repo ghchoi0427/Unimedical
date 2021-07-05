@@ -49,15 +49,13 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        search.setOnClickListener(v -> {
-            new Thread(() -> {
-                try {
-                    request();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        });
+        search.setOnClickListener(v -> new Thread(() -> {
+            try {
+                request();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start());
 
 
         if (requestQueue == null) {
