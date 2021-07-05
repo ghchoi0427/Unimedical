@@ -26,6 +26,8 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DeviceAdapter adapter;
 
+    private int pageNumber = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
     private String request() throws Exception {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471000/MdeqPrdlstInfoService/getMdeqPrdlstInfoInq"); /*URL*/
         urlBuilder.append("?").append(URLEncoder.encode("serviceKey", "UTF-8")).append("=").append(URLEncoder.encode("uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
-        urlBuilder.append("&").append(URLEncoder.encode("pageNo", "UTF-8")).append("=").append(URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&").append(URLEncoder.encode("pageNo", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(pageNumber), "UTF-8")); /*페이지번호*/
         urlBuilder.append("&").append(URLEncoder.encode("numOfRows", "UTF-8")).append("=").append(URLEncoder.encode("3", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&").append(URLEncoder.encode("PRDLST_NM", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(edit.getText()), "UTF-8")); /*품목명*/
         urlBuilder.append("&").append(URLEncoder.encode("type", "UTF-8")).append("=").append(URLEncoder.encode("json", "UTF-8")); /*응답데이터 형식(xml/json) Default: xml*/
