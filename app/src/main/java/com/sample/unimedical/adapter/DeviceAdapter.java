@@ -1,4 +1,4 @@
-package com.sample.unimedical.activities;
+package com.sample.unimedical.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
     ArrayList<Item> items = new ArrayList<>();
 
     @NonNull
