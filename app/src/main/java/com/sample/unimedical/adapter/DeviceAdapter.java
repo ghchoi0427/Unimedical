@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sample.unimedical.R;
 import com.sample.unimedical.device.Item;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
@@ -59,19 +57,19 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        TextView textView2;
+        TextView itemName;
+        TextView itemPurpose;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.textItemName);
-            textView2 = itemView.findViewById(R.id.textItemPurpose);
+            itemName = itemView.findViewById(R.id.textItemName);
+            itemPurpose = itemView.findViewById(R.id.textItemPurpose);
         }
 
         public void setItem(Item item) {
-            textView.setText(item.getPRDLST_NM());
-            textView2.setText(item.getUSE_PURPS_CONT());
+            itemName.setText(item.getPRDLST_NM());
+            itemPurpose.setText(item.getUSE_PURPS_CONT());
         }
     }
 }
