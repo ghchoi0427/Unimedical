@@ -16,28 +16,18 @@
             android:id="@+id/edit"
             android:layout_width="200dp"
             android:layout_height="match_parent"
+            android:layout_weight="8"
             android:hint="@string/hint_input_keyword"/>
 
         <Button
             android:id="@+id/btn_search_result"
             android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:text="@string/search"
             android:textSize="12sp"/>
 
     </LinearLayout>
-
-   <!-- <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-    </ScrollView>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
