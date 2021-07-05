@@ -35,24 +35,24 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/load_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="10개씩 보기" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/load_fifty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:text="50개씩 보기" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/load_hundred"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:text="100개씩 보기" />
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
