@@ -16,16 +16,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
+    ArrayList<Item> items = new ArrayList<>();
+
     public ArrayList<Item> getItems() {
         return items;
     }
 
-    ArrayList<Item> items = new ArrayList<>();
-
     @NonNull
-    @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.device_item, viewGroup, false);
 
@@ -33,7 +32,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull DeviceAdapter.ViewHolder viewHolder, int position) {
         Item item = items.get(position);
         viewHolder.setItem(item);
     }
@@ -55,6 +54,10 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         return items.get(position);
     }
 
+    public void clearItem(){
+        items.clear();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         TextView textView2;
@@ -63,7 +66,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             super(itemView);
 
             textView = itemView.findViewById(R.id.textItemName);
-            textView = itemView.findViewById(R.id.textItemPurpose);
+            textView2 = itemView.findViewById(R.id.textItemPurpose);
         }
 
         public void setItem(Item item) {
