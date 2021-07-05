@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,18 +15,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textItemName"
+                android:id="@+id/text_item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/textItemPurpose"
+                android:id="@+id/text_item_purpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_serial_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
