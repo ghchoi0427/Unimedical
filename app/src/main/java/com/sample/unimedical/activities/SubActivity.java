@@ -19,7 +19,6 @@ public class SubActivity extends AppCompatActivity {
         ImageButton btnSetting = findViewById(R.id.btn_setting);
         Button btnSearchEngine = findViewById(R.id.btn_search_engine);
         Button btnCommunity = findViewById(R.id.btn_community);
-        Button testButton = findViewById(R.id.btn_test);
 
         btnSetting.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, SettingActivity.class));
@@ -33,8 +32,6 @@ public class SubActivity extends AppCompatActivity {
             startActivity(new Intent(SubActivity.this, CommunityActivity.class));
         });
 
-        testButton.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, TestActivity.class));
-        });
+
     }
 }
