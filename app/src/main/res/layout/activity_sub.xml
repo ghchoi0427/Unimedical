@@ -8,56 +8,71 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btn_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_preferences" />
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/setting_icon" />
 
         <TextView
             android:id="@+id/header_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/sub_title" />
+            android:layout_height="50dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="2"
+            android:elegantTextHeight="true"
+            android:text="@string/sub_title"
+            android:textAlignment="center"
+            android:textScaleX="1.2"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_info_details" />
+            android:scaleType="centerInside"
+
+            app:srcCompat="@drawable/profile_image" />
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/uni_logo"
-        android:contentDescription="@string/sub_logo_description" />
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/sub_logo_description"
+        app:srcCompat="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_search_engine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:text="의료기기 \n 검색엔진" />
 
         <Button
             android:id="@+id/btn_promotion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity=""
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:text="의료인-구매-업체 \n 영업제안" />
     </LinearLayout>
@@ -65,20 +80,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="0dp">
 
         <Button
             android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:text="병원 &amp; 약국 찾기 \n 주변검색" />
 
         <Button
             android:id="@+id/btn_community"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
             android:text="메디닷컴 \n커뮤니티" />
 
     </LinearLayout>
