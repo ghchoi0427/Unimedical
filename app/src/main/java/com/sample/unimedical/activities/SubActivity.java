@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -10,15 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sample.unimedical.R;
 
 public class SubActivity extends AppCompatActivity {
+    ImageButton btnSetting;
+    Button btnSearchEngine;
+    Button btnCommunity ;
+    Button buttonMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        ImageButton btnSetting = findViewById(R.id.btn_setting);
-        Button btnSearchEngine = findViewById(R.id.btn_search_engine);
-        Button btnCommunity = findViewById(R.id.btn_community);
+        btnSetting = findViewById(R.id.btn_setting);
+        btnSearchEngine = findViewById(R.id.btn_search_engine);
+        btnCommunity = findViewById(R.id.btn_community);
+        buttonMap = findViewById(R.id.btn_map);
 
         btnSetting.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, SettingActivity.class));
@@ -32,6 +38,11 @@ public class SubActivity extends AppCompatActivity {
             startActivity(new Intent(SubActivity.this, CommunityActivity.class));
         });
 
+        buttonMap.setOnClickListener(v -> {
+            startActivity(new Intent(SubActivity.this, MapActivity.class));
+        });
+
 
     }
+
 }
