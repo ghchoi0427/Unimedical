@@ -95,18 +95,18 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
             try {
                 itemName.setText(item.getProductName());
-                primaryCode.setText(item.getPrimaryCode());
-                midClass.setText(item.getMidClass());
-                midCode.setText(item.getMidCode() + "");
-                size.setText(item.getSize());
-                unit.setText(item.getUnit());
-                maker.setText(item.getMaker());
-                material.setText(item.getMaterial());
-                vendor.setText(item.getVendor());
-                priceMax.setText(item.getPriceMax());
-                update.setText(item.getUpdate());
-                validFrom.setText(item.getValidFrom());
-                remark.setText(item.getRemark());
+                primaryCode.setText("코드 : "+item.getPrimaryCode());
+                midClass.setText("중분류 : "+item.getMidClass());
+                midCode.setText("중분류코드 : "+item.getMidCode() + "");
+                size.setText("규격 : "+item.getSize());
+                unit.setText("단위 : "+item.getUnit());
+                maker.setText("제조회사 : "+item.getMaker());
+                material.setText("재질 : "+item.getMaterial());
+                vendor.setText("수입업소 : "+item.getVendor());
+                priceMax.setText("상한금액 : "+item.getPriceMax());
+                update.setText("최초등재일 : "+item.getUpdate());
+                validFrom.setText("적용일자 : "+item.getValidFrom());
+                remark.setText("비고 : "+item.getRemark());
             } catch (Exception e) {
                 e.printStackTrace();
             }
