@@ -2,10 +2,8 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +21,6 @@ import java.io.InputStream;
 public class SearchActivity extends AppCompatActivity {
     EditText editText;
     Button searchButton;
-    TextView resultView;
     RecyclerView recyclerView;
     DeviceAdapter adapter;
 
@@ -61,7 +58,6 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
-
         return jsonString;
     }
 
@@ -84,10 +80,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void notifyDataSetChanged(DeviceAdapter adapter) {
         runOnUiThread(adapter::notifyDataSetChanged);
-    }
-
-    private void print(String s) {
-        Log.d("test1", s);
     }
 
 }
