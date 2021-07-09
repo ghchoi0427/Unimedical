@@ -15,36 +15,73 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_item_name"
+                android:id="@+id/text_productname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/text_item_purpose"
+                android:id="@+id/text_primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/text_serial_number"
+                android:id="@+id/text_midclass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/text_item_number"
+                android:id="@+id/text_midcode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="" />
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/text_inst_div"
+                android:id="@+id/text_size"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="" />
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/text_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_maker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_vendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_pricemax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_validfrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
