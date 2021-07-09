@@ -1,15 +1,12 @@
 package com.sample.unimedical.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,25 +15,17 @@ import com.google.gson.Gson;
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.DeviceAdapter;
 import com.sample.unimedical.device.Item;
-import com.sample.unimedical.device.Response;
+import com.sample.unimedical.device.ItemList;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.stream.Stream;
-
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
 
 public class SearchActivity extends AppCompatActivity {
     EditText editText;
     Button searchButton;
     TextView resultView;
+    RecyclerView recyclerView;
+    DeviceAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,107 +34,56 @@ public class SearchActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.edit);
         searchButton = findViewById(R.id.btn_search_result);
-        resultView = findViewById(R.id.imptextview);
+        recyclerView = findViewById(R.id.recyclerView);
+        adapter = new DeviceAdapter();
 
-        // readExcel();
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
         searchButton.setOnClickListener(v -> {
-            readExcel(editText.getText().toString());
+            processResponse(getJsonFromAssets(getApplicationContext(), "device_data.json"));
         });
-
-
     }
 
-
-    private void readExcel() {
+    private String getJsonFromAssets(Context context, String fileName) {
+        String jsonString;
         try {
-            InputStream is = getBaseContext().getResources().getAssets().open("device_data.xls");
+            InputStream is = context.getAssets().open(fileName);
 
-            Workbook wb = Workbook.getWorkbook(is);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
 
-            if (wb != null) {
-                Sheet sheet = wb.getSheet(0);
-                if (sheet != null) {
-                    int colTotal = sheet.getColumns();
-                    int rowIndexStart = 1;
-                    int rowTotal = sheet.getColumn(colTotal - 1).length;
-
-                    StringBuilder sb;
-
-                    for (int row = rowIndexStart; row < rowTotal; row++) {
-                        sb = new StringBuilder();
-
-                        for (int col = 0; col < colTotal; col++) {
-                            String contents = sheet.getCell(col, row).getContents();
-                            Log.d("test", col + "번째: " + contents);
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
+
+        return jsonString;
     }
 
-    private void readExcel(String keyword) {
-        try {
-            print("keyword= " + keyword);
-            print("flag1");
-            InputStream is = getBaseContext().getResources().getAssets().open("meddev_list.xls");
-            print("flag2");
+    public void processResponse(String response) {
+        Gson gson = new Gson();
+        ItemList itemList = gson.fromJson(response, ItemList.class);
 
-            Workbook wb = Workbook.getWorkbook(is);
-            print("flag3");
+        clearItemList(adapter);
 
-            if (wb != null) {
-                print("flag4");
-                Sheet sheet = wb.getSheet(0);
-                print("flag5");
-                if (sheet != null) {
-                    print("flag6");
-                    int colTotal = sheet.getColumns();
-                    print("flag7");
-                    int rowIndexStart = 1;
-                    print("flag8");
-                    int rowTotal = sheet.getColumn(colTotal - 1).length;
-                    print("flag9");
-
-                    StringBuilder sb = null;
-                    print("flag10");
-
-                    print(rowIndexStart+"");
-                    print(rowTotal+"");
-                    print(colTotal+"");
-
-                    for (int row = rowIndexStart; row < rowTotal; row++) {
-                        print("flag11");
-                        sb = new StringBuilder();
-
-                        for (int col = 0; col < colTotal; col++) {
-                            String contents = sheet.getCell(col, row).getContents();
-
-                            //Log.d("test2", col + " : " + contents);
-                            //print("contents="+contents);
-
-                            if (contents.contains(keyword)) {
-                               for(Cell c :sheet.getRow(row)){
-                                   printTextView(c.getContents());
-                               }
-                            }
-
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Item i : itemList.getItems()) {
+            adapter.addItem(i);
         }
+
+        notifyDataSetChanged(adapter);
     }
 
-    private void printTextView(String s){
-        //resultView.setText("");
-        resultView.append(s);
+    private void clearItemList(DeviceAdapter adapter) {
+        adapter.clearItem();
+    }
+
+    private void notifyDataSetChanged(DeviceAdapter adapter) {
+        runOnUiThread(adapter::notifyDataSetChanged);
     }
 
     private void print(String s) {
