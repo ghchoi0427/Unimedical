@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -23,6 +24,7 @@ public class SearchActivity extends AppCompatActivity {
     Button searchButton;
     RecyclerView recyclerView;
     DeviceAdapter adapter;
+    ItemList itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +65,46 @@ public class SearchActivity extends AppCompatActivity {
 
     public void processResponse(String response) {
         Gson gson = new Gson();
-        ItemList itemList = gson.fromJson(response, ItemList.class);
+        itemList = gson.fromJson(response, ItemList.class);
 
         clearItemList(adapter);
+        searchItem(editText.getText().toString());
+        notifyDataSetChanged(adapter);
+    }
 
-        for (Item i : itemList.getItems()) {
-            adapter.addItem(i);
+    private void searchItem(String keyword) {
+
+
+        try {
+            for (Item i : itemList.getItems()) {
+                if (!i.getPrimaryCode().isEmpty()) {
+                    if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
+                        adapter.addItem(i);
+                    }
+                    if (i.getProductName().toLowerCase().contains(keyword.toLowerCase())) {
+                        adapter.addItem(i);
+                    }
+                    if (i.getMaker().toLowerCase().contains(keyword.toLowerCase())) {
+                        adapter.addItem(i);
+                    }
+                    if (i.getVendor().toLowerCase().contains(keyword.toLowerCase())) {
+                        adapter.addItem(i);
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        notifyDataSetChanged(adapter);
+    }
+
+    private void test() {
+        int count = 0;
+        for (Item i : itemList.getItems()) {
+            count++;
+        }
+        Log.d("test", count + "");
     }
 
     private void clearItemList(DeviceAdapter adapter) {
