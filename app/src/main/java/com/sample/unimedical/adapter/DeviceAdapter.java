@@ -92,19 +92,25 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         }
 
         public void setItem(Item item) {
-            itemName.setText(item.getProductName());
-            primaryCode.setText(item.getPrimaryCode());
-            midClass.setText(item.getMidClass());
-            midCode.setText(item.getMidCode());
-            size.setText(item.getSize());
-            unit.setText(item.getUnit());
-            maker.setText(item.getMaker());
-            material.setText(item.getMaterial());
-            vendor.setText(item.getVendor());
-            priceMax.setText(item.getPriceMax());
-            update.setText(item.getUpdate());
-            validFrom.setText(item.getValidFrom());
-            remark.setText(item.getRemark());
+
+            try {
+                itemName.setText(item.getProductName());
+                primaryCode.setText(item.getPrimaryCode());
+                midClass.setText(item.getMidClass());
+                midCode.setText(item.getMidCode() + "");
+                size.setText(item.getSize());
+                unit.setText(item.getUnit());
+                maker.setText(item.getMaker());
+                material.setText(item.getMaterial());
+                vendor.setText(item.getVendor());
+                priceMax.setText(item.getPriceMax());
+                update.setText(item.getUpdate());
+                validFrom.setText(item.getValidFrom());
+                remark.setText(item.getRemark());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
     }
