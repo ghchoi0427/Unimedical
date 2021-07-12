@@ -17,11 +17,7 @@
         android:theme="@style/Theme.Unimedical"
         android:usesCleartextTraffic="true">
         <activity android:name=".activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
@@ -36,7 +32,13 @@
                     android:scheme="0cfe9165fbf7d7069b488e119b2e8d6c"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SubActivity"/>
+        <activity android:name=".activities.SubActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.SettingActivity"/>
         <activity android:name=".activities.SearchActivity"/>
         <activity android:name=".activities.CommunityActivity"/>
