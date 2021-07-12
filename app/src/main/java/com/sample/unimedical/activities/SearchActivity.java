@@ -35,7 +35,7 @@ public class SearchActivity extends AppCompatActivity {
     List<Item> searchItems;
     private int itemCursor = 0;
 
-    private static final String FILE_NAME = "device_data.json";
+    private static final String FILE_NAME = "device_data_0712.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
