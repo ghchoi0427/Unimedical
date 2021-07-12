@@ -26,6 +26,8 @@ public class SearchActivity extends AppCompatActivity {
     DeviceAdapter adapter;
     ItemList itemList;
 
+    private static final String FILE_NAME = "device_data.json";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +43,10 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         searchButton.setOnClickListener(v -> {
-            processResponse(getJsonFromAssets(getApplicationContext(), "device_data.json"));
+            processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME));
         });
+
+
     }
 
     private String getJsonFromAssets(Context context, String fileName) {
