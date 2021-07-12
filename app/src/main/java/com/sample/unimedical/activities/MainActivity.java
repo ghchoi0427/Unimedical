@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLogOut = findViewById(R.id.btnLogout);
 
+
         btnLogin.setOnClickListener(v -> UserApiClient.getInstance().loginWithKakaoTalk(MainActivity.this, (oAuthToken, error) -> {
             if (error != null) {
                 Log.e(TAG, "로그인 실패", error);
