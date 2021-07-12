@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +17,12 @@ import com.sample.unimedical.adapter.DeviceAdapter;
 import com.sample.unimedical.device.Item;
 import com.sample.unimedical.device.ItemList;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     EditText editText;
@@ -25,6 +30,10 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DeviceAdapter adapter;
     ItemList itemList;
+
+    List<Item> currentItem;
+    List<Item> searchItems;
+    private int itemCursor = 0;
 
     private static final String FILE_NAME = "device_data.json";
 
@@ -38,6 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new DeviceAdapter();
 
+        searchItems = new ArrayList<>();
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -46,6 +57,22 @@ public class SearchActivity extends AppCompatActivity {
             processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME));
         });
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                //check if it is last element
+                if (!recyclerView.canScrollVertically(1)) {
+
+                }
+            }
+        });
 
     }
 
@@ -78,37 +105,50 @@ public class SearchActivity extends AppCompatActivity {
 
     private void searchItem(String keyword) {
 
-
         try {
+
+            //wholeItem.add(new Item());
+
+            int a=1;
             for (Item i : itemList.getItems()) {
-                if (!i.getPrimaryCode().isEmpty()) {
+                a++;
+                Log.d("test", a+" : "+i.getPrimaryCode());
+                searchItems.add(i);
+            }
+
+            Log.d("test","@@"+ searchItems.size()+"");
+
+            for (Item i : itemList.getItems()) {
+
+                if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
+                    // wholeItem.add(i);
+                }
+
+
+                /*if (!i.getPrimaryCode().isEmpty()) {
                     if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
-                        adapter.addItem(i);
+                        wholeItem.add(i);
                     }
                     if (i.getProductName().toLowerCase().contains(keyword.toLowerCase())) {
-                        adapter.addItem(i);
+                        wholeItem.add(i);
                     }
                     if (i.getMaker().toLowerCase().contains(keyword.toLowerCase())) {
-                        adapter.addItem(i);
+                        wholeItem.add(i);
                     }
                     if (i.getVendor().toLowerCase().contains(keyword.toLowerCase())) {
-                        adapter.addItem(i);
+                        wholeItem.add(i);
                     }
-                }
+                }*/
+            }
+
+            for (Item i : searchItems) {
+                Log.d("test", "@@@" + i.getPrimaryCode());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
-
-    private void test() {
-        int count = 0;
-        for (Item i : itemList.getItems()) {
-            count++;
-        }
-        Log.d("test", count + "");
     }
 
     private void clearItemList(DeviceAdapter adapter) {
@@ -118,5 +158,6 @@ public class SearchActivity extends AppCompatActivity {
     private void notifyDataSetChanged(DeviceAdapter adapter) {
         runOnUiThread(adapter::notifyDataSetChanged);
     }
+
 
 }
