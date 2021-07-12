@@ -54,21 +54,20 @@ public class SearchActivity extends AppCompatActivity {
 
         searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME)));
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.radio_product_name) {
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.radio_product_name:
                     searchMode = SEARCH_NAME;
-                }
-                if (checkedId == R.id.radio_primary_code) {
+                    break;
+                case R.id.radio_primary_code:
                     searchMode = SEARCH_CODE;
-                }
-                if (checkedId == R.id.radio_maker) {
+                    break;
+                case R.id.radio_maker:
                     searchMode = SEARCH_MAKER;
-                }
-                if (checkedId == R.id.radio_vendor) {
+                    break;
+                case R.id.radio_vendor:
                     searchMode = SEARCH_VENDOR;
-                }
+                    break;
             }
         });
 
@@ -104,11 +103,19 @@ public class SearchActivity extends AppCompatActivity {
     private void searchItem(String keyword) {
 
         try {
-            switch (searchMode){
-                case SEARCH_CODE:itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);break;
-                case SEARCH_NAME:itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);break;
-                case SEARCH_MAKER:itemList.getItems().stream().filter(e -> e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);break;
-                case SEARCH_VENDOR:itemList.getItems().stream().filter(e -> e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);break;
+            switch (searchMode) {
+                case SEARCH_CODE:
+                    itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+                    break;
+                case SEARCH_NAME:
+                    itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+                    break;
+                case SEARCH_MAKER:
+                    itemList.getItems().stream().filter(e -> e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+                    break;
+                case SEARCH_VENDOR:
+                    itemList.getItems().stream().filter(e -> e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+                    break;
             }
 
         } catch (Exception e) {
