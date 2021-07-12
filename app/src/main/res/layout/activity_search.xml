@@ -37,26 +37,34 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/load_ten"
+            android:id="@+id/radio_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:layout_weight="1"
-            android:text="10개씩 보기" />
+            android:text="제품명" />
 
         <RadioButton
-            android:id="@+id/load_fifty"
+            android:id="@+id/radio_primary_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:text="50개씩 보기" />
+            android:text="코드" />
 
         <RadioButton
-            android:id="@+id/load_hundred"
+            android:id="@+id/radio_maker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="100개씩 보기" />
+            android:text="제조사" />
+
+        <RadioButton
+            android:id="@+id/radio_vendor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="판매사" />
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
