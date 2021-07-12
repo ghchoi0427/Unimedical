@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.sample.unimedical"
         minSdkVersion 30
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -48,4 +48,5 @@ dependencies {
     implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/libDaumMapAndroid.jar')
+
 }

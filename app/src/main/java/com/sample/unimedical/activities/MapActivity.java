@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,11 @@ import com.sample.unimedical.R;
 
 //import net.daum.android.map.MapView;
 import net.daum.mf.map.api.MapView;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,9 +35,13 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        RelativeLayout mapViewContainer = findViewById(R.id.map_view);
-
+        try {
+            MapView mapView = new MapView(this);
+            ViewGroup mapViewContainer = findViewById(R.id.map_view);
+            mapViewContainer.addView(mapView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         new Thread(() -> {
             try {
@@ -42,6 +52,7 @@ public class MapActivity extends AppCompatActivity {
         }).start();
 
     }
+
 
     private void getHospitalRequest() throws Exception {
 
@@ -82,5 +93,40 @@ public class MapActivity extends AppCompatActivity {
         conn.disconnect();
         //System.out.println(sb.toString());
         Log.d("testing", sb.toString());
+    }
+
+    protected void onPostExecute(Document doc) {
+
+        String s = "";
+        NodeList nodeList = doc.getElementsByTagName("item");
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Node node = nodeList.item(i);
+            Element firstElement = (Element) node;
+
+            NodeList idx = firstElement.getElementsByTagName("idx");
+            s += "idx = " + idx.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList gugun = firstElement.getElementsByTagName("gugun");
+            s += "gugun = " + gugun.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList instt = firstElement.getElementsByTagName("instt");
+            s += "instt = " + instt.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList spot = firstElement.getElementsByTagName("spot");
+            s += "spot = " + spot.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList spotGubun = firstElement.getElementsByTagName("spotGubun");
+            s += "spotGubun = " + spotGubun.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList airPump = firstElement.getElementsByTagName("airPump");
+            s += "airPump = " + airPump.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+
+            NodeList updtDate = firstElement.getElementsByTagName("updtDate");
+            s += "updtDate = " + updtDate.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+        }
+
+        Log.d("test", s);
     }
 }
