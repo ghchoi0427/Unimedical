@@ -87,10 +87,10 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
 
-            for (Item i : itemList.getItems()) {
-                adapter.addItem(i);
-
-            }
+            itemList.getItems().stream().filter(e->e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e->e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e->e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e->e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
 
         } catch (Exception e) {
             e.printStackTrace();
