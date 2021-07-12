@@ -2,11 +2,9 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.DeviceAdapter;
-import com.sample.unimedical.device.Item;
 import com.sample.unimedical.device.ItemList;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     EditText editText;
