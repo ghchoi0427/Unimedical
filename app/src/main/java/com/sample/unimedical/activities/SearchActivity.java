@@ -2,7 +2,6 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -107,24 +106,10 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
 
-            //wholeItem.add(new Item());
-
-            int a=1;
-            for (Item i : itemList.getItems()) {
-                a++;
-                Log.d("test", a+" : "+i.getPrimaryCode());
-                searchItems.add(i);
+            for (int i = 0; i < itemList.getItems().size(); i++) {
+                //Log.d("test", itemList.getItem(i).getPrimaryCode());
+                searchItems.add(itemList.getItem(i));
             }
-
-            Log.d("test","@@"+ searchItems.size()+"");
-
-            for (Item i : itemList.getItems()) {
-
-                if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
-                    // wholeItem.add(i);
-                }
-
-
                 /*if (!i.getPrimaryCode().isEmpty()) {
                     if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
                         wholeItem.add(i);
@@ -139,16 +124,10 @@ public class SearchActivity extends AppCompatActivity {
                         wholeItem.add(i);
                     }
                 }*/
-            }
-
-            for (Item i : searchItems) {
-                Log.d("test", "@@@" + i.getPrimaryCode());
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void clearItemList(DeviceAdapter adapter) {
