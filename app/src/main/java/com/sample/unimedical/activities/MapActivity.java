@@ -37,7 +37,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         try {
             MapView mapView = new MapView(this);
-            ViewGroup mapViewContainer = findViewById(R.id.map_view);
+            RelativeLayout mapViewContainer = findViewById(R.id.mapView);
             mapViewContainer.addView(mapView);
         } catch (Exception e) {
             e.printStackTrace();
