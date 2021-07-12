@@ -1,15 +1,12 @@
 package com.sample.unimedical.activities;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
-//import net.daum.android.map.MapView;
 import net.daum.mf.map.api.MapView;
 
 import org.w3c.dom.Document;
@@ -25,19 +22,18 @@ import java.net.URLEncoder;
 
 public class MapActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "MapActivity";
-    private MapView mMapView;
-
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
+    MapView mapView;
+    RelativeLayout mapViewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         try {
-            MapView mapView = new MapView(this);
-            RelativeLayout mapViewContainer = findViewById(R.id.mapView);
+            mapView = new MapView(this);
+            mapViewContainer = findViewById(R.id.mapView);
             mapViewContainer.addView(mapView);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +50,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
-    private void getHospitalRequest() throws Exception {
+    private String getHospitalRequest() throws Exception {
 
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1"); /*URL*/
         urlBuilder.append("?").append(URLEncoder.encode("ServiceKey", "UTF-8")); /*Service Key*/
@@ -72,12 +68,9 @@ public class MapActivity extends AppCompatActivity {
         urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode("37.6132113197367", "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode("3000", "UTF-8")); /*단위 : 미터(m)*/
         URL url = new URL(urlBuilder.toString());
-        Log.d("test", urlBuilder.toString());
-        Log.d("test", "http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1?serviceKey=uhPZ%2ByjcUrJD5qN1Q6Wf1%2Bo63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng%2BLHjCADIGxjrHTUE0pGXJfGA%3D%3D&pageNo=1&numOfRows=10&sidoCd=110000&sgguCd=110019&emdongNm=%EC%8B%A0%EB%82%B4%EB%8F%99&yadmNm=%EC%84%9C%EC%9A%B8%EC%9D%98%EB%A3%8C%EC%9B%90&zipCd=2010&clCd=11&dgsbjtCd=01&xPos=127.09854004628151&yPos=37.6132113197367&radius=3000");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
-        Log.d("test", "Response code: " + conn.getResponseCode());
         BufferedReader rd;
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -91,8 +84,8 @@ public class MapActivity extends AppCompatActivity {
         }
         rd.close();
         conn.disconnect();
-        //System.out.println(sb.toString());
-        Log.d("testing", sb.toString());
+
+        return sb.toString();
     }
 
     protected void onPostExecute(Document doc) {
@@ -126,7 +119,5 @@ public class MapActivity extends AppCompatActivity {
             NodeList updtDate = firstElement.getElementsByTagName("updtDate");
             s += "updtDate = " + updtDate.item(0).getChildNodes().item(0).getNodeValue() + "\n";
         }
-
-        Log.d("test", s);
     }
 }
