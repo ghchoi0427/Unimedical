@@ -53,27 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        searchButton.setOnClickListener(v -> {
-            processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME));
-        });
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                //check if it is last element
-                if (!recyclerView.canScrollVertically(1)) {
-
-                }
-            }
-        });
-
+        searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME)));
     }
 
     private String getJsonFromAssets(Context context, String fileName) {
@@ -107,42 +87,9 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
 
-            //wholeItem.add(new Item());
-
-            int a=1;
             for (Item i : itemList.getItems()) {
-                a++;
-                Log.d("test", a+" : "+i.getPrimaryCode());
-                searchItems.add(i);
-            }
+                adapter.addItem(i);
 
-            Log.d("test","@@"+ searchItems.size()+"");
-
-            for (Item i : itemList.getItems()) {
-
-                if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
-                    // wholeItem.add(i);
-                }
-
-
-                /*if (!i.getPrimaryCode().isEmpty()) {
-                    if (i.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())) {
-                        wholeItem.add(i);
-                    }
-                    if (i.getProductName().toLowerCase().contains(keyword.toLowerCase())) {
-                        wholeItem.add(i);
-                    }
-                    if (i.getMaker().toLowerCase().contains(keyword.toLowerCase())) {
-                        wholeItem.add(i);
-                    }
-                    if (i.getVendor().toLowerCase().contains(keyword.toLowerCase())) {
-                        wholeItem.add(i);
-                    }
-                }*/
-            }
-
-            for (Item i : searchItems) {
-                Log.d("test", "@@@" + i.getPrimaryCode());
             }
 
         } catch (Exception e) {
