@@ -31,10 +31,6 @@ public class SearchActivity extends AppCompatActivity {
     DeviceAdapter adapter;
     ItemList itemList;
 
-    List<Item> currentItem;
-    List<Item> searchItems;
-    private int itemCursor = 0;
-
     private static final String FILE_NAME = "device_data_0712.json";
 
     @Override
@@ -47,13 +43,13 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new DeviceAdapter();
 
-        searchItems = new ArrayList<>();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME)));
+
     }
 
     private String getJsonFromAssets(Context context, String fileName) {
@@ -87,10 +83,10 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
 
-            itemList.getItems().stream().filter(e->e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-            itemList.getItems().stream().filter(e->e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-            itemList.getItems().stream().filter(e->e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-            itemList.getItems().stream().filter(e->e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e -> e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e -> e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,6 +101,5 @@ public class SearchActivity extends AppCompatActivity {
     private void notifyDataSetChanged(DeviceAdapter adapter) {
         runOnUiThread(adapter::notifyDataSetChanged);
     }
-
 
 }
