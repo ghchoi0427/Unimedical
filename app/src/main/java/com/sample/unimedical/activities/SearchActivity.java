@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.DeviceAdapter;
-import com.sample.unimedical.device.ItemList;
+import com.sample.unimedical.domain.ItemList;
 
 import java.io.IOException;
 import java.io.InputStream;

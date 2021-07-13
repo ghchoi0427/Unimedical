@@ -1,6 +1,5 @@
 package com.sample.unimedical.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.device.Item;
+import com.sample.unimedical.domain.Item;
 
 import java.util.ArrayList;
 

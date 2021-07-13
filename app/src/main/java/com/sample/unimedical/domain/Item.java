@@ -1,4 +1,4 @@
-package com.sample.unimedical.device;
+package com.sample.unimedical.domain;
 
 public class Item {
     private String primaryCode;
