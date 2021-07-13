@@ -1,5 +1,6 @@
 package com.sample.unimedical.activities;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import org.w3c.dom.Document;
@@ -29,7 +32,7 @@ import java.util.stream.IntStream;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener {
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -116,6 +119,7 @@ public class MapActivity extends AppCompatActivity {
             try {
 
                 NodeList addr = nodeElement.getElementsByTagName("addr");
+
                 s += "addr = " + addr.item(0).getChildNodes().item(0).getNodeValue() + "\n";
 
                 NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");
@@ -143,7 +147,42 @@ public class MapActivity extends AppCompatActivity {
 
         Log.d("test", s);
 
-        //IntStream.range(0, nodeList.getLength()).mapToObj(e->nodeList.item(e)).forEach(e->Log.d("test2",e.getC));
+
+
     }
 
+    private void currentLocation(){
+        mapView.getCurrentLocationTrackingMode();
+    }
+
+    private void setMarker(){
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("Default Marker");
+        marker.setTag(0);
+
+
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapView.addPOIItem(marker);
+    }
+
+    @Override
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
+
+    }
 }
