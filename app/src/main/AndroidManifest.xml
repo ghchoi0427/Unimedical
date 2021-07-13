@@ -5,15 +5,15 @@
     <!-- 인터넷 사용 권한 설정-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".GlobalApplication"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Unimedical"
@@ -24,14 +24,15 @@
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action
+                    android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
                 <!--Redirect URI: "kakao{NATIVE_APP_KEY}://oauth"-->
                 <data
                     android:host="oauth"
-                    android:scheme="0cfe9165fbf7d7069b488e119b2e8d6c"/>
+                    android:scheme="0cfe9165fbf7d7069b488e119b2e8d6c" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.SubActivity">
@@ -41,11 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SettingActivity"/>
-        <activity android:name=".activities.SearchActivity"/>
-        <activity android:name=".activities.CommunityActivity"/>
-        <activity android:name=".activities.MapActivity"/>
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="0cfe9165fbf7d7069b488e119b2e8d6c"/>
+        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.CommunityActivity" />
+        <activity android:name=".activities.MapActivity" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="0cfe9165fbf7d7069b488e119b2e8d6c" />
 
     </application>
 
