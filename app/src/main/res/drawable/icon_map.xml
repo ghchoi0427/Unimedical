@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:width="70dp"
-        android:height="90dp"
+        android:width="61dp"
+        android:height="98dp"
         android:drawable="@drawable/map_icon" />
 </layer-list>
 
