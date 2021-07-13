@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.Item;
+import com.sample.unimedical.domain.device.Item;
 
 import java.util.ArrayList;
 
-public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ArrayList<Item> items = new ArrayList<>();
 
     public ArrayList<Item> getItems() {
@@ -30,7 +30,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DeviceAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder viewHolder, int position) {
         Item item = items.get(position);
         viewHolder.setItem(item);
     }
