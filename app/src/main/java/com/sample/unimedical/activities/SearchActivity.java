@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.sample.unimedical.R;
-import com.sample.unimedical.adapter.DeviceAdapter;
-import com.sample.unimedical.domain.ItemList;
+import com.sample.unimedical.adapter.ItemAdapter;
+import com.sample.unimedical.domain.device.ItemList;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText editText;
     Button searchButton;
     RecyclerView recyclerView;
-    DeviceAdapter adapter;
+    ItemAdapter adapter;
     ItemList itemList;
 
     RadioGroup radioGroup;
@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.btn_search_result);
         recyclerView = findViewById(R.id.recyclerView);
         radioGroup = findViewById(R.id.radio_group);
-        adapter = new DeviceAdapter();
+        adapter = new ItemAdapter();
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -123,11 +123,11 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    private void clearItemList(DeviceAdapter adapter) {
+    private void clearItemList(ItemAdapter adapter) {
         adapter.clearItem();
     }
 
-    private void notifyDataSetChanged(DeviceAdapter adapter) {
+    private void notifyDataSetChanged(ItemAdapter adapter) {
         runOnUiThread(adapter::notifyDataSetChanged);
     }
 
