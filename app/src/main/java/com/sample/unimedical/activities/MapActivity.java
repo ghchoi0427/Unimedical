@@ -15,7 +15,6 @@ import net.daum.mf.map.api.MapView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -30,7 +29,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -40,6 +38,7 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     MapView mapView;
     RelativeLayout mapViewContainer;
+    List<Item> hospitalItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,7 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         mapView = new MapView(this);
         mapViewContainer = findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
+        hospitalItems = new ArrayList<>();
 
 
         new Thread(() -> {
@@ -60,6 +60,8 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
             }
         }).start();
 
+
+        setMarker();
     }
 
 
@@ -81,7 +83,6 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode("3000", "UTF-8")); /*단위 : 미터(m)*/
         URL url = new URL(urlBuilder.toString());
-        Log.d("test", url.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
@@ -100,8 +101,6 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         rd.close();
         conn.disconnect();
 
-
-        Log.d("test", sb.toString());
         return sb.toString();
     }
 
@@ -110,7 +109,6 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         InputSource is = new InputSource(new StringReader(str));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
-        List<Item> hospitalItems = new ArrayList<>();
 
         String s = "";
         NodeList nodeList = document.getElementsByTagName("item");
@@ -151,15 +149,9 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         }
 
         for (Item i : hospitalItems) {
-            try{
-                Log.d("test", i.getAddr());
-                Log.d("test", i.getYadmNm());
-                Log.d("test", i.getEstbDd());
-                Log.d("test", i.getHospUrl());
-                Log.d("test", i.getTelno());
-                Log.d("test", i.getXPos());
-                Log.d("test", i.getYPos());
-            }catch (Exception e){
+            try {
+
+            } catch (Exception e) {
 
             }
         }
@@ -175,10 +167,42 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         marker.setItemName("Default Marker");
         marker.setTag(0);
 
+        try {
+
+            for (Item i : hospitalItems) {
+                if (!"".equals(i.getXPos()) && !"".equals(i.getYPos())) {
+                    Log.d("test2", i.getXPos());
+                    Log.d("test2", i.getYPos());
+                }
+            }
+            Log.d("test2", hospitalItems.get(1).getXPos());
+            Log.d("test2", hospitalItems.get(1).getYPos());
+        } catch (Exception e) {
+
+        }
+
+
+        MapPoint MARKER_POINT = MapPoint.mapPointWithCONGCoord(37.6132762, 127.0978309);
+        marker.setMapPoint(MARKER_POINT);
 
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        marker.setCustomImageAnchor(0.5f, 1.0f);
         mapView.addPOIItem(marker);
+    }
+
+    private void setCustomMarker() {
+        MapPOIItem customMarker = new MapPOIItem();
+        MapPoint MARKER_POINT = MapPoint.mapPointWithCONGCoord(37.6132762, 127.0978309);
+        customMarker.setItemName("Custom Marker");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MARKER_POINT);
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.gradation); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+
+        mapView.addPOIItem(customMarker);
     }
 
     @Override
