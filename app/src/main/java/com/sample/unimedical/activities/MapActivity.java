@@ -1,6 +1,5 @@
 package com.sample.unimedical.activities;
 
-import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -8,6 +7,7 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
+import com.sample.unimedical.domain.hospital.Item;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -27,8 +27,10 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -108,6 +110,7 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         InputSource is = new InputSource(new StringReader(str));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
+        List<Item> hospitalItems = new ArrayList<>();
 
         String s = "";
         NodeList nodeList = document.getElementsByTagName("item");
@@ -115,47 +118,59 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
         for (int i = 0; i < nodeList.getLength(); i++) {
 
             Element nodeElement = (Element) nodeList.item(i);
-
+            Item item = new Item();
             try {
 
                 NodeList addr = nodeElement.getElementsByTagName("addr");
-
-                s += "addr = " + addr.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setAddr(addr.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");
-                s += "yadmNm = " + yadmNm.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList estbDd = nodeElement.getElementsByTagName("estbDd");
-                s += "estbDd = " + estbDd.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setEstbDd(estbDd.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList hospUrl = nodeElement.getElementsByTagName("hospUrl");
-                s += "hospUrl = " + hospUrl.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setHospUrl(hospUrl.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList telno = nodeElement.getElementsByTagName("telno");
-                s += "telno = " + telno.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList XPos = nodeElement.getElementsByTagName("XPos");
-                s += "XPos = " + XPos.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList YPos = nodeElement.getElementsByTagName("YPos");
-                s += "YPos = " + YPos.item(0).getChildNodes().item(0).getNodeValue() + "\n";
+                item.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            hospitalItems.add(item);
+
         }
 
-        Log.d("test", s);
+        for (Item i : hospitalItems) {
+            try{
+                Log.d("test", i.getAddr());
+                Log.d("test", i.getYadmNm());
+                Log.d("test", i.getEstbDd());
+                Log.d("test", i.getHospUrl());
+                Log.d("test", i.getTelno());
+                Log.d("test", i.getXPos());
+                Log.d("test", i.getYPos());
+            }catch (Exception e){
 
-
+            }
+        }
 
     }
 
-    private void currentLocation(){
+    private void currentLocation() {
         mapView.getCurrentLocationTrackingMode();
     }
 
-    private void setMarker(){
+    private void setMarker() {
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("Default Marker");
         marker.setTag(0);
@@ -168,6 +183,7 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
 
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
 
     }
 
@@ -185,4 +201,5 @@ public class MapActivity extends AppCompatActivity implements MapView.CurrentLoc
     public void onCurrentLocationUpdateCancelled(MapView mapView) {
 
     }
+
 }
