@@ -1,8 +1,8 @@
 package com.sample.unimedical.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +11,10 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
+import com.sample.unimedical.domain.HospitalPoiBind;
+import com.sample.unimedical.domain.hospital.Item;
 import com.sample.unimedical.util.RequestSender;
+import com.sample.unimedical.util.XMLParser;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.CameraUpdateFactory;
@@ -20,10 +23,10 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapView;
 
-public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private final int MENU_DEFAULT_CALLOUT_BALLOON = Menu.FIRST;
-    private final int MENU_CUSTOM_CALLOUT_BALLOON = Menu.FIRST + 1;
+public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener {
 
     private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
     private static final MapPoint CUSTOM_MARKER_POINT2 = MapPoint.mapPointWithGeoCoord(37.447229, 127.015515);
@@ -33,6 +36,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private MapPOIItem mDefaultMarker;
     private MapPOIItem mCustomMarker;
     private MapPOIItem mCustomBmMarker;
+    List<HospitalPoiBind> hospitalPoiBinds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,33 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         //createCustomBitmapMarker(mMapView);
         showAll();
 
+        new Thread(() -> {
+            try {
+                Log.d("test", RequestSender.sendHospitalRequest("서울의료원"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+
+    }
+
+    private HospitalPoiBind itemBinder(Item hospital, MapPOIItem mapPOIItem) {
+        return new HospitalPoiBind(hospital, mapPOIItem);
+    }
+
+    private void addBoundObjects(String hospitalName) throws Exception {
+        List<Item> items = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
+
+        for (Item i : items) {
+            MapPOIItem mapPOIItem = new MapPOIItem();
+            mapPOIItem.setItemName(i.getYadmNm());
+            mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.valueOf(i.getYPos()), Double.valueOf(i.getXPos())));
+            mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
+            mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.BluePin);
+
+            hospitalPoiBinds.add(new HospitalPoiBind(i, mapPOIItem));
+        }
     }
 
     // CalloutBalloonAdapter 인터페이스 구현
@@ -63,8 +94,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         @Override
         public View getCalloutBalloon(MapPOIItem poiItem) {
             ((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.round);
-            ((TextView) mCalloutBalloon.findViewById(R.id.title)).setText(poiItem.getItemName());
-            ((TextView) mCalloutBalloon.findViewById(R.id.desc)).setText("Custom CalloutBalloon");
+            ((TextView) mCalloutBalloon.findViewById(R.id.bal_hospital_name)).setText(poiItem.getItemName());
+            ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText("Custom CalloutBalloon");
             return mCalloutBalloon;
         }
 
@@ -78,15 +109,15 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.add(0, MENU_DEFAULT_CALLOUT_BALLOON, Menu.NONE, "Default CalloutBalloon");
-        menu.add(0, MENU_CUSTOM_CALLOUT_BALLOON, Menu.NONE, "Custom CalloutBalloon");
+        //menu.add(0, MENU_DEFAULT_CALLOUT_BALLOON, Menu.NONE, "Default CalloutBalloon");
+        // menu.add(0, MENU_CUSTOM_CALLOUT_BALLOON, Menu.NONE, "Custom CalloutBalloon");
 
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case MENU_DEFAULT_CALLOUT_BALLOON: {
                 mapView.removeAllPOIItems();
                 mapView.setCalloutBalloonAdapter(null);
@@ -106,7 +137,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     private void createDefaultMarker(MapView mapView) {
         mDefaultMarker = new MapPOIItem();
