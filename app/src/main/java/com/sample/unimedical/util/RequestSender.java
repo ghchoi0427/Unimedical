@@ -8,7 +8,7 @@ import java.net.URLEncoder;
 
 public class RequestSender {
 
-    public String getHospitalRequest() throws Exception {
+    public static String getHospitalRequest() throws Exception {
 
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1"); /*URL*/
         urlBuilder.append("?").append(URLEncoder.encode("ServiceKey", "UTF-8")); /*Service Key*/

@@ -19,7 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XMLParser {
 
-    public void processXML(String str, List<Item> hospitalItems) throws ParserConfigurationException, IOException, SAXException {
+    public static void processXML(String str, List<Item> hospitalItems) throws ParserConfigurationException, IOException, SAXException {
 
         InputSource is = new InputSource(new StringReader(str));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
