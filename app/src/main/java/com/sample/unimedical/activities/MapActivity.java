@@ -1,225 +1,215 @@
 package com.sample.unimedical.activities;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.hospital.Item;
 import com.sample.unimedical.util.RequestSender;
-import com.sample.unimedical.util.XMLParser;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
+import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapReverseGeoCoder;
+import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapView;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener {
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+    private final int MENU_DEFAULT_CALLOUT_BALLOON = Menu.FIRST;
+    private final int MENU_CUSTOM_CALLOUT_BALLOON = Menu.FIRST + 1;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+    private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
+    private static final MapPoint CUSTOM_MARKER_POINT2 = MapPoint.mapPointWithGeoCoord(37.447229, 127.015515);
+    private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.4020737, 127.1086766);
 
-public class MapActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener {
-
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int PERMISSIONS_REQUEST_CODE = 100;
-    MapView mapView;
-    RelativeLayout mapViewContainer;
-    List<Item> hospitalItems;
-
-    private final String LOG_TAG = "test2";
+    private MapView mapView;
+    private MapPOIItem mDefaultMarker;
+    private MapPOIItem mCustomMarker;
+    private MapPOIItem mCustomBmMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-
-        mapView = new MapView(this);
-
+        setContentView(R.layout.nested_mapview);
+        mapView = findViewById(R.id.map_view);
         mapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
-        mapView.setOpenAPIKeyAuthenticationResultListener(this);
         mapView.setMapViewEventListener(this);
-        mapView.setCurrentLocationEventListener(this);
+        mapView.setPOIItemEventListener(this);
 
-        mapViewContainer = findViewById(R.id.mapView);
-        mapViewContainer.addView(mapView);
-        hospitalItems = new ArrayList<>();
+        // 구현한 CalloutBalloonAdapter 등록
+        mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+        createDefaultMarker(mapView);
+        //createCustomMarker(mMapView);
+        //createCustomBitmapMarker(mMapView);
+        showAll();
 
-        currentLocation();
-        new Thread(() -> {
-            try {
-                new XMLParser().processXML(new RequestSender().getHospitalRequest(), hospitalItems);
-            } catch (Exception e) {
-                e.printStackTrace();
+    }
+
+    // CalloutBalloonAdapter 인터페이스 구현
+    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+        private final View mCalloutBalloon;
+
+        public CustomCalloutBalloonAdapter() {
+            mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
+        }
+
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem) {
+            ((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.round);
+            ((TextView) mCalloutBalloon.findViewById(R.id.title)).setText(poiItem.getItemName());
+            ((TextView) mCalloutBalloon.findViewById(R.id.desc)).setText("Custom CalloutBalloon");
+            return mCalloutBalloon;
+        }
+
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
+            return null;
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(0, MENU_DEFAULT_CALLOUT_BALLOON, Menu.NONE, "Default CalloutBalloon");
+        menu.add(0, MENU_CUSTOM_CALLOUT_BALLOON, Menu.NONE, "Custom CalloutBalloon");
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_DEFAULT_CALLOUT_BALLOON: {
+                mapView.removeAllPOIItems();
+                mapView.setCalloutBalloonAdapter(null);
+                createDefaultMarker(mapView);
+                createCustomMarker(mapView);
+                showAll();
+                return true;
             }
-        }).start();
-
-
-
-        /*new Thread(() -> {
-            try {
-                processXML(getHospitalRequest());
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            case MENU_CUSTOM_CALLOUT_BALLOON: {
+                mapView.removeAllPOIItems();
+                mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+                createDefaultMarker(mapView);
+                createCustomMarker(mapView);
+                showAll();
+                return true;
             }
-        }).start();*/
 
+        }
+        return super.onOptionsItemSelected(item);
     }
 
+    private void createDefaultMarker(MapView mapView) {
+        mDefaultMarker = new MapPOIItem();
+        String name = "Default Marker";
+        mDefaultMarker.setItemName(name);
+        mDefaultMarker.setTag(0);
+        mDefaultMarker.setMapPoint(DEFAULT_MARKER_POINT);
+        mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
-    private void currentLocation() {
-        mapView.getCurrentLocationTrackingMode();
+        mapView.addPOIItem(mDefaultMarker);
+        mapView.selectPOIItem(mDefaultMarker, true);
+        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
     }
 
+    private void createCustomMarker(MapView mapView) {
+        mCustomMarker = new MapPOIItem();
+        String name = "Custom Marker";
+        mCustomMarker.setItemName(name);
+        mCustomMarker.setTag(1);
+        mCustomMarker.setMapPoint(CUSTOM_MARKER_POINT);
 
-   /* private void setMarker() {
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("Default Marker");
-        marker.setTag(0);
+        mCustomMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
 
-        MapPoint MARKER_POINT = MapPoint.mapPointWithCONGCoord(37.6, 127.0);
-        //MapPoint MARKER_POINT = MapPoint.mapPointWithCONGCoord(127.0, 37.6);
-        marker.setMapPoint(MARKER_POINT);
+        mCustomMarker.setCustomImageResourceId(R.drawable.round);
+        mCustomMarker.setCustomImageAutoscale(false);
+        mCustomMarker.setCustomImageAnchor(0.5f, 1.0f);
 
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-
-        marker.setCustomImageAnchor(0.5f, 1.0f);
-
-        mapView.addPOIItem(marker);
-    }*/
-
-
-    private void setCustomMarker() {
-        MapPOIItem customMarker = new MapPOIItem();
-        MapPoint MARKER_POINT = MapPoint.mapPointWithCONGCoord(37.6132762, 127.0978309);
-        customMarker.setItemName("Custom Marker");
-        customMarker.setTag(1);
-        customMarker.setMapPoint(MARKER_POINT);
-        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-        customMarker.setCustomImageResourceId(R.drawable.gradation); // 마커 이미지.
-        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
-
-        mapView.addPOIItem(customMarker);
+        mapView.addPOIItem(mCustomMarker);
+        mapView.selectPOIItem(mCustomMarker, true);
+        mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
     }
 
-    @Override
-    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.d("test", String.format("mapview oncurrentLocationUpdate (%f, %f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, v));
-
+    private void showAll() {
+        int padding = 20;
+        float minZoomLevel = 7;
+        float maxZoomLevel = 10;
+        MapPointBounds bounds = new MapPointBounds(CUSTOM_MARKER_POINT, DEFAULT_MARKER_POINT);
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(bounds, padding, minZoomLevel, maxZoomLevel));
     }
-
-    @Override
-    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
-
-    }
-
-    @Override
-    public void onCurrentLocationUpdateFailed(MapView mapView) {
-
-    }
-
-    @Override
-    public void onCurrentLocationUpdateCancelled(MapView mapView) {
-
-    }
-
-    //MapViewEventListener
 
     @Override
     public void onMapViewInitialized(MapView mapView) {
-        Log.i(LOG_TAG, "MapView had loaded. Now, MapView APIs could be called safely");
-        //mMapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.537229, 127.005515), 2, true);
+
     }
 
     @Override
     public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.i(LOG_TAG, String.format("MapView onMapViewCenterPointMoved (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
+
     }
 
     @Override
     public void onMapViewZoomLevelChanged(MapView mapView, int i) {
-        Log.i(LOG_TAG, String.format("MapView onMapViewZoomLevelChanged (%d)", i));
+
     }
 
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.i(LOG_TAG, String.format("MapView onMapViewSingleTapped (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
+
     }
 
     @Override
     public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("DaumMapLibrarySample");
-        alertDialog.setMessage(String.format("Double-Tap on (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
-        alertDialog.setPositiveButton("OK", null);
-        alertDialog.show();
     }
 
     @Override
     public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("DaumMapLibrarySample");
-        alertDialog.setMessage(String.format("Long-Press on (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
-        alertDialog.setPositiveButton("OK", null);
-        alertDialog.show();
     }
 
     @Override
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.i(LOG_TAG, String.format("MapView onMapViewDragStarted (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
+
     }
 
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.i(LOG_TAG, String.format("MapView onMapViewDragEnded (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
+
     }
 
     @Override
     public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
-        Log.i(LOG_TAG, String.format("MapView onMapViewMoveFinished (%f,%f)", mapPointGeo.latitude, mapPointGeo.longitude));
-    }
 
-    //OpenAPIKeyAuthenticationResultListener
+    }
 
     @Override
-    public void onDaumMapOpenAPIKeyAuthenticationResult(MapView mapView, int resultCode, String resultMessage) {
-        Log.i("test", String.format("Open API Key Authentication Result : code=%d, message=%s", resultCode, resultMessage));
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+        Toast.makeText(this, "Clicked " + mapPOIItem.getItemName() + " Callout Balloon", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
     }
 }
-
-
