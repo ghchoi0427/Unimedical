@@ -1,7 +1,5 @@
 package com.sample.unimedical.activities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +28,7 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
     private static final MapPoint CUSTOM_MARKER_POINT2 = MapPoint.mapPointWithGeoCoord(37.447229, 127.015515);
     private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.4020737, 127.1086766);
 
-    private MapView mMapView;
+    private MapView mapView;
     private MapPOIItem mDefaultMarker;
     private MapPOIItem mCustomMarker;
     private MapPOIItem mCustomBmMarker;
@@ -39,16 +37,16 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_nested_mapview);
-        mMapView = findViewById(R.id.map_view);
-        mMapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
-        mMapView.setMapViewEventListener(this);
-        mMapView.setPOIItemEventListener(this);
+        mapView = findViewById(R.id.map_view);
+        mapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
+        mapView.setMapViewEventListener(this);
+        mapView.setPOIItemEventListener(this);
 
         // 구현한 CalloutBalloonAdapter 등록
-        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-        createDefaultMarker(mMapView);
+        mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+        createDefaultMarker(mapView);
         //createCustomMarker(mMapView);
-        createCustomBitmapMarker(mMapView);
+        //createCustomBitmapMarker(mMapView);
         showAll();
     }
 
@@ -88,18 +86,18 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_DEFAULT_CALLOUT_BALLOON: {
-                mMapView.removeAllPOIItems();
-                mMapView.setCalloutBalloonAdapter(null);
-                createDefaultMarker(mMapView);
-                createCustomMarker(mMapView);
+                mapView.removeAllPOIItems();
+                mapView.setCalloutBalloonAdapter(null);
+                createDefaultMarker(mapView);
+                createCustomMarker(mapView);
                 showAll();
                 return true;
             }
             case MENU_CUSTOM_CALLOUT_BALLOON: {
-                mMapView.removeAllPOIItems();
-                mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-                createDefaultMarker(mMapView);
-                createCustomMarker(mMapView);
+                mapView.removeAllPOIItems();
+                mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+                createDefaultMarker(mapView);
+                createCustomMarker(mapView);
                 showAll();
                 return true;
             }
@@ -140,30 +138,12 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
         mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
     }
 
-    private void createCustomBitmapMarker(MapView mapView) {
-        mCustomBmMarker = new MapPOIItem();
-        String name = "Custom Bitmap Marker";
-        mCustomBmMarker.setItemName(name);
-        mCustomBmMarker.setTag(2);
-        mCustomBmMarker.setMapPoint(CUSTOM_MARKER_POINT2);
-
-        mCustomBmMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.gradation);
-        mCustomBmMarker.setCustomImageBitmap(bm);
-        mCustomBmMarker.setCustomImageAutoscale(false);
-        mCustomBmMarker.setCustomImageAnchor(0.5f, 0.5f);
-
-        mapView.addPOIItem(mCustomBmMarker);
-        mapView.selectPOIItem(mCustomBmMarker, true);
-        mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
-    }
-
     private void showAll() {
         int padding = 20;
         float minZoomLevel = 7;
         float maxZoomLevel = 10;
         MapPointBounds bounds = new MapPointBounds(CUSTOM_MARKER_POINT, DEFAULT_MARKER_POINT);
-        mMapView.moveCamera(CameraUpdateFactory.newMapPointBounds(bounds, padding, minZoomLevel, maxZoomLevel));
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(bounds, padding, minZoomLevel, maxZoomLevel));
     }
 
     @Override
