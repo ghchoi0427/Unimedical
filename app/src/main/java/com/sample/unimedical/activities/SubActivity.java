@@ -14,6 +14,7 @@ public class SubActivity extends AppCompatActivity {
     Button btnSearchEngine;
     Button btnCommunity;
     Button buttonMap;
+    Button buttonMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class SubActivity extends AppCompatActivity {
         btnSearchEngine = findViewById(R.id.btn_search_engine);
         btnCommunity = findViewById(R.id.btn_community);
         buttonMap = findViewById(R.id.btn_map);
+        buttonMarker = findViewById(R.id.act_marker);
 
         btnSetting.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, SettingActivity.class));
@@ -39,6 +41,10 @@ public class SubActivity extends AppCompatActivity {
 
         buttonMap.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, MapActivity.class));
+        });
+
+        buttonMarker.setOnClickListener(v -> {
+            startActivity(new Intent(SubActivity.this, MarkerActivity.class));
         });
 
 
