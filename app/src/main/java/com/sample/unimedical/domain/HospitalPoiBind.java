@@ -8,6 +8,14 @@ public class HospitalPoiBind {
     Item hospitalItem;
     MapPOIItem mapPOIItem;
 
+    public HospitalPoiBind() {
+    }
+
+    public HospitalPoiBind(Item hospitalItem, MapPOIItem mapPOIItem) {
+        this.hospitalItem = hospitalItem;
+        this.mapPOIItem = mapPOIItem;
+    }
+
     public Item getHospitalItem() {
         return hospitalItem;
     }
