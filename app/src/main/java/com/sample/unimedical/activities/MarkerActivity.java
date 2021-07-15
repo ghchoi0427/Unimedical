@@ -35,6 +35,23 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
     private MapPOIItem mCustomMarker;
     private MapPOIItem mCustomBmMarker;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.demo_nested_mapview);
+        mMapView = findViewById(R.id.map_view);
+        mMapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
+        mMapView.setMapViewEventListener(this);
+        mMapView.setPOIItemEventListener(this);
+
+        // 구현한 CalloutBalloonAdapter 등록
+        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+        createDefaultMarker(mMapView);
+        //createCustomMarker(mMapView);
+        createCustomBitmapMarker(mMapView);
+        showAll();
+    }
+
     // CalloutBalloonAdapter 인터페이스 구현
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
         private final View mCalloutBalloon;
@@ -57,22 +74,6 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_nested_mapview);
-        mMapView = findViewById(R.id.map_view);
-        mMapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
-        mMapView.setMapViewEventListener(this);
-        mMapView.setPOIItemEventListener(this);
-
-        // 구현한 CalloutBalloonAdapter 등록
-        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-        createDefaultMarker(mMapView);
-        //createCustomMarker(mMapView);
-        createCustomBitmapMarker(mMapView);
-        showAll();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,7 +138,6 @@ public class MarkerActivity extends FragmentActivity implements MapView.MapViewE
         mapView.addPOIItem(mCustomMarker);
         mapView.selectPOIItem(mCustomMarker, true);
         mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
-
     }
 
     private void createCustomBitmapMarker(MapView mapView) {
