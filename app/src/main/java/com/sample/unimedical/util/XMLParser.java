@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,7 +20,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XMLParser {
 
-    public static void processXML(String str, List<Item> hospitalItems) throws ParserConfigurationException, IOException, SAXException {
+    public static List<Item> processXML(String str) throws ParserConfigurationException, IOException, SAXException {    //비거래처
+
+        List<Item> newList = new ArrayList<>();
 
         InputSource is = new InputSource(new StringReader(str));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
@@ -34,42 +37,25 @@ public class XMLParser {
             Item item = new Item();
             try {
 
-                NodeList addr = nodeElement.getElementsByTagName("addr");
-                item.setAddr(addr.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");
+                NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");   //병원명
                 item.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
 
-                NodeList estbDd = nodeElement.getElementsByTagName("estbDd");
-                item.setEstbDd(estbDd.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList hospUrl = nodeElement.getElementsByTagName("hospUrl");
-                item.setHospUrl(hospUrl.item(0).getChildNodes().item(0).getNodeValue());
+                NodeList mdeptGdrCnt = nodeElement.getElementsByTagName("mdeptGdrCnt");   //의과일반의 총 수
+                item.setMdeptGdrCnt(mdeptGdrCnt.item(0).getChildNodes().item(0).getNodeValue());
 
                 NodeList telno = nodeElement.getElementsByTagName("telno");
                 item.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
 
-                NodeList XPos = nodeElement.getElementsByTagName("XPos");
-                item.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList YPos = nodeElement.getElementsByTagName("YPos");
-                item.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            hospitalItems.add(item);
-
+            newList.add(item);
         }
 
-        for (Item i : hospitalItems) {
-            try {
-                Log.d("test", i.getYadmNm());
-            } catch (Exception e) {
 
-            }
-        }
+        return newList;
 
     }
 }
