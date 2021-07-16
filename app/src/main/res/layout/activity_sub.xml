@@ -11,8 +11,10 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginVertical="40dp"
+        android:scaleX="3"
+        android:scaleY="3"
         android:contentDescription="@string/sub_logo_description"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo_main" />
 
     <LinearLayout
         android:layout_width="match_parent"
