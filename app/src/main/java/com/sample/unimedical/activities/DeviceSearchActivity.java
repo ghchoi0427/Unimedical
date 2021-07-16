@@ -2,9 +2,9 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +31,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_device_search);
 
         editText = findViewById(R.id.edit);
         searchButton = findViewById(R.id.btn_search_result);
@@ -79,6 +79,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
         try {
             itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
             itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+
 
         } catch (Exception e) {
             e.printStackTrace();
