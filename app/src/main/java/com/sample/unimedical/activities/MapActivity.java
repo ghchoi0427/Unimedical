@@ -1,5 +1,6 @@
 package com.sample.unimedical.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,12 +23,13 @@ import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapPointBounds;
+import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener {
+public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
     private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
     private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
@@ -36,6 +38,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private MapPOIItem mCustomMarker;
     EditText searchHospital;
     Button btnSearchHospital;
+    Button btnGPS;
+
+    private int GPS_MODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setContentView(R.layout.nested_mapview);
         mapView = findViewById(R.id.map_view);
         mapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
+
         mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
+        mapView.setCurrentLocationEventListener(this);
 
         searchHospital = findViewById(R.id.search_hospital);
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
+        btnGPS = findViewById(R.id.button_gps);
 
         btnSearchHospital.setOnClickListener(view -> {
             new Thread(() -> {
@@ -67,10 +75,47 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             return false;
         });
 
+        btnGPS.setOnClickListener(v -> {
+            if (GPS_MODE == 2) {
+                GPS_MODE = 0;
+            } else {
+                GPS_MODE += 1;
+            }
+            userLocationMode(GPS_MODE);
+        });
+
 
         mapView.removeAllPOIItems();
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
         showAll();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        mapView.setShowCurrentLocationMarker(false);
+    }
+
+    private void userLocationMode(int GPS_MODE) {
+        switch (GPS_MODE) {
+            case 0: // Off
+            {
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+                mapView.setShowCurrentLocationMarker(false);
+            }
+            break;
+            case 1: // User Location On
+            {
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+            }
+            break;
+            case 2: // User Location+Heading On
+            {
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            }
+            break;
+        }
     }
 
 
@@ -114,6 +159,44 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
     }
 
+    //ReverseGeoCoder
+    @Override
+    public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {
+        mapReverseGeoCoder.toString();
+        onFinishReverseGeoCoding(s);
+    }
+
+    @Override
+    public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
+        onFinishReverseGeoCoding("Fail");
+    }
+
+    private void onFinishReverseGeoCoding(String result) {
+        Toast.makeText(MapActivity.this, "Reverse Geo-coding : " + result, Toast.LENGTH_SHORT).show();
+    }
+
+    //currentLocationListener
+    @Override
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
+    }
+
+    @Override
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
+
+    }
+
+
     // CalloutBalloonAdapter 인터페이스 구현
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
         private final View mCalloutBalloon;
@@ -125,8 +208,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         @Override
         public View getCalloutBalloon(MapPOIItem poiItem) {
             try {
-                Log.d("tester", poiItem.getItemName());
-                //((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.hospital);
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_hospital_name)).setText(poiItem.getItemName().split("/")[0]);
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText("일반의: " + poiItem.getItemName().split("/")[1] + "명");
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_tel_number)).setText(poiItem.getItemName().split("/")[2]);
