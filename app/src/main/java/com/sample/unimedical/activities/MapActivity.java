@@ -1,5 +1,6 @@
 package com.sample.unimedical.activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -77,13 +78,31 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private void addBoundObjects(String hospitalName) throws Exception {
         List<Item> items = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
         List<MapPOIItem> newList = new ArrayList<>();
+
         for (Item i : items) {
             try {
                 MapPOIItem mapPOIItem = new MapPOIItem();
                 mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
                 mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
-                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
-                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+                MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
+                switch (i.getClCd()) {
+                    case "01":
+                        markerType = MapPOIItem.MarkerType.YellowPin;
+                        break;
+                    case "11":
+                    case "21":
+                        markerType = MapPOIItem.MarkerType.RedPin;
+                        //markerType = MapPOIItem.MarkerType.CustomImage;
+                        //mapPOIItem.setCustomImageResourceId(R.id.green_marker);
+                        break;
+                    case "31":
+                        markerType = MapPOIItem.MarkerType.BluePin;
+                        break;
+                }
+
+                mapPOIItem.setMarkerType(markerType);
+                mapPOIItem.setSelectedMarkerType(markerType);
                 newList.add(mapPOIItem);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -136,44 +155,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         return true;
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_DEFAULT_CALLOUT_BALLOON: {
-                mapView.removeAllPOIItems();
-                mapView.setCalloutBalloonAdapter(null);
-                createDefaultMarker(mapView);
-                createCustomMarker(mapView);
-                showAll();
-                return true;
-            }
-            case MENU_CUSTOM_CALLOUT_BALLOON: {
-                mapView.removeAllPOIItems();
-                mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-                createDefaultMarker(mapView);
-                createCustomMarker(mapView);
-                showAll();
-                return true;
-            }
-
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    /*private void createDefaultMarker(MapView mapView) {
-        mDefaultMarker = new MapPOIItem();
-        String name = "Default Marker";
-        mDefaultMarker.setItemName(name);
-        mDefaultMarker.setTag(0);
-        mDefaultMarker.setMapPoint(DEFAULT_MARKER_POINT);
-        mDefaultMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        mDefaultMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        mapView.addPOIItem(mDefaultMarker);
-        mapView.selectPOIItem(mDefaultMarker, true);
-        mapView.setMapCenterPoint(DEFAULT_MARKER_POINT, false);
-    }*/
 
     private void createCustomMarker(MapView mapView) {
         mCustomMarker = new MapPOIItem();
