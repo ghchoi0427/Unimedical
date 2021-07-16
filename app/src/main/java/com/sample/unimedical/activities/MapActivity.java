@@ -6,14 +6,12 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.HospitalPoiBind;
 import com.sample.unimedical.domain.hospital.Item;
 import com.sample.unimedical.util.RequestSender;
 import com.sample.unimedical.util.XMLParser;
@@ -74,13 +72,15 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 MapPOIItem mapPOIItem = new MapPOIItem();
                 mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
                 mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
-                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
-                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.BluePin);
+                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
+                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 newList.add(mapPOIItem);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+        mapView.removeAllPOIItems();
         for (MapPOIItem mpi : newList) {
             mapView.addPOIItem(mpi);
             mapView.selectPOIItem(mpi, true);
@@ -100,9 +100,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         public View getCalloutBalloon(MapPOIItem poiItem) {
             try {
                 Log.d("tester", poiItem.getItemName());
-                ((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.round);
+                //((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.hospital);
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_hospital_name)).setText(poiItem.getItemName().split("/")[0]);
-                ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText(poiItem.getItemName().split("/")[1]);
+                ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText("일반의: " + poiItem.getItemName().split("/")[1] + "명");
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_tel_number)).setText(poiItem.getItemName().split("/")[2]);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -244,6 +244,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
         Toast.makeText(this, "Clicked " + mapPOIItem.getItemName() + " Callout Balloon", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
