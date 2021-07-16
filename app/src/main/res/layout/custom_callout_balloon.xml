@@ -17,7 +17,8 @@
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/icon_community" >
+            android:src="@drawable/icon_hospital"
+            android:scaleX="0.8">
         </ImageView>
 
         <LinearLayout
@@ -33,7 +34,7 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="Custom Marker"
-                android:textColor="@color/blue"
+                android:textColor="@color/purple_700"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
