@@ -52,6 +52,9 @@ public class XMLParser {
                 NodeList YPos = nodeElement.getElementsByTagName("YPos");
                 item.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
 
+                NodeList clCd = nodeElement.getElementsByTagName("clCd");
+                item.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -60,8 +63,6 @@ public class XMLParser {
             newList.add(item);
 
         }
-        Log.d("test", "fromXML:" + newList.size());
-        Log.d("test", "fromXML:" + newList.get(0).getYadmNm());
 
         return newList;
 
