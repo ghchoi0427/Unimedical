@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.ItemAdapter;
+import com.sample.unimedical.domain.device.Item;
 import com.sample.unimedical.domain.device.ItemList;
 
 import java.io.IOException;
@@ -77,8 +78,17 @@ public class MarketSearchActivity extends AppCompatActivity {
 
         try {
             Log.d("test", itemList.getItems().stream().count() + "");
-            itemList.getItems().stream().filter(e -> e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-            itemList.getItems().stream().filter(e -> e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            for (Item i : itemList.getItems()) {
+                if (!"".equals(i.getMaker()) && !"".equals(i.getVendor())) {
+                    try {
+                        if (i.getMaker().toLowerCase().contains(keyword.toLowerCase()) || i.getVendor().toLowerCase().contains(keyword.toLowerCase())) {
+                            adapter.addItem(i);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
