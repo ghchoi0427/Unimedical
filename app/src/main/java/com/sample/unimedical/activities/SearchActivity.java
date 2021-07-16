@@ -25,14 +25,6 @@ public class SearchActivity extends AppCompatActivity {
     ItemAdapter adapter;
     ItemList itemList;
 
-    RadioGroup radioGroup;
-
-    private static final int SEARCH_NAME = 0;
-    private static final int SEARCH_CODE = 1;
-    private static final int SEARCH_MAKER = 2;
-    private static final int SEARCH_VENDOR = 3;
-
-    private int searchMode = SEARCH_NAME;
 
     private static final String FILE_NAME = "device_data_0712.json";
 
@@ -44,7 +36,6 @@ public class SearchActivity extends AppCompatActivity {
         editText = findViewById(R.id.edit);
         searchButton = findViewById(R.id.btn_search_result);
         recyclerView = findViewById(R.id.recyclerView);
-        radioGroup = findViewById(R.id.radio_group);
         adapter = new ItemAdapter();
 
 
@@ -53,23 +44,6 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME)));
-
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            switch (checkedId) {
-                case R.id.radio_product_name:
-                    searchMode = SEARCH_NAME;
-                    break;
-                case R.id.radio_primary_code:
-                    searchMode = SEARCH_CODE;
-                    break;
-                case R.id.radio_maker:
-                    searchMode = SEARCH_MAKER;
-                    break;
-                case R.id.radio_vendor:
-                    searchMode = SEARCH_VENDOR;
-                    break;
-            }
-        });
 
     }
 
@@ -103,20 +77,8 @@ public class SearchActivity extends AppCompatActivity {
     private void searchItem(String keyword) {
 
         try {
-            switch (searchMode) {
-                case SEARCH_CODE:
-                    itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-                    break;
-                case SEARCH_NAME:
-                    itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-                    break;
-                case SEARCH_MAKER:
-                    itemList.getItems().stream().filter(e -> e.getMaker().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-                    break;
-                case SEARCH_VENDOR:
-                    itemList.getItems().stream().filter(e -> e.getVendor().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
-                    break;
-            }
+            itemList.getItems().stream().filter(e -> e.getPrimaryCode().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
+            itemList.getItems().stream().filter(e -> e.getProductName().toLowerCase().contains(keyword.toLowerCase())).forEach(adapter::addItem);
 
         } catch (Exception e) {
             e.printStackTrace();
