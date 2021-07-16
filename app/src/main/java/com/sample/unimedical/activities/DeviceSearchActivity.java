@@ -18,7 +18,7 @@ import com.sample.unimedical.domain.device.ItemList;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SearchActivity extends AppCompatActivity {
+public class DeviceSearchActivity extends AppCompatActivity {
     EditText editText;
     Button searchButton;
     RecyclerView recyclerView;

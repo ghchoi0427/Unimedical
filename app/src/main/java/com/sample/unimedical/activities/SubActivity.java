@@ -1,10 +1,8 @@
 package com.sample.unimedical.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +25,7 @@ public class SubActivity extends AppCompatActivity {
         buttonMap = findViewById(R.id.btn_map);
 
         btnSearchEngine.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, SearchActivity.class));
+            startActivity(new Intent(SubActivity.this, DeviceSearchActivity.class));
         });
 
         btnCommunity.setOnClickListener(v -> {
