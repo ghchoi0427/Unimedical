@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,15 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 }
             }).start();
         });
+
+        searchHospital.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                btnSearchHospital.callOnClick();
+                return true;
+            }
+            return false;
+        });
+
 
         mapView.removeAllPOIItems();
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
@@ -243,7 +253,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-        Toast.makeText(this, "Clicked " + mapPOIItem.getItemName() + " Callout Balloon", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, mapPOIItem.getItemName().split("/")[0], Toast.LENGTH_SHORT).show();
 
     }
 
