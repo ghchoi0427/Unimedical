@@ -1,6 +1,7 @@
 package com.sample.unimedical.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -10,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sample.unimedical.R;
 
 public class SubActivity extends AppCompatActivity {
-    ImageButton btnSetting;
     Button btnSearchEngine;
+    Button btnSearchMarket;
     Button btnCommunity;
     Button buttonMap;
 
@@ -20,14 +21,10 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        btnSetting = findViewById(R.id.btn_setting);
         btnSearchEngine = findViewById(R.id.btn_search_engine);
+        btnSearchMarket = findViewById(R.id.btn_search_market);
         btnCommunity = findViewById(R.id.btn_community);
         buttonMap = findViewById(R.id.btn_map);
-
-        btnSetting.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, SettingActivity.class));
-        });
 
         btnSearchEngine.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, SearchActivity.class));
@@ -39,6 +36,10 @@ public class SubActivity extends AppCompatActivity {
 
         buttonMap.setOnClickListener(v -> {
             startActivity(new Intent(SubActivity.this, MapActivity.class));
+        });
+
+        btnSearchMarket.setOnClickListener(v -> {
+            startActivity(new Intent(SubActivity.this, MarketSearchActivity.class));
         });
 
     }
