@@ -1,6 +1,5 @@
 package com.sample.unimedical.activities;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -93,8 +92,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                     case "11":
                     case "21":
                         markerType = MapPOIItem.MarkerType.RedPin;
-                        //markerType = MapPOIItem.MarkerType.CustomImage;
-                        //mapPOIItem.setCustomImageResourceId(R.id.green_marker);
                         break;
                     case "31":
                         markerType = MapPOIItem.MarkerType.BluePin;
