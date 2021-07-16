@@ -46,14 +46,22 @@ public class XMLParser {
                 NodeList telno = nodeElement.getElementsByTagName("telno");
                 item.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
 
+                NodeList XPos = nodeElement.getElementsByTagName("XPos");
+                item.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
+
+                NodeList YPos = nodeElement.getElementsByTagName("YPos");
+                item.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             newList.add(item);
-        }
 
+        }
+        Log.d("test", "fromXML:" + newList.size());
+        Log.d("test", "fromXML:" + newList.get(0).getYadmNm());
 
         return newList;
 
