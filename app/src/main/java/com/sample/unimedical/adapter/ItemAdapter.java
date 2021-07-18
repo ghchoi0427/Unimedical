@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.device.Item;
+import com.sample.unimedical.domain.device.Device;
 
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
-    ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Device> devices = new ArrayList<>();
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Device> getItems() {
+        return devices;
     }
 
     @NonNull
@@ -31,29 +31,29 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder viewHolder, int position) {
-        Item item = items.get(position);
-        viewHolder.setItem(item);
+        Device device = devices.get(position);
+        viewHolder.setItem(device);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return devices.size();
     }
 
-    public void addItem(Item item) {
-        items.add(item);
+    public void addItem(Device device) {
+        devices.add(device);
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
+    public void setItems(ArrayList<Device> devices) {
+        this.devices = devices;
     }
 
-    public Item getItem(int position) {
-        return items.get(position);
+    public Device getItem(int position) {
+        return devices.get(position);
     }
 
     public void clearItem() {
-        items.clear();
+        devices.clear();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,22 +90,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         }
 
-        public void setItem(Item item) {
+        public void setItem(Device device) {
 
             try {
-                itemName.setText(item.getProductName());
-                primaryCode.setText("코드 : "+item.getPrimaryCode());
-                midClass.setText("중분류 : "+item.getMidClass());
-                midCode.setText("중분류코드 : "+item.getMidCode() + "");
-                size.setText("규격 : "+item.getSize());
-                unit.setText("단위 : "+item.getUnit());
-                maker.setText("제조회사 : "+item.getMaker());
-                material.setText("재질 : "+item.getMaterial());
-                vendor.setText("수입업소 : "+item.getVendor());
-                priceMax.setText("상한금액 : "+item.getPriceMax());
-                update.setText("최초등재일 : "+item.getUpdate());
-                validFrom.setText("적용일자 : "+item.getValidFrom());
-                remark.setText("비고 : "+item.getRemark());
+                itemName.setText(device.getProductName());
+                primaryCode.setText("코드 : "+ device.getPrimaryCode());
+                midClass.setText("중분류 : "+ device.getMidClass());
+                midCode.setText("중분류코드 : "+ device.getMidCode() + "");
+                size.setText("규격 : "+ device.getSize());
+                unit.setText("단위 : "+ device.getUnit());
+                maker.setText("제조회사 : "+ device.getMaker());
+                material.setText("재질 : "+ device.getMaterial());
+                vendor.setText("수입업소 : "+ device.getVendor());
+                priceMax.setText("상한금액 : "+ device.getPriceMax());
+                update.setText("최초등재일 : "+ device.getUpdate());
+                validFrom.setText("적용일자 : "+ device.getValidFrom());
+                remark.setText("비고 : "+ device.getRemark());
             } catch (Exception e) {
                 e.printStackTrace();
             }
