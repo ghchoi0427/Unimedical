@@ -33,6 +33,7 @@ import java.util.List;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
+    private static final int SEARCH_RADIUS = 1500;
     private MapView mapView;
     private MapPOIItem mCustomMarker;
     EditText searchHospital;
@@ -82,6 +83,16 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 return true;
             }
             return false;
+        });
+
+        btnSearchFromMap.setOnClickListener(v -> {
+            new Thread(() -> {
+                try {
+                    addBoundObjects2(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
         });
 
         btnGPS.setOnClickListener(v -> {
@@ -166,6 +177,48 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private void addBoundObjects(String hospitalName) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
+        List<MapPOIItem> newList = new ArrayList<>();
+
+        for (Hospital i : hospitals) {
+            try {
+                MapPOIItem mapPOIItem = new MapPOIItem();
+                mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
+                mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
+
+                MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
+                switch (i.getClCd()) {
+                    case "01":
+                        markerType = MapPOIItem.MarkerType.YellowPin;
+                        break;
+                    case "11":
+                    case "21":
+                        markerType = MapPOIItem.MarkerType.RedPin;
+                        break;
+                    case "31":
+                        markerType = MapPOIItem.MarkerType.BluePin;
+                        break;
+                }
+
+                mapPOIItem.setMarkerType(markerType);
+                mapPOIItem.setSelectedMarkerType(markerType);
+                mapPOIItem.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven);
+                newList.add(mapPOIItem);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        mapView.removeAllPOIItems();
+
+        for (MapPOIItem mpi : newList) {
+            mapView.addPOIItem(mpi);
+            mapView.selectPOIItem(mpi, true);
+            mapView.setMapCenterPoint(mpi.getMapPoint(), false);
+        }
+    }
+
+    private void addBoundObjects2(double Xpos, double Ypos, int radius) throws Exception {
+        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, radius));
         List<MapPOIItem> newList = new ArrayList<>();
 
         for (Hospital i : hospitals) {
@@ -326,6 +379,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onMapViewInitialized(MapView mapView) {
         currentMapPoint = mapView.getMapCenterPoint();
+        Log.d("test", currentMapPoint.getMapPointGeoCoord().latitude + "," + currentMapPoint.getMapPointGeoCoord().longitude);
     }
 
     @Override
