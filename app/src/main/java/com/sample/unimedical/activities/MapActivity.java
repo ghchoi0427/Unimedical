@@ -28,6 +28,7 @@ import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
@@ -197,7 +198,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 e.printStackTrace();
             }
         }
-
+        setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
     }
@@ -234,9 +235,13 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 e.printStackTrace();
             }
         }
-
+        setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
+    }
+
+    private void setMarkerAnimationType() {
+        Arrays.stream(mapView.getPOIItems()).forEach(e -> e.setShowAnimationType(MapPOIItem.ShowAnimationType.SpringFromGround));
     }
 
     private void setPOIItems(List<MapPOIItem> list) {
