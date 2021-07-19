@@ -33,8 +33,8 @@ import java.util.List;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
-    private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
-    private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
+    // private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
+    // private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
 
     private MapView mapView;
     private MapPOIItem mCustomMarker;
@@ -111,7 +111,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         mapView.removeAllPOIItems();
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-        showAll();
+
     }
 
     @Override
@@ -198,7 +198,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         for (MapPOIItem mpi : newList) {
             mapView.addPOIItem(mpi);
             mapView.selectPOIItem(mpi, true);
-            mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
+            mapView.setMapCenterPoint(mpi.getMapPoint(), false);
         }
     }
 
@@ -282,7 +282,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         String name = "Custom Marker";
         mCustomMarker.setItemName(name);
         mCustomMarker.setTag(1);
-        mCustomMarker.setMapPoint(CUSTOM_MARKER_POINT);
+        mCustomMarker.setMapPoint(mCustomMarker.getMapPoint());
 
         mCustomMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
 
@@ -292,15 +292,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         mapView.addPOIItem(mCustomMarker);
         mapView.selectPOIItem(mCustomMarker, true);
-        mapView.setMapCenterPoint(CUSTOM_MARKER_POINT, false);
-    }
-
-    private void showAll() {
-        int padding = 20;
-        float minZoomLevel = 7;
-        float maxZoomLevel = 10;
-        MapPointBounds bounds = new MapPointBounds(CUSTOM_MARKER_POINT, DEFAULT_MARKER_POINT);
-        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(bounds, padding, minZoomLevel, maxZoomLevel));
+        mapView.setMapCenterPoint(mCustomMarker.getMapPoint(), false);
     }
 
     @Override
