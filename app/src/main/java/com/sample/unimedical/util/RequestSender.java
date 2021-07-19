@@ -1,7 +1,5 @@
 package com.sample.unimedical.util;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -66,7 +64,6 @@ public class RequestSender {
         urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(xPos), "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(radius), "UTF-8")); /*단위 : 미터(m)*/
         URL url = new URL(urlBuilder.toString());
-        Log.d("test", urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
