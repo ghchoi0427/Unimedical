@@ -57,10 +57,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         mapView.setCurrentLocationEventListener(this);
 
         searchHospital = findViewById(R.id.edit_search_hospital);
-        btnSearchHospital = findViewById(R.id.btn_search_hospital);
-        btnGPS = findViewById(R.id.button_gps);
-        btnSearchFromMap = findViewById(R.id.btn_search_from_map);
 
+        btnSearchHospital = findViewById(R.id.btn_search_hospital);
+        btnSearchFromMap = findViewById(R.id.btn_search_from_map);
+        btnGPS = findViewById(R.id.button_gps);
         btnZoomIn = findViewById(R.id.btn_zoom_in);
         btnZoomOut = findViewById(R.id.btn_zoom_out);
 
@@ -98,7 +98,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 } else {
                     GPS_MODE += 1;
                 }
-                userLocationMode(GPS_MODE);
+                userLocationModeSelector(GPS_MODE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -135,7 +135,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
     }
 
-    private void userLocationMode(int GPS_MODE) {
+    private void userLocationModeSelector(int GPS_MODE) {
         switch (GPS_MODE) {
             case 0: // Off
             {
