@@ -24,21 +24,13 @@ public class SubActivity extends AppCompatActivity {
         btnCommunity = findViewById(R.id.btn_community);
         buttonMap = findViewById(R.id.btn_map);
 
-        btnSearchEngine.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, DeviceSearchActivity.class));
-        });
+        btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(SubActivity.this, DeviceSearchActivity.class)));
 
-        btnCommunity.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, CommunityActivity.class));
-        });
+        btnCommunity.setOnClickListener(v -> startActivity(new Intent(SubActivity.this, CommunityActivity.class)));
 
-        buttonMap.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, MapActivity.class));
-        });
+        buttonMap.setOnClickListener(v -> startActivity(new Intent(SubActivity.this, MapActivity.class)));
 
-        btnSearchMarket.setOnClickListener(v -> {
-            startActivity(new Intent(SubActivity.this, MarketSearchActivity.class));
-        });
+        btnSearchMarket.setOnClickListener(v -> startActivity(new Intent(SubActivity.this, MarketSearchActivity.class)));
 
     }
 
