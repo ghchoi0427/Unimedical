@@ -41,8 +41,12 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     EditText searchHospital;
     Button btnSearchHospital;
     Button btnGPS;
+    Button btnZoomIn;
+    Button btnZoomOut;
+
 
     private int GPS_MODE = 0;
+    private int CURRENT_ZOOMLEVEL = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         searchHospital = findViewById(R.id.search_hospital);
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
         btnGPS = findViewById(R.id.button_gps);
+
+        btnZoomIn = findViewById(R.id.btn_zoom_in);
+        btnZoomOut = findViewById(R.id.btn_zoom_out);
+
 
         btnSearchHospital.setOnClickListener(view -> {
             new Thread(() -> {
@@ -86,6 +94,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 GPS_MODE += 1;
             }
             userLocationMode(GPS_MODE);
+        });
+
+        btnZoomIn.setOnClickListener(v -> {
+            zoomIn();
+        });
+
+        btnZoomOut.setOnClickListener(v -> {
+            zoomOut();
         });
 
 
@@ -130,6 +146,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             }
             break;
         }
+    }
+
+    private void zoomIn() {
+        mapView.setZoomLevel(CURRENT_ZOOMLEVEL - 1, true);
+    }
+
+    private void zoomOut() {
+        mapView.setZoomLevel(CURRENT_ZOOMLEVEL + 1, true);
     }
 
 
@@ -287,7 +311,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewZoomLevelChanged(MapView mapView, int i) {
-
+        CURRENT_ZOOMLEVEL = i;
+        Log.d("test", CURRENT_ZOOMLEVEL + "");
     }
 
     @Override
