@@ -16,15 +16,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.hospital.Item;
+import com.sample.unimedical.domain.hospital.Hospital;
 import com.sample.unimedical.util.RequestSender;
 import com.sample.unimedical.util.XMLParser;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
-import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
@@ -162,10 +160,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
 
     private void addBoundObjects(String hospitalName) throws Exception {
-        List<Item> items = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
+        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
         List<MapPOIItem> newList = new ArrayList<>();
 
-        for (Item i : items) {
+        for (Hospital i : hospitals) {
             try {
                 MapPOIItem mapPOIItem = new MapPOIItem();
                 mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());

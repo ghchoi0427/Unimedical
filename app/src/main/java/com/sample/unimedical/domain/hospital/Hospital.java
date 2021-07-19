@@ -1,6 +1,6 @@
 package com.sample.unimedical.domain.hospital;
 
-public class Item {
+public class Hospital {
 
     private String clCd;
     private String clCdNm;

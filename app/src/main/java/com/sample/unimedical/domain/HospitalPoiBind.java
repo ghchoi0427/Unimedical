@@ -1,26 +1,26 @@
 package com.sample.unimedical.domain;
 
-import com.sample.unimedical.domain.hospital.Item;
+import com.sample.unimedical.domain.hospital.Hospital;
 
 import net.daum.mf.map.api.MapPOIItem;
 
 public class HospitalPoiBind {
-    Item hospitalItem;
+    Hospital hospitalItem;
     MapPOIItem mapPOIItem;
 
     public HospitalPoiBind() {
     }
 
-    public HospitalPoiBind(Item hospitalItem, MapPOIItem mapPOIItem) {
+    public HospitalPoiBind(Hospital hospitalItem, MapPOIItem mapPOIItem) {
         this.hospitalItem = hospitalItem;
         this.mapPOIItem = mapPOIItem;
     }
 
-    public Item getHospitalItem() {
+    public Hospital getHospitalItem() {
         return hospitalItem;
     }
 
-    public void setHospitalItem(Item hospitalItem) {
+    public void setHospitalItem(Hospital hospitalItem) {
         this.hospitalItem = hospitalItem;
     }
 
