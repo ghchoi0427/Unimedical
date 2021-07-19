@@ -67,7 +67,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchHospital.setOnClickListener(view -> new Thread(() -> {
             try {
-                addBoundObjects(searchHospital.getText().toString().trim());
+                bindSearchItems(searchHospital.getText().toString().trim());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -165,7 +165,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
 
-    private void addBoundObjects(String hospitalName) throws Exception {
+    private void bindSearchItems(String hospitalName) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
         List<MapPOIItem> newList = new ArrayList<>();
 
