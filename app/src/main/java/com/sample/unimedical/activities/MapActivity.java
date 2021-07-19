@@ -39,6 +39,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     Button btnGPS;
     Button btnZoomIn;
     Button btnZoomOut;
+    Button btnSearchFromMap;
 
 
     private int GPS_MODE = 0;
@@ -56,6 +57,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         searchHospital = findViewById(R.id.edit_search_hospital);
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
         btnGPS = findViewById(R.id.button_gps);
+        btnSearchFromMap = findViewById(R.id.btn_search_from_map);
 
         btnZoomIn = findViewById(R.id.btn_zoom_in);
         btnZoomOut = findViewById(R.id.btn_zoom_out);
@@ -306,6 +308,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnGPS.setVisibility(View.VISIBLE);
         btnZoomIn.setVisibility(View.VISIBLE);
         btnZoomOut.setVisibility(View.VISIBLE);
+        btnSearchFromMap.setVisibility(View.VISIBLE);
     }
 
     private void setInvisible() {
@@ -314,6 +317,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnGPS.setVisibility(View.INVISIBLE);
         btnZoomIn.setVisibility(View.INVISIBLE);
         btnZoomOut.setVisibility(View.INVISIBLE);
+        btnSearchFromMap.setVisibility(View.INVISIBLE);
     }
 
     @Override
