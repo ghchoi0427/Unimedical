@@ -294,18 +294,26 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private void toggleViewVisibility() {
 
         if (btnZoomIn.getVisibility() == View.VISIBLE) {
-            searchHospital.setVisibility(View.INVISIBLE);
-            btnSearchHospital.setVisibility(View.INVISIBLE);
-            btnGPS.setVisibility(View.INVISIBLE);
-            btnZoomIn.setVisibility(View.INVISIBLE);
-            btnZoomOut.setVisibility(View.INVISIBLE);
+            setInvisible();
         } else {
-            searchHospital.setVisibility(View.VISIBLE);
-            btnSearchHospital.setVisibility(View.VISIBLE);
-            btnGPS.setVisibility(View.VISIBLE);
-            btnZoomIn.setVisibility(View.VISIBLE);
-            btnZoomOut.setVisibility(View.VISIBLE);
+            setVisible();
         }
+    }
+
+    private void setVisible() {
+        searchHospital.setVisibility(View.VISIBLE);
+        btnSearchHospital.setVisibility(View.VISIBLE);
+        btnGPS.setVisibility(View.VISIBLE);
+        btnZoomIn.setVisibility(View.VISIBLE);
+        btnZoomOut.setVisibility(View.VISIBLE);
+    }
+
+    private void setInvisible() {
+        searchHospital.setVisibility(View.INVISIBLE);
+        btnSearchHospital.setVisibility(View.INVISIBLE);
+        btnGPS.setVisibility(View.INVISIBLE);
+        btnZoomIn.setVisibility(View.INVISIBLE);
+        btnZoomOut.setVisibility(View.INVISIBLE);
     }
 
     @Override
