@@ -31,9 +31,6 @@ import java.util.List;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
-    // private static final MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
-    // private static final MapPoint DEFAULT_MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.537229, 127.005515);
-
     private MapView mapView;
     private MapPOIItem mCustomMarker;
     EditText searchHospital;
@@ -51,13 +48,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nested_mapview);
         mapView = findViewById(R.id.map_view);
-        mapView.setDaumMapApiKey("0cfe9165fbf7d7069b488e119b2e8d6c");
-
         mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
         mapView.setCurrentLocationEventListener(this);
 
-        searchHospital = findViewById(R.id.search_hospital);
+        searchHospital = findViewById(R.id.edit_search_hospital);
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
         btnGPS = findViewById(R.id.button_gps);
 
@@ -269,9 +264,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        //menu.add(0, MENU_DEFAULT_CALLOUT_BALLOON, Menu.NONE, "Default CalloutBalloon");
-        // menu.add(0, MENU_CUSTOM_CALLOUT_BALLOON, Menu.NONE, "Custom CalloutBalloon");
-
         return true;
     }
 
