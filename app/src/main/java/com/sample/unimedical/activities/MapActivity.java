@@ -88,12 +88,16 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnGPS.setOnClickListener(v -> {
             askForPermission();
 
-            if (GPS_MODE == 2) {
-                GPS_MODE = 0;
-            } else {
-                GPS_MODE += 1;
+            try {
+                if (GPS_MODE == 2) {
+                    GPS_MODE = 0;
+                } else {
+                    GPS_MODE += 1;
+                }
+                userLocationMode(GPS_MODE);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            userLocationMode(GPS_MODE);
         });
 
         btnZoomIn.setOnClickListener(v -> {
@@ -312,7 +316,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onMapViewZoomLevelChanged(MapView mapView, int i) {
         CURRENT_ZOOMLEVEL = i;
-        Log.d("test", CURRENT_ZOOMLEVEL + "");
     }
 
     @Override
