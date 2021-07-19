@@ -1,8 +1,8 @@
 package com.sample.unimedical.activities;
 
-import android.graphics.Color;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
@@ -76,6 +78,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         });
 
         btnGPS.setOnClickListener(v -> {
+            askForPermission();
+
             if (GPS_MODE == 2) {
                 GPS_MODE = 0;
             } else {
@@ -95,6 +99,16 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         super.onDestroy();
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         mapView.setShowCurrentLocationMarker(false);
+    }
+
+    private void askForPermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) { //위치 권한 확인
+
+            //위치 권한 요청
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
     }
 
     private void userLocationMode(int GPS_MODE) {
@@ -152,6 +166,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
 
         mapView.removeAllPOIItems();
+
         for (MapPOIItem mpi : newList) {
             mapView.addPOIItem(mpi);
             mapView.selectPOIItem(mpi, true);

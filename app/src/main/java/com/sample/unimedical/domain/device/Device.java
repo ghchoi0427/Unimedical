@@ -1,6 +1,6 @@
 package com.sample.unimedical.domain.device;
 
-public class Item {
+public class Device {
     private String primaryCode;
     private String midClass;
     private int midCode;
