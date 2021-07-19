@@ -83,7 +83,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
             try {
-                addBoundObjects2(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
+                bindLocationSearchItems(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -203,7 +203,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
-    private void addBoundObjects2(double Xpos, double Ypos, int radius) throws Exception {
+    private void bindLocationSearchItems(double Xpos, double Ypos, int radius) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, radius));
         List<MapPOIItem> newList = new ArrayList<>();
 
