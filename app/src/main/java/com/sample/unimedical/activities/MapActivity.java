@@ -200,11 +200,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         mapView.removeAllPOIItems();
 
-        for (MapPOIItem mpi : newList) {
-            mapView.addPOIItem(mpi);
-            mapView.selectPOIItem(mpi, true);
-            mapView.setMapCenterPoint(mpi.getMapPoint(), false);
-        }
+        setPOIItems(newList);
     }
 
     private void addBoundObjects2(double Xpos, double Ypos, int radius) throws Exception {
@@ -233,7 +229,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
                 mapPOIItem.setMarkerType(markerType);
                 mapPOIItem.setSelectedMarkerType(markerType);
-                mapPOIItem.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven);
+                mapPOIItem.setShowAnimationType(MapPOIItem.ShowAnimationType.SpringFromGround);
                 newList.add(mapPOIItem);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -242,12 +238,17 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         mapView.removeAllPOIItems();
 
-        for (MapPOIItem mpi : newList) {
-            mapView.addPOIItem(mpi);
-            mapView.selectPOIItem(mpi, true);
-            mapView.setMapCenterPoint(mpi.getMapPoint(), false);
+        setPOIItems(newList);
+    }
+
+    private void setPOIItems(List<MapPOIItem> list) {
+        for (MapPOIItem item : list) {
+            mapView.addPOIItem(item);
+            mapView.selectPOIItem(item, true);
+            mapView.setMapCenterPoint(item.getMapPoint(), false);
         }
     }
+
 
     //ReverseGeoCoder
     @Override
