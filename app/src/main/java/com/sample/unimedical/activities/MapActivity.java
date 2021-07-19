@@ -198,8 +198,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             }
         }
 
-        mapView.removeAllPOIItems();
-
+        clearPOI();
         setPOIItems(newList);
     }
 
@@ -236,8 +235,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             }
         }
 
-        mapView.removeAllPOIItems();
-
+        clearPOI();
         setPOIItems(newList);
     }
 
@@ -249,6 +247,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
     }
 
+    private void clearPOI() {
+        mapView.removeAllPOIItems();
+    }
 
     //ReverseGeoCoder
     @Override
