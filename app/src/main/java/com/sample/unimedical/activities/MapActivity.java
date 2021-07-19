@@ -46,6 +46,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private int GPS_MODE = 0;
     private int CURRENT_ZOOMLEVEL = 7;
 
+    MapPoint currentMapPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -323,12 +325,12 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewInitialized(MapView mapView) {
-
+        currentMapPoint = mapView.getMapCenterPoint();
     }
 
     @Override
     public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
-
+        currentMapPoint = mapPoint;
     }
 
     @Override
