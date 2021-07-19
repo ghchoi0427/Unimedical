@@ -46,7 +46,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private int GPS_MODE = 0;
     private int CURRENT_ZOOMLEVEL = 7;
 
-    MapPoint currentMapPoint;
+    MapPoint CURRENT_MAP_POINT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
             try {
-                bindLocationSearchItems(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
+                bindLocationSearchItems(CURRENT_MAP_POINT.getMapPointGeoCoord().latitude, CURRENT_MAP_POINT.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -355,12 +355,12 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewInitialized(MapView mapView) {
-        currentMapPoint = mapView.getMapCenterPoint();
+        CURRENT_MAP_POINT = mapView.getMapCenterPoint();
     }
 
     @Override
     public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
-        currentMapPoint = mapPoint;
+        CURRENT_MAP_POINT = mapPoint;
     }
 
     @Override
