@@ -109,8 +109,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnZoomOut.setOnClickListener(v -> zoomOut());
 
-
-        mapView.removeAllPOIItems();
+        clearPOI();
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
 
     }
@@ -175,8 +174,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 MapPOIItem mapPOIItem = new MapPOIItem();
                 mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
                 mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
-
                 MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
+
                 switch (i.getClCd()) {
                     case "01":
                         markerType = MapPOIItem.MarkerType.YellowPin;
