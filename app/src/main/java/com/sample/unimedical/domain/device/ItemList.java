@@ -3,17 +3,17 @@ package com.sample.unimedical.domain.device;
 import java.util.ArrayList;
 
 public class ItemList {
-    ArrayList<Device> devices = new ArrayList<>();
+    ArrayList<Device> items = new ArrayList<>();
 
     public ArrayList<Device> getItems() {
-        return devices;
+        return items;
     }
 
     public Device getItem(int index) {
-        return devices.get(index);
+        return items.get(index);
     }
 
     public Device getLastElement() {
-        return devices.get(devices.size() - 1);
+        return items.get(items.size() - 1);
     }
 }
