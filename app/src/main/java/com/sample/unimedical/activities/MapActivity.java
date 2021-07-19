@@ -3,7 +3,6 @@ package com.sample.unimedical.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -35,7 +34,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private static final int SEARCH_RADIUS = 1500;
     private MapView mapView;
-    private MapPOIItem mCustomMarker;
     EditText searchHospital;
     Button btnSearchHospital;
     ImageButton btnGPS;
@@ -67,15 +65,13 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnZoomOut = findViewById(R.id.btn_zoom_out);
 
 
-        btnSearchHospital.setOnClickListener(view -> {
-            new Thread(() -> {
-                try {
-                    addBoundObjects(searchHospital.getText().toString().trim());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        });
+        btnSearchHospital.setOnClickListener(view -> new Thread(() -> {
+            try {
+                addBoundObjects(searchHospital.getText().toString().trim());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start());
 
         searchHospital.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -85,15 +81,13 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             return false;
         });
 
-        btnSearchFromMap.setOnClickListener(v -> {
-            new Thread(() -> {
-                try {
-                    addBoundObjects2(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        });
+        btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
+            try {
+                addBoundObjects2(currentMapPoint.getMapPointGeoCoord().latitude, currentMapPoint.getMapPointGeoCoord().longitude, SEARCH_RADIUS);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start());
 
         btnGPS.setOnClickListener(v -> {
             askForPermission();
@@ -110,13 +104,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             }
         });
 
-        btnZoomIn.setOnClickListener(v -> {
-            zoomIn();
-        });
+        btnZoomIn.setOnClickListener(v -> zoomIn());
 
-        btnZoomOut.setOnClickListener(v -> {
-            zoomOut();
-        });
+        btnZoomOut.setOnClickListener(v -> zoomOut());
 
 
         mapView.removeAllPOIItems();
@@ -296,7 +286,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     }
 
-
     // CalloutBalloonAdapter 인터페이스 구현
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
         private final View mCalloutBalloon;
@@ -317,7 +306,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             return mCalloutBalloon;
         }
 
-
         @Override
         public View getPressedCalloutBalloon(MapPOIItem poiItem) {
             return null;
@@ -329,24 +317,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         return true;
-    }
-
-    private void createCustomMarker(MapView mapView) {
-        mCustomMarker = new MapPOIItem();
-        String name = "Custom Marker";
-        mCustomMarker.setItemName(name);
-        mCustomMarker.setTag(1);
-        mCustomMarker.setMapPoint(mCustomMarker.getMapPoint());
-
-        mCustomMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-
-        mCustomMarker.setCustomImageResourceId(R.drawable.round);
-        mCustomMarker.setCustomImageAutoscale(false);
-        mCustomMarker.setCustomImageAnchor(0.5f, 1.0f);
-
-        mapView.addPOIItem(mCustomMarker);
-        mapView.selectPOIItem(mCustomMarker, true);
-        mapView.setMapCenterPoint(mCustomMarker.getMapPoint(), false);
     }
 
     private void toggleViewVisibility() {
@@ -379,7 +349,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onMapViewInitialized(MapView mapView) {
         currentMapPoint = mapView.getMapCenterPoint();
-        Log.d("test", currentMapPoint.getMapPointGeoCoord().latitude + "," + currentMapPoint.getMapPointGeoCoord().longitude);
     }
 
     @Override
