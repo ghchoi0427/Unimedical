@@ -68,7 +68,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnSearchHospital.setOnClickListener(view -> {
             new Thread(() -> {
                 try {
-                    addBoundObjects(searchHospital.getText().toString());
+                    addBoundObjects(searchHospital.getText().toString().trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
