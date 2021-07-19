@@ -48,7 +48,7 @@ public class RequestSender {
         return sb.toString();
     }
 
-    public static String sendHospitalRequest(String xPos, String yPos, int radius) throws Exception {
+    public static String sendHospitalRequest(double xPos, double yPos, int radius) throws Exception {
 
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1"); /*URL*/
         urlBuilder.append("?").append(URLEncoder.encode("ServiceKey", "UTF-8")); /*Service Key*/
@@ -62,10 +62,11 @@ public class RequestSender {
         urlBuilder.append("&").append(URLEncoder.encode("zipCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*분류코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("clCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*종별코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("dgsbjtCd", "UTF-8")).append("=").append(URLEncoder.encode("05", "UTF-8")); /*진료과목코드(활용가이드 참조)*/
-        urlBuilder.append("&").append(URLEncoder.encode("xPos", "UTF-8")).append("=").append(URLEncoder.encode(xPos, "UTF-8")); /*x좌표(소수점 15)*/
-        urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode(yPos, "UTF-8")); /*y좌표(소수점 15)*/
+        urlBuilder.append("&").append(URLEncoder.encode("xPos", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(yPos), "UTF-8")); /*x좌표(소수점 15)*/
+        urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(xPos), "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(radius), "UTF-8")); /*단위 : 미터(m)*/
         URL url = new URL(urlBuilder.toString());
+        Log.d("test", urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
