@@ -3,6 +3,7 @@ package com.sample.unimedical.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -110,7 +111,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        try {
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mapView.setShowCurrentLocationMarker(false);
     }
 
@@ -180,6 +185,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
                 mapPOIItem.setMarkerType(markerType);
                 mapPOIItem.setSelectedMarkerType(markerType);
+                mapPOIItem.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven);
                 newList.add(mapPOIItem);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -285,6 +291,23 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         mapView.setMapCenterPoint(mCustomMarker.getMapPoint(), false);
     }
 
+    private void toggleViewVisibility() {
+
+        if (btnZoomIn.getVisibility() == View.VISIBLE) {
+            searchHospital.setVisibility(View.INVISIBLE);
+            btnSearchHospital.setVisibility(View.INVISIBLE);
+            btnGPS.setVisibility(View.INVISIBLE);
+            btnZoomIn.setVisibility(View.INVISIBLE);
+            btnZoomOut.setVisibility(View.INVISIBLE);
+        } else {
+            searchHospital.setVisibility(View.VISIBLE);
+            btnSearchHospital.setVisibility(View.VISIBLE);
+            btnGPS.setVisibility(View.VISIBLE);
+            btnZoomIn.setVisibility(View.VISIBLE);
+            btnZoomOut.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onMapViewInitialized(MapView mapView) {
 
@@ -302,7 +325,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-
+        toggleViewVisibility();
     }
 
     @Override
