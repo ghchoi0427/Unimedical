@@ -2,7 +2,6 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
