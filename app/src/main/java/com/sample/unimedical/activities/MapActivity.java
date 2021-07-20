@@ -360,7 +360,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewInitialized(MapView mapView) {
-
+        try {
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        } catch (Exception e) {
+            askForPermission();
+        }
     }
 
     @Override
@@ -390,9 +394,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-        if (mapView.getCurrentLocationTrackingMode() == TrackingModeOnWithoutHeading || mapView.getCurrentLocationTrackingMode() == TrackingModeOnWithHeading) {
-            mapView.setCurrentLocationTrackingMode(TrackingModeOnWithHeadingWithoutMapMoving);
-        }
+
     }
 
     @Override
