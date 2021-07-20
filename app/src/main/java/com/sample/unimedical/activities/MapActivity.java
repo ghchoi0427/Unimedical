@@ -1,8 +1,10 @@
 package com.sample.unimedical.activities;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -31,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.sample.unimedical.util.AnimationHandler.*;
+
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
     private static final int SEARCH_RADIUS = 1500;
@@ -45,6 +49,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private int GPS_MODE = 0;
     private int CURRENT_ZOOM_LEVEL = 7;
+    private boolean isViewVisible = true;
 
     private long backKeyPressedTime = 0;
 
@@ -327,29 +332,26 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private void toggleViewVisibility() {
 
-        if (btnZoomIn.getVisibility() == View.VISIBLE) {
-            setInvisible();
+        View linearLayoutSearch = findViewById(R.id.linear_search);
+        View linearLayoutZoom = findViewById(R.id.linear_zoom);
+        View SearchFromMap = btnSearchFromMap;
+        View GPSButton = btnGPS;
+
+        if (isViewVisible) {
+
+            viewAnimationUp(linearLayoutSearch);
+            viewAnimationUp(SearchFromMap);
+            viewAnimationUp(SearchFromMap);
+            viewAnimationRight(linearLayoutZoom);
+            viewAnimationLeft(GPSButton);
+            isViewVisible = false;
         } else {
-            setVisible();
+            viewAnimationGetBack(linearLayoutSearch);
+            viewAnimationGetBack(SearchFromMap);
+            viewAnimationGetBack(linearLayoutZoom);
+            viewAnimationGetBack(GPSButton);
+            isViewVisible = true;
         }
-    }
-
-    private void setVisible() {
-        searchHospital.setVisibility(View.VISIBLE);
-        btnSearchHospital.setVisibility(View.VISIBLE);
-        btnGPS.setVisibility(View.VISIBLE);
-        btnZoomIn.setVisibility(View.VISIBLE);
-        btnZoomOut.setVisibility(View.VISIBLE);
-        btnSearchFromMap.setVisibility(View.VISIBLE);
-    }
-
-    private void setInvisible() {
-        searchHospital.setVisibility(View.INVISIBLE);
-        btnSearchHospital.setVisibility(View.INVISIBLE);
-        btnGPS.setVisibility(View.INVISIBLE);
-        btnZoomIn.setVisibility(View.INVISIBLE);
-        btnZoomOut.setVisibility(View.INVISIBLE);
-        btnSearchFromMap.setVisibility(View.INVISIBLE);
     }
 
     @Override
