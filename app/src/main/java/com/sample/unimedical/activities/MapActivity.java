@@ -38,6 +38,7 @@ import static com.sample.unimedical.util.AnimationHandler.viewAnimationUp;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading;
+import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
@@ -394,7 +395,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-        if (mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading || mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading) {
+        if (mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading) {
+            mapView.setCurrentLocationTrackingMode(TrackingModeOnWithoutHeadingWithoutMapMoving);
+        }
+        if (mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading) {
             mapView.setCurrentLocationTrackingMode(TrackingModeOnWithHeadingWithoutMapMoving);
         }
     }
