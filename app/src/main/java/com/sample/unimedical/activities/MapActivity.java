@@ -44,7 +44,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
 
     private int GPS_MODE = 0;
-    private int CURRENT_ZOOMLEVEL = 7;
+    private int CURRENT_ZOOM_LEVEL = 7;
 
     MapPoint CURRENT_MAP_POINT;
     private long backKeyPressedTime = 0;
@@ -160,11 +160,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     private void zoomIn() {
-        mapView.setZoomLevel(CURRENT_ZOOMLEVEL - 1, true);
+        mapView.setZoomLevel(CURRENT_ZOOM_LEVEL - 1, true);
     }
 
     private void zoomOut() {
-        mapView.setZoomLevel(CURRENT_ZOOMLEVEL + 1, true);
+        mapView.setZoomLevel(CURRENT_ZOOM_LEVEL + 1, true);
     }
 
 
@@ -366,7 +366,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewZoomLevelChanged(MapView mapView, int i) {
-        CURRENT_ZOOMLEVEL = i;
+        CURRENT_ZOOM_LEVEL = i;
     }
 
     @Override
