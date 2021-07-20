@@ -304,8 +304,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         public View getCalloutBalloon(MapPOIItem poiItem) {
             try {
                 ((TextView) mCalloutBalloon.findViewById(R.id.bal_hospital_name)).setText(poiItem.getItemName().split("/")[0]);
-                //((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText(String.format("일반의: %s명", poiItem.getItemName().split("/")[1]));
-                //((TextView) mCalloutBalloon.findViewById(R.id.bal_tel_number)).setText(poiItem.getItemName().split("/")[2]);
+                ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText(String.format("일반의: %s명", poiItem.getItemName().split("/")[1]));
+                ((TextView) mCalloutBalloon.findViewById(R.id.bal_tel_number)).setText(poiItem.getItemName().split("/")[2]);
             } catch (Exception e) {
                 e.printStackTrace();
             }

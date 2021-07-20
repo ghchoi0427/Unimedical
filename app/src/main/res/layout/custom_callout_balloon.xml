@@ -1,71 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:background="@drawable/round"
+    android:background="@drawable/radius_theme"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bal_hospital_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:text="Custom Marker"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/badge"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:scaleX="0.7"
-            android:scaleY="0.9"
-            android:layout_marginHorizontal="2dp"
-            android:layout_marginVertical="2dp"
-            android:src="@drawable/icon_hospital" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bal_doctor_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="custom marker desc."
+        android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/bal_hospital_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:autoSizeMaxTextSize="15sp"
-                android:autoSizeMinTextSize="7sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Custom Marker"
-                android:textColor="@color/purple_700"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/bal_doctor_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="15sp"
-                android:autoSizeMinTextSize="7sp"
-                android:autoSizeStepGranularity="2sp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="custom marker desc."
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/bal_tel_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="15sp"
-                android:autoSizeMinTextSize="7sp"
-                android:autoSizeStepGranularity="2sp"
-                android:text="TextView"
-                android:textColor="@color/black"
-               />
-        </LinearLayout>
-    </LinearLayout>
-
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bal_tel_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:text="TextView"
+        android:textColor="@color/black" />
 </LinearLayout>
