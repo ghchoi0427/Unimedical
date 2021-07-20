@@ -11,9 +11,9 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginVertical="40dp"
+        android:contentDescription="@string/sub_logo_description"
         android:scaleX="3"
         android:scaleY="3"
-        android:contentDescription="@string/sub_logo_description"
         app:srcCompat="@drawable/logo_main" />
 
     <LinearLayout
@@ -31,10 +31,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
-            android:background="@drawable/radius_purple"
+            android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_injection"
             android:padding="10dp"
             android:text="의료기기\n검색"
+            android:textColor="@color/white"
             android:textSize="17dp" />
 
         <Button
@@ -43,10 +44,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
-            android:background="@drawable/radius"
+            android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_hospital"
             android:padding="10dp"
             android:text="의료기기\n업체검색"
+            android:textColor="@color/white"
             android:textSize="17dp" />
     </LinearLayout>
 
@@ -67,10 +69,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
-            android:background="@drawable/radius"
+            android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_map"
             android:paddingTop="15dp"
             android:text="주변찾기"
+            android:textColor="@color/white"
             android:textSize="17dp" />
 
         <Button
@@ -79,10 +82,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
-            android:background="@drawable/radius"
+            android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_community"
             android:paddingTop="15dp"
             android:text="커뮤니티"
+            android:textColor="@color/white"
             android:textSize="17dp" />
 
     </LinearLayout>
