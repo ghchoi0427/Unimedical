@@ -167,7 +167,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
 
     private void bindSearchItems(String hospitalName) throws Exception {
-        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName));
+        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
         List<MapPOIItem> newList = new ArrayList<>();
 
         for (Hospital i : hospitals) {
