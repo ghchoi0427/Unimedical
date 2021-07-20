@@ -394,7 +394,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-
+        if (mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading || mapView.getCurrentLocationTrackingMode() == MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading) {
+            mapView.setCurrentLocationTrackingMode(TrackingModeOnWithHeadingWithoutMapMoving);
+        }
     }
 
     @Override
