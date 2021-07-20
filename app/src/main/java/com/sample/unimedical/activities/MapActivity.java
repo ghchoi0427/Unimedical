@@ -35,7 +35,6 @@ import static com.sample.unimedical.util.AnimationHandler.viewAnimationGetBack;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationLeft;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationRight;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationUp;
-import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving;
@@ -140,7 +139,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         if (permissionCheck == PackageManager.PERMISSION_DENIED) { //위치 권한 확인
-
             //위치 권한 요청
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
