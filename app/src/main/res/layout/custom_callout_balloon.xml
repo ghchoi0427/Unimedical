@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="1"
         android:text="Custom Marker"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 
@@ -30,15 +31,16 @@
         android:maxLines="1"
         android:singleLine="true"
         android:text="custom marker desc."
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/bal_tel_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="1"
         android:text="TextView"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 </LinearLayout>
