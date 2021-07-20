@@ -47,6 +47,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private int CURRENT_ZOOMLEVEL = 7;
 
     MapPoint CURRENT_MAP_POINT;
+    private long backKeyPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -417,5 +418,19 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            finish();
+        }
     }
 }
