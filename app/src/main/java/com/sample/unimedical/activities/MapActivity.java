@@ -146,11 +146,13 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             case 1: // User Location On
             {
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+                CURRENT_MAP_POINT = mapView.getMapCenterPoint();
             }
             break;
             case 2: // User Location+Heading On
             {
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+                CURRENT_MAP_POINT = mapView.getMapCenterPoint();
             }
             break;
         }
