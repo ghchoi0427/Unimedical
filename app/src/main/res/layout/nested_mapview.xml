@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/radius_white"
+                android:background="@drawable/shadow"
                 android:ems="10"
                 android:hint="  병원명 검색"
                 android:inputType="textPersonName"
@@ -40,6 +40,7 @@
                 android:id="@+id/btn_search_hospital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/round_theme"
@@ -51,13 +52,16 @@
         <Button
             android:id="@+id/btn_search_from_map"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/radius_theme_transparent"
-            android:drawableLeft="@android:drawable/ic_menu_rotate"
-            android:text="현 지도에서 검색   "
-            android:textSize="10sp" />
+            android:drawableLeft="@drawable/icon_refresh"
+            android:padding="-10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="   현 지도에서 검색   "
+            android:textSize="13sp" />
 
     </LinearLayout>
 
@@ -69,7 +73,7 @@
         android:layout_alignParentBottom="true"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingBottom="100dp">
+        android:paddingBottom="140dp">
 
         <Button
             android:id="@+id/btn_zoom_in"
@@ -87,18 +91,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/round_theme"
+            android:layout_marginBottom="10dp"
             android:text="-"
             android:textSize="28sp" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/button_gps"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/round_theme"
-        android:src="@drawable/icon_crosshair" />
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/button_gps"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/round_theme"
+            android:src="@drawable/icon_crosshair" />
+    </LinearLayout>
 
 </RelativeLayout>
