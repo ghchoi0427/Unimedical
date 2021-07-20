@@ -7,7 +7,7 @@ public class AnimationHandler {
 
     public static void viewAnimationUp(View view) {
 
-        view.animate().translationY(-view.getHeight() * 2).setListener(new Animator.AnimatorListener() {
+        view.animate().translationY(-view.getHeight() * 3).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
