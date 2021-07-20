@@ -1,10 +1,8 @@
 package com.sample.unimedical.activities;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -33,7 +31,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.sample.unimedical.util.AnimationHandler.*;
+import static com.sample.unimedical.util.AnimationHandler.viewAnimationGetBack;
+import static com.sample.unimedical.util.AnimationHandler.viewAnimationLeft;
+import static com.sample.unimedical.util.AnimationHandler.viewAnimationRight;
+import static com.sample.unimedical.util.AnimationHandler.viewAnimationUp;
+import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading;
+import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving;
+import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading;
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
@@ -151,7 +155,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             break;
             case 1: // User Location On
             {
-                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+                mapView.setCurrentLocationTrackingMode(TrackingModeOnWithoutHeading);
             }
             break;
             case 2: // User Location+Heading On
@@ -386,7 +390,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-
+        if (mapView.getCurrentLocationTrackingMode() == TrackingModeOnWithoutHeading || mapView.getCurrentLocationTrackingMode() == TrackingModeOnWithHeading) {
+            mapView.setCurrentLocationTrackingMode(TrackingModeOnWithHeadingWithoutMapMoving);
+        }
     }
 
     @Override
