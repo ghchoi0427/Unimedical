@@ -34,7 +34,7 @@
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_injection"
             android:padding="10dp"
-            android:text="의료기기\n검색"
+            android:text="의료기기\n검색엔진"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
@@ -72,7 +72,7 @@
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_map"
             android:paddingTop="15dp"
-            android:text="주변찾기"
+            android:text="병원 찾기\n주변검색"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
@@ -83,9 +83,9 @@
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
-            android:drawableTop="@drawable/icon_community"
+            android:drawableTop="@drawable/icon_sell"
             android:paddingTop="15dp"
-            android:text="커뮤니티"
+            android:text="판매입력"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
