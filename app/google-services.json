@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358861986527",
+    "project_id": "medi-5dbf9",
+    "storage_bucket": "medi-5dbf9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358861986527:android:ff937df5ecfa999a45676a",
+        "android_client_info": {
+          "package_name": "com.sample.unimedical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358861986527-bq0vabpl1ufpepaarlkmd8u3lvvddbl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhwCiTxsdwfyPXg_ozbXU4uV2FXqbp3tY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358861986527-bq0vabpl1ufpepaarlkmd8u3lvvddbl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
