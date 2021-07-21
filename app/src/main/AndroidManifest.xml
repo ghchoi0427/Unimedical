@@ -47,7 +47,6 @@
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.DeviceSearchActivity" />
-        <activity android:name=".activities.CommunityActivity" />
         <activity android:name=".activities.MapActivity" />
         <activity android:name=".activities.MarketSearchActivity" />
 

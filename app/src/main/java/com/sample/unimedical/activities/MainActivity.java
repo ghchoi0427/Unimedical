@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
 
-        btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CommunityActivity.class)));
+        btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, InputSaleActivity.class)));
 
         buttonMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
 
