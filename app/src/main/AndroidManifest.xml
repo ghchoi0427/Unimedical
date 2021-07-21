@@ -35,7 +35,9 @@
                     android:scheme="0cfe9165fbf7d7069b488e119b2e8d6c" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SplashActivity" android:theme="@style/SplashTheme">
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +46,6 @@
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.SettingActivity" />
         <activity android:name=".activities.DeviceSearchActivity" />
         <activity android:name=".activities.CommunityActivity" />
         <activity android:name=".activities.MapActivity" />
