@@ -72,7 +72,7 @@
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_map"
             android:paddingTop="15dp"
-            android:text="병원 찾기\n주변검색"
+            android:text="병원찾기\n주변검색"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
@@ -83,7 +83,7 @@
             android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
-            android:drawableTop="@drawable/icon_sell"
+            android:drawableTop="@drawable/icon_database"
             android:paddingTop="15dp"
             android:text="판매입력"
             android:textColor="@color/white"
