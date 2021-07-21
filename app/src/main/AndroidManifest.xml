@@ -49,6 +49,7 @@
         <activity android:name=".activities.DeviceSearchActivity" />
         <activity android:name=".activities.MapActivity" />
         <activity android:name=".activities.MarketSearchActivity" />
+        <activity android:name=".activities.InputSaleActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
