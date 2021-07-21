@@ -77,7 +77,7 @@
             android:textSize="17dp" />
 
         <Button
-            android:id="@+id/btn_community"
+            android:id="@+id/btn_input_sales"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"

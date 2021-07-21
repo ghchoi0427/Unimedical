@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
         btnSearchMarket = findViewById(R.id.btn_search_market);
-        btnCommunity = findViewById(R.id.btn_community);
+        btnCommunity = findViewById(R.id.btn_input_sales);
         buttonMap = findViewById(R.id.btn_map);
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
