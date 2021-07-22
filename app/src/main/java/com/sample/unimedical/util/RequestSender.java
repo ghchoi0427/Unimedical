@@ -1,5 +1,7 @@
 package com.sample.unimedical.util;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +20,6 @@ import static com.sample.unimedical.util.JsonFactory.createLoginJSONObject;
 public class RequestSender {
 
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
-    private static final String SESSION_ID = "BA-AO3tevbe3MS7u";
 
 
     public static String sendHospitalRequest(String hospitalName) throws Exception {
@@ -126,14 +127,14 @@ public class RequestSender {
         return sb.toString();
     }
 
-    public static String sendEcountInputSaleRequest(String UPLOAD_SER_NO, String PROD_CD, String QTY) throws IOException, JSONException {
+    public static String sendEcountInputSaleRequest(String SESSION_ID, String UPLOAD_SER_NO, String PROD_CD, String QTY) throws IOException, JSONException {
         StringBuilder urlBuilder = new StringBuilder("https://oapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
 
-        JSONObject jsonObject = createInputSaleJSONObject(SESSION_ID,UPLOAD_SER_NO, PROD_CD, QTY);
+        JSONObject jsonObject = createInputSaleJSONObject(UPLOAD_SER_NO, PROD_CD, QTY);
 
         conn.setDoOutput(true);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -151,6 +152,8 @@ public class RequestSender {
         }
         br.close();
         conn.disconnect();
+
+        Log.d("tester", sb.toString());
         return sb.toString();
     }
 }
