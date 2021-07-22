@@ -1,9 +1,12 @@
 package com.sample.unimedical.util;
 
-import com.sample.unimedical.R;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -11,6 +14,7 @@ import java.net.URLEncoder;
 public class RequestSender {
 
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
+    private static final String ECOUNT_API_KEY = "3e533429870154db68acac0e662825e193";
 
     public static String sendHospitalRequest(String hospitalName) throws Exception {
 
@@ -87,5 +91,43 @@ public class RequestSender {
         conn.disconnect();
 
         return sb.toString();
+    }
+
+    public static String sendEcountLoginRequest(String comCode, String userID) throws Exception {
+        StringBuilder urlBuilder = new StringBuilder("https://sboapiBA.ecount.com/OAPI/V2/OAPILogin"); /*URL*/
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        JSONObject jsonObject = createJSONObject(comCode, userID);
+
+        conn.setDoOutput(true);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+
+        bw.write(jsonObject.toString());
+        bw.flush();
+        bw.close();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line;
+        StringBuilder sb = new StringBuilder();
+
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+        conn.disconnect();
+        return sb.toString();
+    }
+
+    private static JSONObject createJSONObject(String comCode, String userID) throws JSONException {
+        return new JSONObject()
+                .put("COM_CODE", comCode)
+                .put("USER_ID", userID)
+                .put("API_CERT_KEY", ECOUNT_API_KEY)
+                .put("LAN_TYPE", "ko-KR")
+                .put("ZONE", "BA");
     }
 }
