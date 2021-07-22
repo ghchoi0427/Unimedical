@@ -1,6 +1,5 @@
 package com.sample.unimedical.util;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -11,10 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static com.sample.unimedical.util.JsonFactory.createJSONObject;
+
 public class RequestSender {
 
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
-    private static final String ECOUNT_API_KEY = "3e533429870154db68acac0e662825e193";
+
 
     public static String sendHospitalRequest(String hospitalName) throws Exception {
 
@@ -113,21 +114,11 @@ public class RequestSender {
         String line;
         StringBuilder sb = new StringBuilder();
 
-
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
         br.close();
         conn.disconnect();
         return sb.toString();
-    }
-
-    private static JSONObject createJSONObject(String comCode, String userID) throws JSONException {
-        return new JSONObject()
-                .put("COM_CODE", comCode)
-                .put("USER_ID", userID)
-                .put("API_CERT_KEY", ECOUNT_API_KEY)
-                .put("LAN_TYPE", "ko-KR")
-                .put("ZONE", "BA");
     }
 }
