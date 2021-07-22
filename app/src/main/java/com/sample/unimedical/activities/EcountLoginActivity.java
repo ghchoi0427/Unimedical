@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,8 +15,9 @@ import com.sample.unimedical.R;
 import org.json.JSONException;
 
 import static com.sample.unimedical.util.RequestSender.sendEcountLoginRequest;
-import static com.sample.unimedical.util.ResponseValidator.getErrorMessage;
-import static com.sample.unimedical.util.ResponseValidator.validateJSON;
+import static com.sample.unimedical.util.ResponseHandler.getErrorMessage;
+import static com.sample.unimedical.util.ResponseHandler.getSessionID;
+import static com.sample.unimedical.util.ResponseHandler.validateJSON;
 
 public class EcountLoginActivity extends AppCompatActivity {
 
@@ -34,14 +36,18 @@ public class EcountLoginActivity extends AppCompatActivity {
         ecountLogin = findViewById(R.id.btn_ecount_login);
         textEcountLoginResult = findViewById(R.id.text_ecount_login_result);
 
+
         ecountLogin.setOnClickListener(view -> new Thread(() -> {
             try {
                 String result = sendEcountLoginRequest(editComCode.getText().toString(), editUserID.getText().toString());
 
                 if (validateJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
+                    Intent ecountLoginComplete = new Intent(EcountLoginActivity.this, InputSaleActivity.class);
+                    Log.d("tester", getSessionID(result));
+                    ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
+                    startActivity(ecountLoginComplete);
 
-                    startActivity(new Intent(EcountLoginActivity.this, InputSaleActivity.class));
                 } else {
                     runOnUiThread(() -> {
                         try {
