@@ -11,4 +11,11 @@ public class ResponseValidator {
 
         return jsonChildObject.getString("Code").equals("00");
     }
+
+    public static String getErrorMessage(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject jsonChildObject = (JSONObject) jsonObject.get("Data");
+
+        return jsonChildObject.getString("Message");
+    }
 }
