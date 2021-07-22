@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
+import org.json.JSONException;
+
 import static com.sample.unimedical.util.RequestSender.sendEcountLoginRequest;
 import static com.sample.unimedical.util.ResponseValidator.getErrorMessage;
 import static com.sample.unimedical.util.ResponseValidator.validateJSON;
@@ -41,7 +43,13 @@ public class EcountLoginActivity extends AppCompatActivity {
 
                     startActivity(new Intent(EcountLoginActivity.this, InputSaleActivity.class));
                 } else {
-                    Toast.makeText(getApplicationContext(), getErrorMessage(result), Toast.LENGTH_SHORT).show();
+                    runOnUiThread(() -> {
+                        try {
+                            Toast.makeText(getApplicationContext(), getErrorMessage(result), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
             } catch (Exception e) {
