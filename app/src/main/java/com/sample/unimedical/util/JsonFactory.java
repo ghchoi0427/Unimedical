@@ -17,12 +17,19 @@ public class JsonFactory {
                 .put("ZONE", "BA");
     }
 
-    public static JSONObject createInputSaleJSONObject(String SESSION_ID, String UPLOAD_SER_NO, String PROD_CD, String QTY) throws JSONException {
-        return new JSONObject()
-                .put("SESSION_ID", SESSION_ID)
-                .put("UPLOAD_SER_NO", UPLOAD_SER_NO)
-                .put("WH_CD", WH_CD)
-                .put("PROD_CD", PROD_CD)
-                .put("QTY", QTY);
+    public static JSONObject createInputSaleJSONObject(String UPLOAD_SER_NO, String PROD_CD, String QTY) throws JSONException {
+        String str = "{\n" +
+                "  \"SaleList\": [\n" +
+                "    {\n" +
+                "      \"Line\": \"0\",\n" +
+                "      \"BulkDatas\": {\n" +
+                "        \"UPLOAD_SER_NO\": \"" + UPLOAD_SER_NO + "\",\n" +
+                "        \"PROD_CD\": \"" + PROD_CD + "\",\n" +
+                "        \"QTY\": \"" + QTY + "\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        return new JSONObject(str);
     }
 }
