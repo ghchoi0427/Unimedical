@@ -4,7 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JsonFactory {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     private static final String ECOUNT_API_KEY = "3e533429870154db68acac0e662825e193";
 
     public static JSONObject createJSONObject(String comCode, String userID) throws JSONException {

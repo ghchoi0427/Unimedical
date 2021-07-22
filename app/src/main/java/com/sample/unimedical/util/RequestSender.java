@@ -114,7 +114,6 @@ public class RequestSender {
         String line;
         StringBuilder sb = new StringBuilder();
 
-
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
