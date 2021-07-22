@@ -36,9 +36,7 @@ public class InputSaleActivity extends AppCompatActivity {
         uploadSale = findViewById(R.id.btn_upload_sale);
         uploadSaleResult = findViewById(R.id.text_ecount_sales_result);
 
-        Intent secondIntent = getIntent();
-        String SESSION_ID = secondIntent.getStringExtra("SESSION_ID").split(":")[1];
-        Log.d("tester", SESSION_ID);
+        String SESSION_ID = getIntent().getStringExtra("SESSION_ID");
 
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
