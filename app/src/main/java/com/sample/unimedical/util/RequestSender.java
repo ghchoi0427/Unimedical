@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 
 import static com.sample.unimedical.util.JsonFactory.createInputSaleJSONObject;
 import static com.sample.unimedical.util.JsonFactory.createLoginJSONObject;
+import static com.sample.unimedical.util.JsonFactory.getZoneJSONObject;
 
 public class RequestSender {
 
@@ -110,13 +111,13 @@ public class RequestSender {
 
 
     public static String sendEcountZoneRequest(String comCode) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder("https://sboapiBA.ecount.com/OAPI/V2/OAPILogin"); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(ZONE_URL_TEST); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
 
-        JSONObject jsonObject = createLoginJSONObject();
+        JSONObject jsonObject = getZoneJSONObject(comCode);
 
         conn.setDoOutput(true);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
