@@ -6,7 +6,13 @@ import org.json.JSONObject;
 public class JsonFactory {
 
     private static final String ECOUNT_API_KEY_TEST = "3e533429870154db68acac0e662825e193";
+    private static final String ECOUNT_API_KEY = "1952f97f0a12f48f690c708ff9b28fe0b1";
     private static final String WH_CD = "00001";
+
+    public static JSONObject getZoneJSONObject(String comCode) throws JSONException {
+        return new JSONObject()
+                .put("COM_CODE", comCode);
+    }
 
     public static JSONObject createLoginJSONObject(String comCode, String userID) throws JSONException {
         return new JSONObject()
