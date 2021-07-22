@@ -18,6 +18,7 @@ import static com.sample.unimedical.util.RequestSender.sendEcountLoginRequest;
 import static com.sample.unimedical.util.RequestSender.sendEcountZoneRequest;
 import static com.sample.unimedical.util.ResponseHandler.getErrorMessage;
 import static com.sample.unimedical.util.ResponseHandler.getSessionID;
+import static com.sample.unimedical.util.ResponseHandler.getZoneCode;
 import static com.sample.unimedical.util.ResponseHandler.validateJSON;
 
 public class EcountLoginActivity extends AppCompatActivity {
@@ -26,6 +27,8 @@ public class EcountLoginActivity extends AppCompatActivity {
     EditText editUserID;
     Button ecountLogin;
     TextView textEcountLoginResult;
+
+    private String ZONE_CODE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class EcountLoginActivity extends AppCompatActivity {
     }
 
     private void zone() throws Exception {
-        sendEcountZoneRequest(editComCode.getText().toString());
+        String response = sendEcountZoneRequest(editComCode.getText().toString());
+        ZONE_CODE = getZoneCode(response);
     }
 }
