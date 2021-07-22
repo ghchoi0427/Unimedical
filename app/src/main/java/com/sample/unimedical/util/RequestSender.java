@@ -21,6 +21,15 @@ public class RequestSender {
 
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
 
+    private static final String ZONE_URL_TEST = "https://sboapi.ecount.com/OAPI/V2/Zone";
+    private static final String ZONE_URL = "https://oapi.ecount.com/OAPI/V2/Zone";
+
+    private static final String LOGIN_URL_TEST = "https://sboapiBA.ecount.com/OAPI/V2/OAPILogin";
+    private static final String LOGIN_URL = "https://oapiBA.ecount.com/OAPI/V2/OAPILogin";
+
+    private static final String UPLOAD_URL_TEST = "https://sboapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=";
+    private static final String UPLOAD_URL = "https://oapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=";
+
 
     public static String sendHospitalRequest(String hospitalName) throws Exception {
 
@@ -99,6 +108,35 @@ public class RequestSender {
         return sb.toString();
     }
 
+
+    public static String sendEcountZoneRequest(String comCode) throws Exception {
+        StringBuilder urlBuilder = new StringBuilder("https://sboapiBA.ecount.com/OAPI/V2/OAPILogin"); /*URL*/
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        JSONObject jsonObject = createLoginJSONObject();
+
+        conn.setDoOutput(true);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+
+        bw.write(jsonObject.toString());
+        bw.flush();
+        bw.close();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line;
+        StringBuilder sb = new StringBuilder();
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+        conn.disconnect();
+        return sb.toString();
+    }
+
     public static String sendEcountLoginRequest(String comCode, String userID) throws Exception {
         StringBuilder urlBuilder = new StringBuilder("https://sboapiBA.ecount.com/OAPI/V2/OAPILogin"); /*URL*/
         URL url = new URL(urlBuilder.toString());
@@ -153,7 +191,6 @@ public class RequestSender {
         br.close();
         conn.disconnect();
 
-        Log.d("tester", sb.toString());
         return sb.toString();
     }
 }
