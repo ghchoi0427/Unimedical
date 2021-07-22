@@ -15,6 +15,7 @@ import com.sample.unimedical.R;
 import org.json.JSONException;
 
 import static com.sample.unimedical.util.RequestSender.sendEcountLoginRequest;
+import static com.sample.unimedical.util.RequestSender.sendEcountZoneRequest;
 import static com.sample.unimedical.util.ResponseHandler.getErrorMessage;
 import static com.sample.unimedical.util.ResponseHandler.getSessionID;
 import static com.sample.unimedical.util.ResponseHandler.validateJSON;
@@ -37,14 +38,18 @@ public class EcountLoginActivity extends AppCompatActivity {
         textEcountLoginResult = findViewById(R.id.text_ecount_login_result);
 
 
-        ecountLogin.setOnClickListener(view -> new Thread(() -> {
+        ecountLogin.setOnClickListener(view -> login());
+
+    }
+
+    private void login() {
+        new Thread(() -> {
             try {
                 String result = sendEcountLoginRequest(editComCode.getText().toString(), editUserID.getText().toString());
 
                 if (validateJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
                     Intent ecountLoginComplete = new Intent(EcountLoginActivity.this, InputSaleActivity.class);
-                    Log.d("tester", getSessionID(result));
                     ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
                     startActivity(ecountLoginComplete);
 
@@ -61,8 +66,10 @@ public class EcountLoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }).start();
+    }
 
-        }).start());
-
+    private void zone() throws Exception {
+        sendEcountZoneRequest(editComCode.getText().toString());
     }
 }
