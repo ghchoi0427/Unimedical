@@ -12,6 +12,13 @@ public class ResponseHandler {
         return jsonChildObject.getString("Code").equals("00");
     }
 
+    public static String getZoneCode(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject Data = (JSONObject) jsonObject.get("Data");
+
+        return Data.getString("ZONE");
+    }
+
     public static String getErrorMessage(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response);
         JSONObject jsonChildObject = (JSONObject) jsonObject.get("Data");
