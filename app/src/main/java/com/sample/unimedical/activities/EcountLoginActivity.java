@@ -1,16 +1,19 @@
 package com.sample.unimedical.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
 import static com.sample.unimedical.util.RequestSender.sendEcountLoginRequest;
+import static com.sample.unimedical.util.ResponseValidator.getErrorMessage;
+import static com.sample.unimedical.util.ResponseValidator.validateJSON;
 
 public class EcountLoginActivity extends AppCompatActivity {
 
@@ -30,10 +33,17 @@ public class EcountLoginActivity extends AppCompatActivity {
         textEcountLoginResult = findViewById(R.id.text_ecount_login_result);
 
         ecountLogin.setOnClickListener(view -> new Thread(() -> {
-
             try {
-                String result = sendEcountLoginRequest("310316", "양예림");
-                runOnUiThread(() -> textEcountLoginResult.setText(result));
+                String result = sendEcountLoginRequest(editComCode.getText().toString(), editUserID.getText().toString());
+
+                if (validateJSON(result)) {
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
+
+                    startActivity(new Intent(EcountLoginActivity.this, InputSaleActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), getErrorMessage(result), Toast.LENGTH_SHORT).show();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
