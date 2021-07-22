@@ -32,7 +32,8 @@ public class EcountLoginActivity extends AppCompatActivity {
         ecountLogin.setOnClickListener(view -> new Thread(() -> {
 
             try {
-                textEcountLoginResult.setText(sendEcountLoginRequest("310316", "양예림"));
+                String result = sendEcountLoginRequest("310316", "양예림");
+                runOnUiThread(() -> textEcountLoginResult.setText(result));
             } catch (Exception e) {
                 e.printStackTrace();
             }
