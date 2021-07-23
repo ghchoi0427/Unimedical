@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.JsonObject;
 import com.sample.unimedical.R;
 
 import org.json.JSONException;
