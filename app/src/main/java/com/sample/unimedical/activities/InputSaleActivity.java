@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.SaleAdapter;
+import com.sample.unimedical.domain.sale.SaleItem;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -23,6 +25,7 @@ public class InputSaleActivity extends AppCompatActivity {
     EditText productCode;
     EditText quantity;
     Button uploadSale;
+    Button addSaleItem;
     SaleAdapter saleAdapter;
     RecyclerView recyclerViewSale;
 
@@ -35,8 +38,10 @@ public class InputSaleActivity extends AppCompatActivity {
         productCode = findViewById(R.id.edit_prod_cd);
         quantity = findViewById(R.id.edit_qty);
         uploadSale = findViewById(R.id.btn_upload_sale);
+        addSaleItem = findViewById(R.id.btn_add_sale_item);
         saleAdapter = new SaleAdapter();
         recyclerViewSale = findViewById(R.id.recyclerview_sale);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewSale.setLayoutManager(layoutManager);
@@ -53,6 +58,11 @@ public class InputSaleActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start());
+
+        addSaleItem.setOnClickListener(v -> {
+            saleAdapter.addItem(new SaleItem(new JSONObject()));
+            saleAdapter.notifyDataSetChanged();
+        });
 
     }
 }
