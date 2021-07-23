@@ -91,8 +91,7 @@ public class InputSaleActivity extends AppCompatActivity {
 
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
-
-                String response = sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, uploadSerialNumber.getText().toString(), productCode.getText().toString(), quantity.getText().toString());
+                String response = sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, jsonArray);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
