@@ -39,6 +39,10 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
         return 0;
     }
 
+    public void addItem(SaleItem saleItem) {
+        saleItems.add(saleItem);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textSaleItemCode;
