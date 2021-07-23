@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class ResponseHandler {
 
-    public static boolean validateJSON(String response) throws JSONException {
+    public static boolean validateLoginJSON(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response);
         JSONObject jsonChildObject = (JSONObject) jsonObject.get("Data");
 

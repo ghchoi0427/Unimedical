@@ -2,7 +2,6 @@ package com.sample.unimedical.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ import static com.sample.unimedical.util.RequestSender.sendEcountZoneRequest;
 import static com.sample.unimedical.util.ResponseHandler.getErrorMessage;
 import static com.sample.unimedical.util.ResponseHandler.getSessionID;
 import static com.sample.unimedical.util.ResponseHandler.getZoneCode;
-import static com.sample.unimedical.util.ResponseHandler.validateJSON;
+import static com.sample.unimedical.util.ResponseHandler.validateLoginJSON;
 
 public class EcountLoginActivity extends AppCompatActivity {
 
@@ -50,7 +49,7 @@ public class EcountLoginActivity extends AppCompatActivity {
             try {
                 String result = sendEcountLoginRequest(ZONE_CODE, editComCode.getText().toString(), editUserID.getText().toString());
 
-                if (validateJSON(result)) {
+                if (validateLoginJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
                     Intent ecountLoginComplete = new Intent(EcountLoginActivity.this, InputSaleActivity.class);
                     ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
