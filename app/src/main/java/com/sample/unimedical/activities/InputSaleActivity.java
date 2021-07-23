@@ -34,7 +34,6 @@ public class InputSaleActivity extends AppCompatActivity {
         productCode = findViewById(R.id.edit_prod_cd);
         quantity = findViewById(R.id.edit_qty);
         uploadSale = findViewById(R.id.btn_upload_sale);
-        uploadSaleResult = findViewById(R.id.text_ecount_sales_result);
 
         String SESSION_ID = getIntent().getStringExtra("SESSION_ID");
 
