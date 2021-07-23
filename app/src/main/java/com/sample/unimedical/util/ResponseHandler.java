@@ -33,4 +33,16 @@ public class ResponseHandler {
 
         return Datas.getString("SESSION_ID");
     }
+
+    public static String getProductCode(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject BulkDatas = (JSONObject) jsonObject.get("BulkDatas");
+        return BulkDatas.getString("PROD_CD");
+    }
+
+    public static String getProductQuantity(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject BulkDatas = (JSONObject) jsonObject.get("BulkDatas");
+        return BulkDatas.getString("QTY");
+    }
 }
