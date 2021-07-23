@@ -1,7 +1,6 @@
 package com.sample.unimedical.util;
 
-import android.util.Log;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,9 +13,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import static com.sample.unimedical.util.JsonFactory.createInputSaleJSONObject;
 import static com.sample.unimedical.util.JsonFactory.createLoginJSONObject;
 import static com.sample.unimedical.util.JsonFactory.getZoneJSONObject;
+import static com.sample.unimedical.util.JsonFactory.saleList;
 
 public class RequestSender {
 
@@ -166,19 +165,19 @@ public class RequestSender {
         return sb.toString();
     }
 
-    public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, String UPLOAD_SER_NO, String PROD_CD, String QTY) throws IOException, JSONException {
+    public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, JSONArray jsonArray) throws IOException, JSONException {
         StringBuilder urlBuilder = new StringBuilder("https://sboapi" + zoneCode + ".ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
 
-        JSONObject jsonObject = createInputSaleJSONObject(UPLOAD_SER_NO, PROD_CD, QTY);
+        JSONObject saleItem = saleList(jsonArray);
 
         conn.setDoOutput(true);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 
-        bw.write(jsonObject.toString());
+        bw.write(saleItem.toString());
         bw.flush();
         bw.close();
 
