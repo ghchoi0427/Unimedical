@@ -48,7 +48,7 @@ public class EcountLoginActivity extends AppCompatActivity {
     private void login() {
         new Thread(() -> {
             try {
-                String result = sendEcountLoginRequest(editComCode.getText().toString(), editUserID.getText().toString());
+                String result = sendEcountLoginRequest(ZONE_CODE, editComCode.getText().toString(), editUserID.getText().toString());
 
                 if (validateJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());

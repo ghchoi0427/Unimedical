@@ -138,8 +138,8 @@ public class RequestSender {
         return sb.toString();
     }
 
-    public static String sendEcountLoginRequest(String comCode, String userID) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder("https://sboapiBA.ecount.com/OAPI/V2/OAPILogin"); /*URL*/
+    public static String sendEcountLoginRequest(String zoneCode, String comCode, String userID) throws Exception {
+        StringBuilder urlBuilder = new StringBuilder("https://sboapi" + zoneCode + ".ecount.com/OAPI/V2/OAPILogin"); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
