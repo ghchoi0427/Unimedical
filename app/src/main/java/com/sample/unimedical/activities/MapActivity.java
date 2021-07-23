@@ -46,8 +46,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     EditText searchHospital;
     Button btnSearchHospital;
     ImageButton btnGPS;
-    Button btnZoomIn;
-    Button btnZoomOut;
+    ImageButton btnZoomIn;
+    ImageButton btnZoomOut;
     Button btnSearchFromMap;
 
 
