@@ -1,15 +1,15 @@
 package com.sample.unimedical.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
+import com.sample.unimedical.adapter.SaleAdapter;
 
 import org.json.JSONException;
 
@@ -23,7 +23,8 @@ public class InputSaleActivity extends AppCompatActivity {
     EditText productCode;
     EditText quantity;
     Button uploadSale;
-    TextView uploadSaleResult;
+    SaleAdapter saleAdapter;
+    RecyclerView recyclerViewSale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,12 @@ public class InputSaleActivity extends AppCompatActivity {
         productCode = findViewById(R.id.edit_prod_cd);
         quantity = findViewById(R.id.edit_qty);
         uploadSale = findViewById(R.id.btn_upload_sale);
+        saleAdapter = new SaleAdapter();
+        recyclerViewSale = findViewById(R.id.recyclerview_sale);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewSale.setLayoutManager(layoutManager);
+        recyclerViewSale.setAdapter(saleAdapter);
 
         String SESSION_ID = getIntent().getStringExtra("SESSION_ID");
 
