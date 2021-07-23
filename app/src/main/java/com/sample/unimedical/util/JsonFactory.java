@@ -10,7 +10,9 @@ public class JsonFactory {
 
     private static final String ECOUNT_API_KEY_TEST = "3e533429870154db68acac0e662825e193";
     private static final String ECOUNT_API_KEY = "1952f97f0a12f48f690c708ff9b28fe0b1";
+
     private static final String WH_CD = "00001";
+    private static final String UPLOAD_SER_NO = "1";
 
 
     public static JSONObject getZoneJSONObject(String comCode) throws JSONException {
@@ -27,23 +29,7 @@ public class JsonFactory {
                 .put("ZONE", "BA");
     }
 
-    public static JSONObject createInputSaleJSONObject(String UPLOAD_SER_NO, String PROD_CD, String QTY) throws JSONException {
-        String str = "{\n" +
-                "  \"SaleList\": [\n" +
-                "    {\n" +
-                "      \"Line\": \"0\",\n" +
-                "      \"BulkDatas\": {\n" +
-                "        \"UPLOAD_SER_NO\": \"" + UPLOAD_SER_NO + "\",\n" +
-                "        \"PROD_CD\": \"" + PROD_CD + "\",\n" +
-                "        \"QTY\": \"" + QTY + "\"\n" +
-                "      }\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
-        return new JSONObject(str);
-    }
-
-    public static JSONObject saleItem(String PROD_CD, String REMARKS, String PROD_DES, String SIZE_DES, String QTY, String PRICE) throws JSONException {
+    public static JSONObject createSaleItem(String PROD_CD, String REMARKS, String PROD_DES, String SIZE_DES, String QTY, String PRICE) throws JSONException {
         JSONObject Sale = new JSONObject();
         JSONObject BulkDatas = new JSONObject();
 
@@ -56,8 +42,6 @@ public class JsonFactory {
 
         Sale.put("Line", "0");
         Sale.put("BulkDatas", BulkDatas);
-
-        Log.d("tester", Sale.toString());
 
         return Sale;
     }
