@@ -36,7 +36,7 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return saleItems.size();
     }
 
     public void addItem(JSONObject saleItem) {
@@ -47,19 +47,29 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
 
         TextView textSaleItemCode;
         TextView textSaleItemQuantity;
+        TextView textSaleItemUploadSerialNo;
+        TextView textSaleItemPrice;
+        TextView textSaleItemRemarks;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             textSaleItemCode = itemView.findViewById(R.id.text_sale_item_code);
             textSaleItemQuantity = itemView.findViewById(R.id.text_sale_item_quantity);
+            textSaleItemUploadSerialNo = itemView.findViewById(R.id.text_item_upload_serial_no);
+            textSaleItemPrice = itemView.findViewById(R.id.text_item_price);
+            textSaleItemRemarks = itemView.findViewById(R.id.text_item_remarks);
         }
 
         public void setItem(JSONObject saleItem) {
             try {
                 JSONObject bulkDatas = (JSONObject) saleItem.get("BulkDatas");
-                textSaleItemCode.setText(bulkDatas.getString("PROD_CD"));
-                textSaleItemQuantity.setText(bulkDatas.getString("QTY"));
+                textSaleItemCode.setText("품목코드: " + bulkDatas.getString("PROD_CD"));
+                textSaleItemQuantity.setText("수량: " + bulkDatas.getString("QTY"));
+                textSaleItemUploadSerialNo.setText("순번: " + bulkDatas.getString("UPLOAD_SER_NO"));
+                textSaleItemRemarks.setText("적요: " + bulkDatas.getString("REMARKS"));
+                textSaleItemPrice.setText("가격: " + bulkDatas.getString("PRICE"));
+
             } catch (Exception e) {
 
             }
