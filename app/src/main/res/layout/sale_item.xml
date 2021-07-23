@@ -8,14 +8,24 @@
         android:id="@+id/layout_item_sale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradation"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/border"
         android:orientation="vertical">
 
+
+        <TextView
+            android:id="@+id/text_item_upload_serial_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TextView"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/text_sale_item_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="TextView"
             android:textColor="@color/white" />
 
@@ -23,7 +33,25 @@
             android:id="@+id/text_sale_item_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="TextView"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_item_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TextView"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_item_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TextView"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 </LinearLayout>
