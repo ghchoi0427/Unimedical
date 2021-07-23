@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.JsonObject;
 import com.sample.unimedical.R;
 
 import org.json.JSONException;
@@ -39,8 +40,14 @@ public class EcountLoginActivity extends AppCompatActivity {
         ecountLogin = findViewById(R.id.btn_ecount_login);
         textEcountLoginResult = findViewById(R.id.text_ecount_login_result);
 
-
-        ecountLogin.setOnClickListener(view -> login());
+        ecountLogin.setOnClickListener(view -> {
+            try {
+                zone();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            login();
+        });
 
     }
 
@@ -71,8 +78,20 @@ public class EcountLoginActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void zone() throws Exception {
-        String response = sendEcountZoneRequest(editComCode.getText().toString());
-        ZONE_CODE = getZoneCode(response);
+    private void zone() {
+        new Thread(() -> {
+            String response = null;
+            try {
+                response = sendEcountZoneRequest(editComCode.getText().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                ZONE_CODE = getZoneCode(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 }
