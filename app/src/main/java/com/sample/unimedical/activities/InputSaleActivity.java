@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.SaleAdapter;
+import com.sample.unimedical.domain.sale.SaleItem;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
+import static com.sample.unimedical.util.JsonFactory.saleItem;
 import static com.sample.unimedical.util.RequestSender.sendEcountInputSaleRequest;
 
 public class InputSaleActivity extends AppCompatActivity {
@@ -27,6 +30,7 @@ public class InputSaleActivity extends AppCompatActivity {
     SaleAdapter saleAdapter;
     RecyclerView recyclerViewSale;
     String SESSION_ID;
+    String ZONE_CODE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +51,12 @@ public class InputSaleActivity extends AppCompatActivity {
         recyclerViewSale.setAdapter(saleAdapter);
 
         SESSION_ID = getIntent().getStringExtra("SESSION_ID");
+        ZONE_CODE = getIntent().getStringExtra("ZONE_CODE");
 
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
 
-                String response = sendEcountInputSaleRequest(SESSION_ID, uploadSerialNumber.getText().toString(), productCode.getText().toString(), quantity.getText().toString());
+                String response = sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, uploadSerialNumber.getText().toString(), productCode.getText().toString(), quantity.getText().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {

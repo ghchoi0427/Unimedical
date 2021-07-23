@@ -60,6 +60,7 @@ public class EcountLoginActivity extends AppCompatActivity {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
                     Intent ecountLoginComplete = new Intent(EcountLoginActivity.this, InputSaleActivity.class);
                     ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
+                    ecountLoginComplete.putExtra("ZONE_CODE", ZONE_CODE);
                     startActivity(ecountLoginComplete);
 
                 } else {

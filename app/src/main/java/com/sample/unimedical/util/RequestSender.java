@@ -166,8 +166,8 @@ public class RequestSender {
         return sb.toString();
     }
 
-    public static String sendEcountInputSaleRequest(String SESSION_ID, String UPLOAD_SER_NO, String PROD_CD, String QTY) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder("https://oapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + SESSION_ID); /*URL*/
+    public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, String UPLOAD_SER_NO, String PROD_CD, String QTY) throws IOException, JSONException {
+        StringBuilder urlBuilder = new StringBuilder("https://sboapi" + zoneCode + ".ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
