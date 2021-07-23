@@ -9,14 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.sale.SaleItem;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
-    ArrayList<SaleItem> saleItems = new ArrayList<>();
+    ArrayList<JSONObject> saleItems = new ArrayList<>();
 
     @NonNull
     @NotNull
@@ -30,7 +30,7 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull SaleAdapter.ViewHolder holder, int position) {
-        SaleItem saleItem = saleItems.get(position);
+        JSONObject saleItem = saleItems.get(position);
         holder.setItem(saleItem);
     }
 
@@ -39,7 +39,7 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
         return 0;
     }
 
-    public void addItem(SaleItem saleItem) {
+    public void addItem(JSONObject saleItem) {
         saleItems.add(saleItem);
     }
 
@@ -55,10 +55,11 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
             textSaleItemQuantity = itemView.findViewById(R.id.text_sale_item_quantity);
         }
 
-        public void setItem(SaleItem saleItem) {
+        public void setItem(JSONObject saleItem) {
             try {
-                textSaleItemCode.setText("");
-                textSaleItemQuantity.setText("");
+                JSONObject bulkDatas = (JSONObject) saleItem.get("BulkDatas");
+                textSaleItemCode.setText(bulkDatas.getString("PROD_CD"));
+                textSaleItemQuantity.setText(bulkDatas.getString("QTY"));
             } catch (Exception e) {
 
             }
