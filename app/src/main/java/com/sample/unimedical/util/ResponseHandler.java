@@ -34,14 +34,12 @@ public class ResponseHandler {
         return Datas.getString("SESSION_ID");
     }
 
-    public static String getProductCode(String response) throws JSONException {
-        JSONObject jsonObject = new JSONObject(response);
+    public static String getProductCode(JSONObject jsonObject) throws JSONException {
         JSONObject BulkDatas = (JSONObject) jsonObject.get("BulkDatas");
         return BulkDatas.getString("PROD_CD");
     }
 
-    public static String getProductQuantity(String response) throws JSONException {
-        JSONObject jsonObject = new JSONObject(response);
+    public static String getProductQuantity(JSONObject jsonObject) throws JSONException {
         JSONObject BulkDatas = (JSONObject) jsonObject.get("BulkDatas");
         return BulkDatas.getString("QTY");
     }
