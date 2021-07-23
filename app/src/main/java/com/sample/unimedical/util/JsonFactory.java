@@ -29,14 +29,13 @@ public class JsonFactory {
                 .put("ZONE", "BA");
     }
 
-    public static JSONObject createSaleItem(String PROD_CD, String REMARKS, String PROD_DES, String SIZE_DES, String QTY, String PRICE) throws JSONException {
+    public static JSONObject createSaleItem(String UPLOAD_SER_NO, String PROD_CD, String REMARKS, String QTY, String PRICE) throws JSONException {
         JSONObject Sale = new JSONObject();
         JSONObject BulkDatas = new JSONObject();
 
-        BulkDatas.put("PROD_CD", PROD_CD)
+        BulkDatas.put("UPLOAD_SER_NO", UPLOAD_SER_NO)
+                .put("PROD_CD", PROD_CD)
                 .put("REMARKS", REMARKS)
-                .put("PROD_DES", PROD_DES)
-                .put("SIZE_DES", SIZE_DES)
                 .put("QTY", QTY)
                 .put("PRICE", PRICE);
 
