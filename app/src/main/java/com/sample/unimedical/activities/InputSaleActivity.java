@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.SaleAdapter;
-import com.sample.unimedical.domain.sale.SaleItem;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static com.sample.unimedical.util.JsonFactory.saleItem;
+import static com.sample.unimedical.util.JsonFactory.createSaleItem;
 import static com.sample.unimedical.util.RequestSender.sendEcountInputSaleRequest;
 
 public class InputSaleActivity extends AppCompatActivity {
@@ -53,6 +51,19 @@ public class InputSaleActivity extends AppCompatActivity {
         SESSION_ID = getIntent().getStringExtra("SESSION_ID");
         ZONE_CODE = getIntent().getStringExtra("ZONE_CODE");
 
+        addSaleItem.setOnClickListener(v -> {
+            try {
+                saleAdapter.addItem(createSaleItem("00070","none","product name","size asdf","quantity","1234"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            saleAdapter.notifyDataSetChanged();
+
+            uploadSerialNumber.setText("");
+            productCode.setText("");
+            quantity.setText("");
+        });
+
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
 
@@ -63,16 +74,6 @@ public class InputSaleActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start());
-
-        addSaleItem.setOnClickListener(v -> {
-            //JSONObject js = saleItem();
-            //saleAdapter.addItem(new SaleItem());
-            saleAdapter.notifyDataSetChanged();
-
-            uploadSerialNumber.setText("");
-            productCode.setText("");
-            quantity.setText("");
-        });
 
     }
 }
