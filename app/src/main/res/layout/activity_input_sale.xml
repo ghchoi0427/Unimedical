@@ -31,16 +31,26 @@
         android:inputType="textPersonName"
         android:text="" />
 
-    <Button
-        android:id="@+id/btn_upload_sale"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:paddingBottom="48dp">
 
-    <TextView
-        android:id="@+id/text_ecount_sales_result"
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-48dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_upload_sale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="send"/>
+    </LinearLayout>
 
 </LinearLayout>
