@@ -47,6 +47,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_add_sale_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="add sale item" />
+
+        <Button
             android:id="@+id/btn_upload_sale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
