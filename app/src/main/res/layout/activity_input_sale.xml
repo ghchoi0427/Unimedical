@@ -5,6 +5,38 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/edit_upload_serial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="순번"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_upload_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="판매일자(미입력시 현재일로 입력됨)"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_employee_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="담당자 코드"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_io_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="거래 유형(미 입력시 기본값)"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:id="@+id/edit_upload_ser_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +63,28 @@
         android:inputType="textPersonName"
         android:text="" />
 
+    <EditText
+        android:id="@+id/edit_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="price"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_remarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="remarks"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btn_add_sale_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add sale item" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_sale"
         android:layout_width="match_parent"
@@ -45,12 +99,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-48dp"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_add_sale_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="add sale item" />
 
         <Button
             android:id="@+id/btn_upload_sale"
