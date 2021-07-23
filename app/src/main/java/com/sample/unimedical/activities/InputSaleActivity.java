@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.SaleAdapter;
-import com.sample.unimedical.domain.sale.SaleItem;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -28,6 +26,7 @@ public class InputSaleActivity extends AppCompatActivity {
     Button addSaleItem;
     SaleAdapter saleAdapter;
     RecyclerView recyclerViewSale;
+    String SESSION_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +46,11 @@ public class InputSaleActivity extends AppCompatActivity {
         recyclerViewSale.setLayoutManager(layoutManager);
         recyclerViewSale.setAdapter(saleAdapter);
 
-        String SESSION_ID = getIntent().getStringExtra("SESSION_ID");
+        SESSION_ID = getIntent().getStringExtra("SESSION_ID");
 
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
+
                 String response = sendEcountInputSaleRequest(SESSION_ID, uploadSerialNumber.getText().toString(), productCode.getText().toString(), quantity.getText().toString());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,8 +60,13 @@ public class InputSaleActivity extends AppCompatActivity {
         }).start());
 
         addSaleItem.setOnClickListener(v -> {
-            saleAdapter.addItem(new SaleItem(new JSONObject()));
+            //JSONObject js = saleItem();
+            //saleAdapter.addItem(new SaleItem());
             saleAdapter.notifyDataSetChanged();
+
+            uploadSerialNumber.setText("");
+            productCode.setText("");
+            quantity.setText("");
         });
 
     }
