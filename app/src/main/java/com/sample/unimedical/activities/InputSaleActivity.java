@@ -84,7 +84,6 @@ public class InputSaleActivity extends AppCompatActivity {
             }
             saleAdapter.notifyDataSetChanged();
 
-            uploadSerialNumber.setText("");
             productCode.setText("");
             quantity.setText("");
         });
