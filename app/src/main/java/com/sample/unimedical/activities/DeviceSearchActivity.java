@@ -2,7 +2,6 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -35,7 +34,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.edit);
         searchButton = findViewById(R.id.btn_search_result);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerview_device);
         adapter = new ItemAdapter();
 
 
