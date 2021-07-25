@@ -3,8 +3,8 @@ package com.sample.unimedical.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 public class MarketSearchActivity extends AppCompatActivity {
     EditText editText;
-    Button searchButton;
+    ImageButton searchButton;
     RecyclerView recyclerView;
     ItemAdapter adapter;
     ItemList itemList;
