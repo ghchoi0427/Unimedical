@@ -263,18 +263,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return customMarker;
     }
 
-    private MapPOIItem setClientMarker(String hospitalInfo, double Xpos, double Ypos) {
-        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
-
-        MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(hospitalInfo);
-        mapPOIItem.setMapPoint(mapPoint);
-        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
-        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        return mapPOIItem;
-    }
-
     private MapPOIItem setNonClientMarker(String hospitalInfo, double Xpos, double Ypos, int hospitalScale) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
