@@ -247,7 +247,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
-    private MapPOIItem createCustomMarker(String hospitalInfo, MapPoint mapPoint) {
+    private MapPOIItem setCustomMarker(String hospitalInfo, MapPoint mapPoint) {
         MapPOIItem customMarker = new MapPOIItem();
         customMarker.setItemName(hospitalInfo);
         customMarker.setMapPoint(mapPoint);
