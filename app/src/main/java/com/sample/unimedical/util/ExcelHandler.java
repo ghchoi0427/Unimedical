@@ -41,4 +41,10 @@ public class ExcelHandler extends AppCompatActivity {
         }
     }
 
+    public boolean validateHospital(String hospitalCell) {
+        if (hospitalCell.contains("폐업") || hospitalCell.contains("거래중지") || hospitalCell.contains("(주)") || hospitalCell.contains("주식회사")) {
+            return false;
+        }
+        return true;
+    }
 }
