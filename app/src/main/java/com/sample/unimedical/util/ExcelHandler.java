@@ -30,8 +30,9 @@ public class ExcelHandler extends AppCompatActivity {
                     for (int row = rowIndexStart; row < rowTotal; row++) {
 
                         String content = sheet.getCell(4, row).getContents();
-                        Log.d("tester", content);
-
+                        if (validateHospital(content)) {
+                            getHospitalInfo(sheet, row);
+                        }
                     }
                 }
             }
@@ -42,7 +43,7 @@ public class ExcelHandler extends AppCompatActivity {
     }
 
     public boolean validateHospital(String hospitalCell) {
-        if (hospitalCell.contains("폐업") || hospitalCell.contains("거래중지") || hospitalCell.contains("(주)") || hospitalCell.contains("주식회사")) {
+        if (hospitalCell.contains("폐업") || hospitalCell.contains("거래중지") || hospitalCell.contains("(주)") || hospitalCell.contains("주식회사") || hospitalCell.equals("")) {
             return false;
         }
         return true;
