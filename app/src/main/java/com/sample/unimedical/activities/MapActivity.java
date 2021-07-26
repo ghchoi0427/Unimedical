@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.domain.hospital.Hospital;
+import com.sample.unimedical.util.ExcelHandler;
 import com.sample.unimedical.util.RequestSender;
 import com.sample.unimedical.util.XMLParser;
 
@@ -218,15 +219,19 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private void bindLocationSearchItems(double Xpos, double Ypos, int radius) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, radius));
         List<MapPOIItem> newList = new ArrayList<>();
+        ExcelHandler excelHandler = new ExcelHandler();
 
-        for (Hospital i : hospitals) {
+        for (Hospital hospital : hospitals) {
             try {
                 MapPOIItem mapPOIItem = new MapPOIItem();
-                mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
-                mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
+                String hospitalInfo = hospital.getYadmNm() + "/" + hospital.getMdeptGdrCnt() + "/" + hospital.getTelno();
+                MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Double.parseDouble(hospital.getYPos()), Double.parseDouble(hospital.getXPos()));
 
+                mapPOIItem.setItemName(hospitalInfo);
+                mapPOIItem.setMapPoint(mapPoint);
                 MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
-                switch (i.getClCd()) {
+
+                switch (hospital.getClCd()) {
                     case "01":
                         markerType = MapPOIItem.MarkerType.YellowPin;
                         break;
@@ -263,6 +268,17 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return customMarker;
     }
 
+    private MapPOIItem setClientMarker(String hospitalInfo, double Xpos, double Ypos) {
+        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
+        MapPOIItem mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName(hospitalInfo);
+        mapPOIItem.setMapPoint(mapPoint);
+        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
+        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        return mapPOIItem;
+    }
+
     private MapPOIItem setNonClientMarker(String hospitalInfo, double Xpos, double Ypos, int hospitalScale) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
@@ -291,7 +307,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     private void setMarkerAnimationType() {
-        Arrays.stream(mapView.getPOIItems()).forEach(e -> e.setShowAnimationType(MapPOIItem.ShowAnimationType.SpringFromGround));
+        Arrays.stream(mapView.getPOIItems()).forEach(e -> e.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven));
     }
 
     private void setPOIItems(List<MapPOIItem> list) {
