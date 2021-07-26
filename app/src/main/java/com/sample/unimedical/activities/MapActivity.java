@@ -247,7 +247,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
-    private void createCustomMarker(String hospitalInfo, MapPoint mapPoint) {
+    private MapPOIItem createCustomMarker(String hospitalInfo, MapPoint mapPoint) {
         MapPOIItem customMarker = new MapPOIItem();
         customMarker.setItemName(hospitalInfo);
         customMarker.setMapPoint(mapPoint);
@@ -255,7 +255,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         customMarker.setCustomImageResourceId(R.drawable.marker_green);
         customMarker.setCustomImageAutoscale(true);
         customMarker.setCustomImageAnchor(0.5f, 1.0f);
-        mapView.addPOIItem(customMarker);
+
+        return customMarker;
     }
 
     private void setMarkerAnimationType() {
