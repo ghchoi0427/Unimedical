@@ -42,6 +42,10 @@ import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingMo
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
     private static final int SEARCH_RADIUS = 1500;
+    private static final int UNIVERSITY_HOSPITAL = 1;
+    private static final int MIDDLE_HOSPITAL = 2;
+    private static final int SMALL_HOSPITAL = 3;
+
     private MapView mapView;
     EditText searchHospital;
     Button btnSearchHospital;
@@ -267,6 +271,30 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         mapPOIItem.setMapPoint(mapPoint);
         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
         mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        return mapPOIItem;
+    }
+
+    private MapPOIItem setNonClientMarker(String hospitalInfo, double Xpos, double Ypos, int hospitalScale) {
+        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
+        MapPOIItem mapPOIItem = new MapPOIItem();
+        mapPOIItem.setItemName(hospitalInfo);
+        mapPOIItem.setMapPoint(mapPoint);
+        MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
+
+        switch (hospitalScale) {
+            case UNIVERSITY_HOSPITAL:
+                markerType = MapPOIItem.MarkerType.YellowPin;
+                break;
+            case MIDDLE_HOSPITAL:
+                markerType = MapPOIItem.MarkerType.RedPin;
+                break;
+            case SMALL_HOSPITAL:
+                markerType = MapPOIItem.MarkerType.BluePin;
+                break;
+        }
+        mapPOIItem.setMarkerType(markerType);
+        mapPOIItem.setSelectedMarkerType(markerType);
 
         return mapPOIItem;
     }
