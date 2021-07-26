@@ -18,6 +18,7 @@ import jxl.read.biff.BiffException;
 public class ExcelHandler extends AppCompatActivity {
 
     private final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
+    private final int rowIndexStart = 2;
 
     public List<Hospital> searchContracts(Context context, String keyword) {
         List<Hospital> searchList = new ArrayList<>();
@@ -30,7 +31,6 @@ public class ExcelHandler extends AppCompatActivity {
 
             if (sheet != null) {
                 int colTotal = sheet.getColumns();
-                int rowIndexStart = 2;
                 int rowTotal = sheet.getColumn(colTotal - 1).length;
 
                 for (int row = rowIndexStart; row < rowTotal; row++) {
@@ -48,6 +48,15 @@ public class ExcelHandler extends AppCompatActivity {
             e.printStackTrace();
         }
         return searchList;
+    }
+
+    private boolean hasContract(Sheet sheet, String hospitalName) {
+        for (int row = rowIndexStart; row < sheet.getColumn(sheet.getColumns() - 1).length; row++) {
+            if (sheet.getCell(4, row).equals(hospitalName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean validateHospital(String hospitalCell) {
