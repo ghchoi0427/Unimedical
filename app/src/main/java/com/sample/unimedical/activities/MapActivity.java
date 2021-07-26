@@ -256,6 +256,16 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
+    private String setHospitalInfo(Hospital hospital, boolean isClient) {
+        String result;
+        if (isClient) {
+            result = hospital.getYadmNm() + "/" + hospital.getManager() + "/" + hospital.getTelno() + "/" + hospital.getDevice();
+        } else {
+            result = hospital.getYadmNm() + "/" + hospital.getMdeptGdrCnt() + "/" + hospital.getTelno();
+        }
+        return result;
+    }
+
     private MapPOIItem setCustomMarker(String hospitalInfo, MapPoint mapPoint) {
         MapPOIItem customMarker = new MapPOIItem();
         customMarker.setItemName(hospitalInfo);
@@ -268,10 +278,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return customMarker;
     }
 
-    private MapPOIItem setClientMarker(String hospitalInfo, double Xpos, double Ypos) {
+    private MapPOIItem setClientMarker(Hospital hospital, double Xpos, double Ypos) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(hospitalInfo);
+        mapPOIItem.setItemName(setHospitalInfo(hospital, true));
         mapPOIItem.setMapPoint(mapPoint);
         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
         mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
@@ -279,10 +289,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return mapPOIItem;
     }
 
-    private MapPOIItem setNonClientMarker(String hospitalInfo, double Xpos, double Ypos, int hospitalScale) {
+    private MapPOIItem setNonClientMarker(Hospital hospital, double Xpos, double Ypos, int hospitalScale) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(hospitalInfo);
+        mapPOIItem.setItemName(setHospitalInfo(hospital, false));
         mapPOIItem.setMapPoint(mapPoint);
 
         switch (hospitalScale) {
