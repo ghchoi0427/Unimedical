@@ -19,6 +19,7 @@ public class ExcelHandler extends AppCompatActivity {
 
     private final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
     private final int rowIndexStart = 2;
+    private final int colHospitalName = 4;
 
     public List<Hospital> searchContracts(Context context, String keyword) {
         List<Hospital> searchList = new ArrayList<>();
@@ -35,7 +36,7 @@ public class ExcelHandler extends AppCompatActivity {
 
                 for (int row = rowIndexStart; row < rowTotal; row++) {
 
-                    String hospitalName = sheet.getCell(4, row).getContents();
+                    String hospitalName = sheet.getCell(colHospitalName, row).getContents();
                     if (validateHospital(hospitalName)) {
                         if (hospitalName.equals(keyword)) {
                             searchList.add(getHospitalInfo(sheet, row));
@@ -52,7 +53,7 @@ public class ExcelHandler extends AppCompatActivity {
 
     private boolean hasContract(Sheet sheet, String hospitalName) {
         for (int row = rowIndexStart; row < sheet.getColumn(sheet.getColumns() - 1).length; row++) {
-            if (sheet.getCell(4, row).equals(hospitalName)) {
+            if (sheet.getCell(colHospitalName, row).equals(hospitalName)) {
                 return true;
             }
         }
@@ -68,7 +69,7 @@ public class ExcelHandler extends AppCompatActivity {
 
     private Hospital getHospitalInfo(Sheet sheet, int row) {
         Hospital hospital = new Hospital();
-        hospital.setYadmNm(sheet.getCell(4, row).getContents());
+        hospital.setYadmNm(sheet.getCell(colHospitalName, row).getContents());
         hospital.setManager(sheet.getCell(1, row).getContents());
         hospital.setDevice(sheet.getCell(9, row).getContents());
 
