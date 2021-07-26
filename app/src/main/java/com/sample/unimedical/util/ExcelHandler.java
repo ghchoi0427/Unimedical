@@ -19,20 +19,18 @@ public class ExcelHandler extends AppCompatActivity {
             InputStream is = context.getResources().getAssets().open("account0726.xls");
             Workbook wb = Workbook.getWorkbook(is);
 
-            if (wb != null) {
-                Sheet sheet = wb.getSheet(0);
+            Sheet sheet = wb.getSheet(0);
 
-                if (sheet != null) {
-                    int colTotal = sheet.getColumns();
-                    int rowIndexStart = 2;
-                    int rowTotal = sheet.getColumn(colTotal - 1).length;
+            if (sheet != null) {
+                int colTotal = sheet.getColumns();
+                int rowIndexStart = 2;
+                int rowTotal = sheet.getColumn(colTotal - 1).length;
 
-                    for (int row = rowIndexStart; row < rowTotal; row++) {
+                for (int row = rowIndexStart; row < rowTotal; row++) {
 
-                        String content = sheet.getCell(4, row).getContents();
-                        if (validateHospital(content)) {
-                            getHospitalInfo(sheet, row);
-                        }
+                    String content = sheet.getCell(4, row).getContents();
+                    if (validateHospital(content)) {
+                        getHospitalInfo(sheet, row);
                     }
                 }
             }
