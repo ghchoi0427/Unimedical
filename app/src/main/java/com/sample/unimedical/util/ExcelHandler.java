@@ -17,11 +17,13 @@ import jxl.read.biff.BiffException;
 
 public class ExcelHandler extends AppCompatActivity {
 
+    private final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
+
     public List<Hospital> searchContracts(Context context, String keyword) {
         List<Hospital> searchList = new ArrayList<>();
 
         try {
-            InputStream is = context.getResources().getAssets().open("account0726.xls");
+            InputStream is = context.getResources().getAssets().open(EXCEL_CONTRACT_FILENAME);
             Workbook wb = Workbook.getWorkbook(is);
 
             Sheet sheet = wb.getSheet(0);
