@@ -280,21 +280,24 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         MapPOIItem mapPOIItem = new MapPOIItem();
         mapPOIItem.setItemName(hospitalInfo);
         mapPOIItem.setMapPoint(mapPoint);
-        MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
 
         switch (hospitalScale) {
             case UNIVERSITY_HOSPITAL:
-                markerType = MapPOIItem.MarkerType.YellowPin;
+                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.YellowPin);
+                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.YellowPin);
                 break;
             case MIDDLE_HOSPITAL:
-                markerType = MapPOIItem.MarkerType.RedPin;
+                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage);
+                mapPOIItem.setCustomImageResourceId(R.drawable.marker_green);
+                mapPOIItem.setCustomImageAutoscale(true);
+                mapPOIItem.setCustomImageAnchor(0.5f, 1.0f);
                 break;
             case SMALL_HOSPITAL:
-                markerType = MapPOIItem.MarkerType.BluePin;
+                mapPOIItem.setMarkerType(MapPOIItem.MarkerType.BluePin);
+                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.BluePin);
                 break;
         }
-        mapPOIItem.setMarkerType(markerType);
-        mapPOIItem.setSelectedMarkerType(markerType);
 
         return mapPOIItem;
     }
