@@ -32,6 +32,24 @@ public class Hospital {
     private String ykiho;
     private String addr;
 
+    private String manager;
+    private String device;
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
 
     public void setClCd(String clCd) {
         this.clCd = clCd;
