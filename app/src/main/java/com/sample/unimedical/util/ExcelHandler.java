@@ -48,4 +48,10 @@ public class ExcelHandler extends AppCompatActivity {
         }
         return true;
     }
+
+    private void getHospitalInfo(Sheet sheet, int row) {
+        String hospitalName = sheet.getCell(4, row).getContents();
+        String manager = sheet.getCell(1, row).getContents();
+        String device = sheet.getCell(9, row).getContents();
+    }
 }
