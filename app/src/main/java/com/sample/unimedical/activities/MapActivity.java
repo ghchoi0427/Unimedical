@@ -293,7 +293,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                 break;
             case MIDDLE_HOSPITAL:
                 mapPOIItem.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-                mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage);
                 mapPOIItem.setCustomImageResourceId(R.drawable.marker_green);
                 mapPOIItem.setCustomImageAutoscale(true);
                 mapPOIItem.setCustomImageAnchor(0.5f, 1.0f);
