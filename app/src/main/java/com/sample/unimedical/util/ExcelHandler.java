@@ -19,6 +19,7 @@ public class ExcelHandler extends AppCompatActivity {
 
     private static final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
     private static final int rowIndexStart = 2;
+    private static final int colHospitalLocation = 3;
     private static final int colHospitalName = 4;
 
     public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
@@ -35,7 +36,8 @@ public class ExcelHandler extends AppCompatActivity {
                 for (int row = rowIndexStart; row < rowTotal; row++) {
 
                     String hospitalName = sheet.getCell(colHospitalName, row).getContents();
-                    if (validateHospital(hospitalName)) {
+                    String hospitalLocation = sheet.getCell(colHospitalLocation, row).getContents();
+                    if (validateHospital(hospitalName) && validateLocation(hospitalLocation, hospital.getSgguCdNm())) {
                         if (hospitalName.equals(hospital.getYadmNm())) {
                             hospital.setManager(sheet.getCell(1, row).getContents());
                             hospital.setDevice(sheet.getCell(9, row).getContents());
@@ -65,6 +67,10 @@ public class ExcelHandler extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private static boolean validateLocation(String hospitalCell, String sgguCodeName) {
+        return (hospitalCell.contains(sgguCodeName));
     }
 
 }
