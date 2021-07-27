@@ -199,6 +199,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
         List<MapPOIItem> newList = new ArrayList<>();
 
+        if (checkNoResult(hospitals)) {
+            alertNoResult();
+            return;
+        }
+
         for (Hospital hospital : hospitals) {
             MapPOIItem mapPOIItem;
             switch (hospital.getClCd()) {
@@ -227,6 +232,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, SEARCH_RADIUS));
         List<MapPOIItem> newList = new ArrayList<>();
 
+        if (checkNoResult(hospitals)) {
+            alertNoResult();
+            return;
+        }
+
         for (Hospital hospital : hospitals) {
             MapPOIItem mapPOIItem;
             switch (hospital.getClCd()) {
@@ -250,6 +260,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         clearPOI();
         setPOIItems(newList);
 
+    }
+
+    private boolean checkNoResult(List<Hospital> list) {
+        return list.isEmpty();
+    }
+
+    private void alertNoResult() {
+        runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show());
     }
 
     private String setHospitalInfo(Hospital hospital, boolean isClient) {
