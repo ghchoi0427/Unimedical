@@ -433,6 +433,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     @Override
     public void onMapViewInitialized(MapView mapView) {
         try {
+            CURRENT_ZOOM_LEVEL = mapView.getZoomLevel();
             mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         } catch (Exception e) {
             askForPermission();
