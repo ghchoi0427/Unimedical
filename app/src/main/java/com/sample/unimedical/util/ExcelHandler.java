@@ -10,8 +10,6 @@ import net.daum.mf.map.api.MapPOIItem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -22,36 +20,6 @@ public class ExcelHandler extends AppCompatActivity {
     private static final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
     private static final int rowIndexStart = 2;
     private static final int colHospitalName = 4;
-
-    public List<Hospital> searchContracts(Context context, String keyword) {
-        List<Hospital> searchList = new ArrayList<>();
-
-        try {
-            InputStream is = context.getResources().getAssets().open(EXCEL_CONTRACT_FILENAME);
-            Workbook wb = Workbook.getWorkbook(is);
-
-            Sheet sheet = wb.getSheet(0);
-
-            if (sheet != null) {
-                int colTotal = sheet.getColumns();
-                int rowTotal = sheet.getColumn(colTotal - 1).length;
-
-                for (int row = rowIndexStart; row < rowTotal; row++) {
-
-                    String hospitalName = sheet.getCell(colHospitalName, row).getContents();
-                    if (validateHospital(hospitalName)) {
-                        if (hospitalName.equals(keyword)) {
-                            searchList.add(getHospitalInfo(sheet, row));
-                        }
-                    }
-                }
-            }
-
-        } catch (IOException | BiffException e) {
-            e.printStackTrace();
-        }
-        return searchList;
-    }
 
     public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
         try {
@@ -99,12 +67,4 @@ public class ExcelHandler extends AppCompatActivity {
         return true;
     }
 
-    private Hospital getHospitalInfo(Sheet sheet, int row) {
-        Hospital hospital = new Hospital();
-        hospital.setYadmNm(sheet.getCell(colHospitalName, row).getContents());
-        hospital.setManager(sheet.getCell(1, row).getContents());
-        hospital.setDevice(sheet.getCell(9, row).getContents());
-
-        return hospital;
-    }
 }
