@@ -3,6 +3,8 @@ package com.sample.unimedical.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -219,41 +221,18 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private void bindLocationSearchItems(double Xpos, double Ypos, int radius) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, radius));
         List<MapPOIItem> newList = new ArrayList<>();
-        ExcelHandler excelHandler = new ExcelHandler();
 
         for (Hospital hospital : hospitals) {
-            try {
-                MapPOIItem mapPOIItem = new MapPOIItem();
-                String hospitalInfo = hospital.getYadmNm() + "/" + hospital.getMdeptGdrCnt() + "/" + hospital.getTelno();
-                MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Double.parseDouble(hospital.getYPos()), Double.parseDouble(hospital.getXPos()));
-
-                mapPOIItem.setItemName(hospitalInfo);
-                mapPOIItem.setMapPoint(mapPoint);
-                MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
-
-                switch (hospital.getClCd()) {
-                    case "01":
-                        markerType = MapPOIItem.MarkerType.YellowPin;
-                        break;
-                    case "11":
-                    case "21":
-                        markerType = MapPOIItem.MarkerType.RedPin;
-                        break;
-                    case "31":
-                        markerType = MapPOIItem.MarkerType.BluePin;
-                        break;
-                }
-
-                mapPOIItem.setMarkerType(markerType);
-                mapPOIItem.setSelectedMarkerType(markerType);
-                newList.add(mapPOIItem);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            MapPOIItem mapPOIItem;
+            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), Integer.parseInt(hospital.getClCd()));
+            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
+            newList.add(mapPOIItem);
         }
+
         setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
+
     }
 
     private String setHospitalInfo(Hospital hospital, boolean isClient) {
