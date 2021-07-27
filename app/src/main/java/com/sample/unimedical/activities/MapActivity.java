@@ -48,6 +48,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private static final int UNIVERSITY_HOSPITAL = 1;
     private static final int MIDDLE_HOSPITAL = 2;
     private static final int SMALL_HOSPITAL = 3;
+    private static int HOSPITAL_SCALE = 1;
 
     private MapView mapView;
     EditText searchHospital;
@@ -224,7 +225,19 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         for (Hospital hospital : hospitals) {
             MapPOIItem mapPOIItem;
-            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), Integer.parseInt(hospital.getClCd()));
+            switch (hospital.getClCd()) {
+                case "01":
+                    HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
+                    break;
+                case "11":
+                case "21":
+                    HOSPITAL_SCALE = MIDDLE_HOSPITAL;
+                    break;
+                case "31":
+                    HOSPITAL_SCALE = SMALL_HOSPITAL;
+                    break;
+            }
+            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
             mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
             newList.add(mapPOIItem);
         }
