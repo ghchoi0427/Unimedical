@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.UiThread;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -87,9 +86,9 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchHospital.setOnClickListener(view -> new Thread(() -> {
             try {
-                runOnUiThread(()->progressBarController(true));
+                runOnUiThread(() -> progressBarController(true));
                 bindSearchItems(searchHospital.getText().toString().trim());
-                runOnUiThread(()->progressBarController(false));
+                runOnUiThread(() -> progressBarController(false));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -105,10 +104,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
             try {
-                runOnUiThread(()->progressBarController(true));
+                runOnUiThread(() -> progressBarController(true));
                 MapPoint mapPoint = mapView.getMapCenterPoint();
                 bindLocationSearchItems(mapPoint.getMapPointGeoCoord().latitude, mapPoint.getMapPointGeoCoord().longitude);
-                runOnUiThread(()->progressBarController(false));
+                runOnUiThread(() -> progressBarController(false));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -354,9 +353,22 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         @Override
         public View getCalloutBalloon(MapPOIItem poiItem) {
             try {
-                ((TextView) mCalloutBalloon.findViewById(R.id.bal_hospital_name)).setText(poiItem.getItemName().split("/")[0]);
-                ((TextView) mCalloutBalloon.findViewById(R.id.bal_doctor_count)).setText(String.format("일반의: %s명", poiItem.getItemName().split("/")[1]));
-                ((TextView) mCalloutBalloon.findViewById(R.id.bal_tel_number)).setText(poiItem.getItemName().split("/")[2]);
+
+                if (poiItem.getItemName().split("/").length == 3) {
+
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_fourth)).setVisibility(View.GONE);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_second)).setText(String.format("일반의: %s명", poiItem.getItemName().split("/")[1]));
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_third)).setText(poiItem.getItemName().split("/")[2]);
+                }
+                if (poiItem.getItemName().split("/").length == 4) {
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_fourth)).setVisibility(View.VISIBLE);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_third)).setText(poiItem.getItemName().split("/")[2]);
+                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_fourth)).setText(poiItem.getItemName().split("/")[3]);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
