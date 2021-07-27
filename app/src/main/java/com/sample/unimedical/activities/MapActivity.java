@@ -3,8 +3,6 @@ package com.sample.unimedical.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -256,29 +254,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             result = hospital.getYadmNm() + "/" + hospital.getMdeptGdrCnt() + "/" + hospital.getTelno();
         }
         return result;
-    }
-
-    private MapPOIItem setCustomMarker(String hospitalInfo, MapPoint mapPoint) {
-        MapPOIItem customMarker = new MapPOIItem();
-        customMarker.setItemName(hospitalInfo);
-        customMarker.setMapPoint(mapPoint);
-        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-        customMarker.setCustomImageResourceId(R.drawable.marker_green);
-        customMarker.setCustomImageAutoscale(true);
-        customMarker.setCustomImageAnchor(0.5f, 1.0f);
-
-        return customMarker;
-    }
-
-    private MapPOIItem setClientMarker(Hospital hospital, double Xpos, double Ypos) {
-        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
-        MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(setHospitalInfo(hospital, true));
-        mapPOIItem.setMapPoint(mapPoint);
-        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
-        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        return mapPOIItem;
     }
 
     private MapPOIItem setNonClientMarker(Hospital hospital, double Xpos, double Ypos, int hospitalScale) {
