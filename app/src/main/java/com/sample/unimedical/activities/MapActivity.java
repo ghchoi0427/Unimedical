@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.UiThread;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -55,7 +57,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     ImageButton btnZoomIn;
     ImageButton btnZoomOut;
     Button btnSearchFromMap;
-
+    ProgressBar progressBar;
 
     private int GPS_MODE = 0;
     private int CURRENT_ZOOM_LEVEL = 7;
@@ -80,10 +82,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnZoomIn = findViewById(R.id.btn_zoom_in);
         btnZoomOut = findViewById(R.id.btn_zoom_out);
 
+        progressBar = findViewById(R.id.progress_bar_search);
+
 
         btnSearchHospital.setOnClickListener(view -> new Thread(() -> {
             try {
+                runOnUiThread(()->progressBarController(true));
                 bindSearchItems(searchHospital.getText().toString().trim());
+                runOnUiThread(()->progressBarController(false));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -99,8 +105,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
             try {
+                runOnUiThread(()->progressBarController(true));
                 MapPoint mapPoint = mapView.getMapCenterPoint();
                 bindLocationSearchItems(mapPoint.getMapPointGeoCoord().latitude, mapPoint.getMapPointGeoCoord().longitude);
+                runOnUiThread(()->progressBarController(false));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -179,39 +187,38 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         mapView.setZoomLevel(CURRENT_ZOOM_LEVEL + 1, true);
     }
 
+    private void progressBarController(boolean isVisible) {
+        if (isVisible) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
 
     private void bindSearchItems(String hospitalName) throws Exception {
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
         List<MapPOIItem> newList = new ArrayList<>();
 
-        for (Hospital i : hospitals) {
-            try {
-                MapPOIItem mapPOIItem = new MapPOIItem();
-                mapPOIItem.setItemName(i.getYadmNm() + "/" + i.getMdeptGdrCnt() + "/" + i.getTelno());
-                mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(i.getYPos()), Double.parseDouble(i.getXPos())));
-                MapPOIItem.MarkerType markerType = MapPOIItem.MarkerType.BluePin;
-
-                switch (i.getClCd()) {
-                    case "01":
-                        markerType = MapPOIItem.MarkerType.YellowPin;
-                        break;
-                    case "11":
-                    case "21":
-                        markerType = MapPOIItem.MarkerType.RedPin;
-                        break;
-                    case "31":
-                        markerType = MapPOIItem.MarkerType.BluePin;
-                        break;
-                }
-
-                mapPOIItem.setMarkerType(markerType);
-                mapPOIItem.setSelectedMarkerType(markerType);
-                newList.add(mapPOIItem);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+        for (Hospital hospital : hospitals) {
+            MapPOIItem mapPOIItem;
+            switch (hospital.getClCd()) {
+                case "01":
+                    HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
+                    break;
+                case "11":
+                case "21":
+                    HOSPITAL_SCALE = MIDDLE_HOSPITAL;
+                    break;
+                case "31":
+                    HOSPITAL_SCALE = SMALL_HOSPITAL;
+                    break;
             }
+            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
+            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
+            newList.add(mapPOIItem);
         }
+
         setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
