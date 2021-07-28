@@ -17,7 +17,7 @@ import jxl.read.biff.BiffException;
 
 public class ExcelHandler extends AppCompatActivity {
 
-    private static final String EXCEL_CONTRACT_FILENAME = "account0726.xls";
+    private static final String EXCEL_CONTRACT_FILENAME = "customer.xls";
     private static final int rowIndexStart = 2;
     private static final int colHospitalLocation = 3;
     private static final int colHospitalName = 4;
