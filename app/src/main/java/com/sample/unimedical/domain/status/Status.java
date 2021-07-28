@@ -370,4 +370,59 @@ public class Status {
     public void setArea(String area) {
         this.area = area;
     }
+
+    public String getAllAttributes() {
+        StringBuilder sb = new StringBuilder();
+
+        appender(sb, getNumber());
+        appender(sb, getHospitalName());
+        appender(sb, getTelNo());
+        appender(sb, getAddress());
+        appender(sb, getCity());
+        appender(sb, getFunction());
+        appender(sb, getAssessment());
+        appender(sb, getMain_remark());
+        appender(sb, getPatient());
+        appender(sb, getHospitalKey());
+        appender(sb, getRemark());
+
+        appender(sb, getShaver_date_visit());
+        appender(sb, getShaver_incharge());
+        appender(sb, getShaver_interest());
+        appender(sb, getShaver_introduction());
+        appender(sb, getShaver_type());
+        appender(sb, getShaver_salesman());
+        appender(sb, getShaver_visit_salesman());
+        appender(sb, getShaver_middle_contractor());
+        appender(sb, getShaver_quotation_price());
+        appender(sb, getShaver_quotation_price());
+        appender(sb, getShaver_contract_price());
+        appender(sb, getShaver_sample_presence());
+        appender(sb, getShaver_date_sampling());
+        appender(sb, getShaver_result_sampling());
+        appender(sb, getShaver_remark());
+        appender(sb, getShaver_count_visit());
+
+        appender(sb, getQplint_introduction());
+        appender(sb, getQplint_salesman());
+        appender(sb, getQplint_date_sales_visit());
+        appender(sb, getQplint_date_last_visit());
+        appender(sb, getQplint_interest());
+        appender(sb, getQplint_result_sale());
+        appender(sb, getCoolband_introduction());
+        appender(sb, getCoolband_salesman());
+        appender(sb, getCoolband_salesvisit());
+        appender(sb, getCoolband_date_last_visit());
+        appender(sb, getCoolband_result_sample());
+        appender(sb, getCoolband_remark());
+        appender(sb, getArea());
+
+        return sb.toString();
+    }
+
+    private void appender(StringBuilder sb, String content) {
+        if (!"".equals(content)) {
+            sb.append(content + "\n");
+        }
+    }
 }
