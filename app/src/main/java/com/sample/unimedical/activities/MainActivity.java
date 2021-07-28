@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnSearchMarket;
     Button btnCommunity;
     Button buttonMap;
+    Button btnStatus;
 
     private long backKeyPressedTime = 0;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btnSearchMarket = findViewById(R.id.btn_search_market);
         btnCommunity = findViewById(R.id.btn_input_sales);
         buttonMap = findViewById(R.id.btn_map);
+        btnStatus = findViewById(R.id.btn_status);
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountLoginActivity.class)));
 
+        btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
     }
 
     @Override
