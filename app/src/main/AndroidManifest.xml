@@ -51,6 +51,7 @@
         <activity android:name=".activities.MarketSearchActivity" />
         <activity android:name=".activities.InputSaleActivity" />
         <activity android:name=".activities.EcountLoginActivity" />
+        <activity android:name=".activities.StatusActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
