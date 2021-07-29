@@ -103,6 +103,7 @@
             android:drawableLeft="@drawable/icon_salesman"
             android:paddingHorizontal="110dp"
             android:text="영업현황"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
 
