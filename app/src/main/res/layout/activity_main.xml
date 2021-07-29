@@ -18,10 +18,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="140dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="50dp"
-        android:layout_weight="1"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
 
@@ -29,11 +29,10 @@
             android:id="@+id/btn_search_engine"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_injection"
-            android:padding="10dp"
             android:text="의료기기\n검색엔진"
             android:textColor="@color/white"
             android:textSize="17dp" />
@@ -42,7 +41,7 @@
             android:id="@+id/btn_search_market"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_hospital"
@@ -54,12 +53,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="140dp"
         android:layout_gravity="bottom"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="-30dp"
-        android:layout_marginBottom="130dp"
-        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -67,7 +64,8 @@
             android:id="@+id/btn_map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="8dp"
+
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_map"
@@ -80,7 +78,7 @@
             android:id="@+id/btn_input_sales"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
             android:drawableTop="@drawable/icon_database"
@@ -91,10 +89,21 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_status"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="영업현황" />
+        android:layout_marginHorizontal="15dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radius_theme"
+            android:drawableLeft="@drawable/icon_salesman"
+            android:paddingHorizontal="110dp"
+            android:text="영업현황"
+            android:textSize="17sp" />
+    </LinearLayout>
 
 </LinearLayout>
