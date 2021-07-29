@@ -374,55 +374,55 @@ public class Status {
     public String getAllAttributes() {
         StringBuilder sb = new StringBuilder();
 
-        appender(sb, getNumber());
-        appender(sb, getHospitalName());
-        appender(sb, getTelNo());
-        appender(sb, getAddress());
-        appender(sb, getCity());
-        appender(sb, getFunction());
-        appender(sb, getAssessment());
-        appender(sb, getMain_remark());
-        appender(sb, getPatient());
-        appender(sb, getHospitalKey());
-        appender(sb, getRemark());
+        appender(sb, "번호: ", getNumber());
+        appender(sb, "병원명: ", getHospitalName());
+        appender(sb, "전화번호: ", getTelNo());
+        appender(sb, "소재지주소: ", getAddress());
+        appender(sb, "도시: ", getCity());
+        appender(sb, "함수: ", getFunction());
+        appender(sb, "병원평가: ", getAssessment());
+        appender(sb, "비고: ", getMain_remark());
+        appender(sb, "환자수: ", getPatient());
+        appender(sb, "병원키: ", getHospitalKey());
+        appender(sb, "번호: ", getRemark());
 
-        appender(sb, getShaver_date_visit());
-        appender(sb, getShaver_incharge());
-        appender(sb, getShaver_interest());
-        appender(sb, getShaver_introduction());
-        appender(sb, getShaver_type());
-        appender(sb, getShaver_salesman());
-        appender(sb, getShaver_visit_salesman());
-        appender(sb, getShaver_middle_contractor());
-        appender(sb, getShaver_quotation_price());
-        appender(sb, getShaver_quotation_price());
-        appender(sb, getShaver_contract_price());
-        appender(sb, getShaver_sample_presence());
-        appender(sb, getShaver_date_sampling());
-        appender(sb, getShaver_result_sampling());
-        appender(sb, getShaver_remark());
-        appender(sb, getShaver_count_visit());
+        appender(sb, "방문일자: ", getShaver_date_visit());
+        appender(sb, "영업자: ", getShaver_incharge());
+        appender(sb, "관심도: ", getShaver_interest());
+        appender(sb, "쉐이버 도입유무: ", getShaver_introduction());
+        appender(sb, "쉐이버 타입: ", getShaver_type());
+        appender(sb, "담당영업사원: ", getShaver_salesman());
+        appender(sb, "방문영업사원: ", getShaver_visit_salesman());
+        appender(sb, "간납업체: ", getShaver_middle_contractor());
+        appender(sb, "견적가: ", getShaver_quotation_price());
+        appender(sb, "계약단가: ", getShaver_contract_price());
+        appender(sb, "샘플타입 유무: ", getShaver_sample_presence());
+        appender(sb, "샘플링 일자: ", getShaver_date_sampling());
+        appender(sb, "샘플링 결과: ", getShaver_result_sampling());
+        appender(sb, "비고: ", getShaver_remark());
+        appender(sb, "방문횟수: ", getShaver_count_visit());
 
-        appender(sb, getQplint_introduction());
-        appender(sb, getQplint_salesman());
-        appender(sb, getQplint_date_sales_visit());
-        appender(sb, getQplint_date_last_visit());
-        appender(sb, getQplint_interest());
-        appender(sb, getQplint_result_sale());
-        appender(sb, getCoolband_introduction());
-        appender(sb, getCoolband_salesman());
-        appender(sb, getCoolband_salesvisit());
-        appender(sb, getCoolband_date_last_visit());
-        appender(sb, getCoolband_result_sample());
-        appender(sb, getCoolband_remark());
-        appender(sb, getArea());
+        appender(sb, "큐플린트 도입여부: ", getQplint_introduction());
+        appender(sb, "영업담당자: ", getQplint_salesman());
+        appender(sb, "영업방문자: ", getQplint_date_sales_visit());
+        appender(sb, "최종방문일자: ", getQplint_date_last_visit());
+        appender(sb, "관심도: ", getQplint_interest());
+        appender(sb, "영업결과: ", getQplint_result_sale());
+
+        appender(sb, "쿨밴드 도입여부: ", getCoolband_introduction());
+        appender(sb, "영업담당자: ", getCoolband_salesman());
+        appender(sb, "영업방문자: ", getCoolband_salesvisit());
+        appender(sb, "최종방문일자: ", getCoolband_date_last_visit());
+        appender(sb, "샘플결과: ", getCoolband_result_sample());
+        appender(sb, "비고(원장 성향 결제, 기타): ", getCoolband_remark());
+        appender(sb, "지역입력: ", getArea());
 
         return sb.toString();
     }
 
-    private void appender(StringBuilder sb, String content) {
+    private void appender(StringBuilder sb, String prefix, String content) {
         if (!"".equals(content)) {
-            sb.append(content + "\n");
+            sb.append(prefix + content + "\n");
         }
     }
 }
