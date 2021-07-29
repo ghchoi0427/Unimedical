@@ -12,6 +12,7 @@ import com.sample.unimedical.R;
 import com.sample.unimedical.domain.status.Status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder> {
     public ArrayList<Status> statuses = new ArrayList<>();
@@ -49,18 +50,32 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textStatus;
+        TextView textStatusPrefix;
+        TextView textStatusContent;
 
         public ViewHolder(View statusView) {
             super(statusView);
 
-            textStatus = statusView.findViewById(R.id.text_status);
+            textStatusPrefix = statusView.findViewById(R.id.text_status_prefix);
+            textStatusContent = statusView.findViewById(R.id.text_status_content);
 
         }
 
         public void setItem(Status status) {
             try {
-                textStatus.setText(status.getAllAttributes());
+
+                StringBuilder prefixBuilder = new StringBuilder();
+                StringBuilder contentBuilder = new StringBuilder();
+
+                List<String> list = status.getAllAttributes();
+                for (String s : list) {
+
+                    prefixBuilder.append(s.split("/")[0] + "\n");
+                    contentBuilder.append(s.split("/")[1] + "\n");
+                }
+
+                textStatusPrefix.setText(prefixBuilder.toString());
+                textStatusContent.setText(contentBuilder.toString());
 
             } catch (Exception e) {
                 e.printStackTrace();
