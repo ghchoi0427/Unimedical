@@ -2,8 +2,11 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,10 +24,14 @@ public class StatusActivity extends AppCompatActivity {
 
     StatusList statusList;
     StatusAdapter adapter;
-    EditText editStatus;
     RecyclerView recyclerViewStatus;
-    Button btnStatusSearch;
 
+    TextView textStatusLocation;
+
+    ArrayAdapter<CharSequence> cityAdapter;
+    Spinner citySpinner;
+
+    private String CITY_NAME = "";
     private static final String FILE_NAME = "sale_status.json";
 
     @Override
@@ -32,19 +39,32 @@ public class StatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-        editStatus = findViewById(R.id.edit_status);
         recyclerViewStatus = findViewById(R.id.recyclerview_status);
         adapter = new StatusAdapter();
-        btnStatusSearch = findViewById(R.id.btn_search_status);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewStatus.setLayoutManager(layoutManager);
         recyclerViewStatus.setAdapter(adapter);
 
-        btnStatusSearch.setOnClickListener(v -> {
-            try {
-                processResponse(getJsonFromAssets(getApplicationContext()));
-            } catch (IOException e) {
-                e.printStackTrace();
+        textStatusLocation = findViewById(R.id.text_status_location_item);
+
+        citySpinner = findViewById(R.id.spinner_city);
+        cityAdapter = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(cityAdapter);
+
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CITY_NAME = parent.getItemAtPosition(position).toString();
+                try {
+                    processResponse(getJsonFromAssets(getApplicationContext()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -71,7 +91,7 @@ public class StatusActivity extends AppCompatActivity {
         statusList = gson.fromJson(response, StatusList.class);
 
         clearItemList(adapter);
-        searchItem(editStatus.getText().toString());
+        searchItem(CITY_NAME);
         notifyDataSetChanged(adapter);
 
 
