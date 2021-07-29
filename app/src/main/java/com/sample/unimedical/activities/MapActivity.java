@@ -196,6 +196,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
 
     private void bindSearchItems(String hospitalName) throws Exception {
+        if ("".equals(hospitalName)) {
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
+            return;
+        }
         List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
         List<MapPOIItem> newList = new ArrayList<>();
 
