@@ -1,5 +1,8 @@
 package com.sample.unimedical.domain.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Status {
     private String number;
     private String hospitalName;
@@ -371,58 +374,58 @@ public class Status {
         this.area = area;
     }
 
-    public String getAllAttributes() {
-        StringBuilder sb = new StringBuilder();
+    public List<String> getAllAttributes() {
+        List<String> list = new ArrayList<>();
 
-        appender(sb, "번호: ", getNumber());
-        appender(sb, "병원명: ", getHospitalName());
-        appender(sb, "전화번호: ", getTelNo());
-        appender(sb, "소재지주소: ", getAddress());
-        appender(sb, "도시: ", getCity());
-        appender(sb, "함수: ", getFunction());
-        appender(sb, "병원평가: ", getAssessment());
-        appender(sb, "비고: ", getMain_remark());
-        appender(sb, "환자수: ", getPatient());
-        appender(sb, "병원키: ", getHospitalKey());
-        appender(sb, "번호: ", getRemark());
+        appender(list, "번호", getNumber());
+        appender(list, "병원명", getHospitalName());
+        appender(list, "전화번호", getTelNo());
+        appender(list, "소재지주소", getAddress());
+        appender(list, "도시", getCity());
+        appender(list, "함수", getFunction());
+        appender(list, "병원평가", getAssessment());
+        appender(list, "비고", getMain_remark());
+        appender(list, "환자수", getPatient());
+        appender(list, "병원키", getHospitalKey());
+        appender(list, "번호", getRemark());
 
-        appender(sb, "방문일자: ", getShaver_date_visit());
-        appender(sb, "영업자: ", getShaver_incharge());
-        appender(sb, "관심도: ", getShaver_interest());
-        appender(sb, "쉐이버 도입유무: ", getShaver_introduction());
-        appender(sb, "쉐이버 타입: ", getShaver_type());
-        appender(sb, "담당영업사원: ", getShaver_salesman());
-        appender(sb, "방문영업사원: ", getShaver_visit_salesman());
-        appender(sb, "간납업체: ", getShaver_middle_contractor());
-        appender(sb, "견적가: ", getShaver_quotation_price());
-        appender(sb, "계약단가: ", getShaver_contract_price());
-        appender(sb, "샘플타입 유무: ", getShaver_sample_presence());
-        appender(sb, "샘플링 일자: ", getShaver_date_sampling());
-        appender(sb, "샘플링 결과: ", getShaver_result_sampling());
-        appender(sb, "비고: ", getShaver_remark());
-        appender(sb, "방문횟수: ", getShaver_count_visit());
+        appender(list, "방문일자", getShaver_date_visit());
+        appender(list, "영업자", getShaver_incharge());
+        appender(list, "관심도", getShaver_interest());
+        appender(list, "쉐이버 도입유무", getShaver_introduction());
+        appender(list, "쉐이버 타입", getShaver_type());
+        appender(list, "담당영업사원", getShaver_salesman());
+        appender(list, "방문영업사원", getShaver_visit_salesman());
+        appender(list, "간납업체", getShaver_middle_contractor());
+        appender(list, "견적가", getShaver_quotation_price());
+        appender(list, "계약단가", getShaver_contract_price());
+        appender(list, "샘플타입 유무", getShaver_sample_presence());
+        appender(list, "샘플링 일자", getShaver_date_sampling());
+        appender(list, "샘플링 결과", getShaver_result_sampling());
+        appender(list, "비고", getShaver_remark());
+        appender(list, "방문횟수", getShaver_count_visit());
 
-        appender(sb, "큐플린트 도입여부: ", getQplint_introduction());
-        appender(sb, "영업담당자: ", getQplint_salesman());
-        appender(sb, "영업방문자: ", getQplint_date_sales_visit());
-        appender(sb, "최종방문일자: ", getQplint_date_last_visit());
-        appender(sb, "관심도: ", getQplint_interest());
-        appender(sb, "영업결과: ", getQplint_result_sale());
+        appender(list, "큐플린트 도입여부", getQplint_introduction());
+        appender(list, "영업담당자", getQplint_salesman());
+        appender(list, "영업방문자", getQplint_date_sales_visit());
+        appender(list, "최종방문일자", getQplint_date_last_visit());
+        appender(list, "관심도", getQplint_interest());
+        appender(list, "영업결과", getQplint_result_sale());
 
-        appender(sb, "쿨밴드 도입여부: ", getCoolband_introduction());
-        appender(sb, "영업담당자: ", getCoolband_salesman());
-        appender(sb, "영업방문자: ", getCoolband_salesvisit());
-        appender(sb, "최종방문일자: ", getCoolband_date_last_visit());
-        appender(sb, "샘플결과: ", getCoolband_result_sample());
-        appender(sb, "비고(원장 성향 결제, 기타): ", getCoolband_remark());
-        appender(sb, "지역입력: ", getArea());
+        appender(list, "쿨밴드 도입여부", getCoolband_introduction());
+        appender(list, "영업담당자", getCoolband_salesman());
+        appender(list, "영업방문자", getCoolband_salesvisit());
+        appender(list, "최종방문일자", getCoolband_date_last_visit());
+        appender(list, "샘플결과", getCoolband_result_sample());
+        appender(list, "비고(원장 성향 결제, 기타)", getCoolband_remark());
+        appender(list, "지역입력", getArea());
 
-        return sb.toString();
+        return list;
     }
 
-    private void appender(StringBuilder sb, String prefix, String content) {
+    private void appender(List<String> list, String prefix, String content) {
         if (!"".equals(content)) {
-            sb.append(prefix + content + "\n");
+            list.add(prefix + "/" + content);
         }
     }
 }
