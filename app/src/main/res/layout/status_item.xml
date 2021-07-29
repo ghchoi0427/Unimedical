@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="5dp"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="10dp"
+        android:background="@drawable/radius_dark_green"
         android:orientation="vertical"
-        android:background="@drawable/gradation">
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
 
-        <TextView
-            android:id="@+id/text_status"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_status_prefix"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/text_status_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="TextView" />
+            </TableRow>
+
+        </TableLayout>
     </LinearLayout>
 </LinearLayout>
