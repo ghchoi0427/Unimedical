@@ -458,6 +458,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         try {
             CURRENT_ZOOM_LEVEL = mapView.getZoomLevel();
             mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+            getMapBoundary();
         } catch (Exception e) {
             askForPermission();
         }
@@ -512,7 +513,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }, this);
         mapReverseGeoCoder.startFindingAddress();
 
-
+        getMapBoundary();
     }
 
     @Override
