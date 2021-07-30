@@ -26,6 +26,7 @@ import com.sample.unimedical.util.XMLHandler;
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
@@ -43,6 +44,8 @@ import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingMo
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
+    private static final String REST_API_KEY = "1a3f3da66a892a6af6667f1f64638be3";
+    private static String CURRENT_ADDRESS = "";
     private static final int SEARCH_RADIUS = 1500;
     private static final int UNIVERSITY_HOSPITAL = 1;
     private static final int MIDDLE_HOSPITAL = 2;
@@ -63,6 +66,15 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private boolean isViewVisible = true;
 
     private long backKeyPressedTime = 0;
+
+    MapReverseGeoCoder mapReverseGeoCoder;
+
+    MapPointBounds mapPointBounds;
+    private double boundTop;
+    private double boundBottom;
+    private double boundLeft;
+    private double boundRight;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +204,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private void getMapBoundary() {
+        mapPointBounds = mapView.getMapPointBounds();
+        boundTop = mapPointBounds.topRight.getMapPointGeoCoord().latitude;
+        boundBottom = mapPointBounds.bottomLeft.getMapPointGeoCoord().latitude;
+        boundLeft = mapPointBounds.bottomLeft.getMapPointGeoCoord().longitude;
+        boundRight = mapPointBounds.topRight.getMapPointGeoCoord().longitude;
     }
 
 
@@ -345,7 +365,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     //currentLocationListener
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
-        MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
+
     }
 
     @Override
@@ -480,6 +500,18 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
+        mapReverseGeoCoder = new MapReverseGeoCoder(REST_API_KEY, mapPoint, new MapReverseGeoCoder.ReverseGeoCodingResultListener() {
+            @Override
+            public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String address) {
+                CURRENT_ADDRESS = address;
+            }
+
+            @Override
+            public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
+            }
+        }, this);
+        mapReverseGeoCoder.startFindingAddress();
+
 
     }
 
