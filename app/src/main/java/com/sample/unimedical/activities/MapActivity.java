@@ -38,6 +38,7 @@ import static com.sample.unimedical.util.AnimationHandler.viewAnimationGetBack;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationLeft;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationRight;
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationUp;
+import static com.sample.unimedical.util.XMLHandler.readHospitalList;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading;
 import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving;
@@ -70,10 +71,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     MapReverseGeoCoder mapReverseGeoCoder;
 
     MapPointBounds mapPointBounds;
-    private double boundTop;
-    private double boundBottom;
-    private double boundLeft;
-    private double boundRight;
 
 
     @Override
@@ -117,8 +114,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnSearchFromMap.setOnClickListener(v -> new Thread(() -> {
             try {
                 runOnUiThread(() -> progressBarController(true));
-                MapPoint mapPoint = mapView.getMapCenterPoint();
-                bindLocationSearchItems(mapPoint.getMapPointGeoCoord().latitude, mapPoint.getMapPointGeoCoord().longitude);
+                bindLocationSearchItems(mapPointBounds);
                 runOnUiThread(() -> progressBarController(false));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -208,10 +204,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private void getMapBoundary() {
         mapPointBounds = mapView.getMapPointBounds();
-        boundTop = mapPointBounds.topRight.getMapPointGeoCoord().latitude;
-        boundBottom = mapPointBounds.bottomLeft.getMapPointGeoCoord().latitude;
-        boundLeft = mapPointBounds.bottomLeft.getMapPointGeoCoord().longitude;
-        boundRight = mapPointBounds.topRight.getMapPointGeoCoord().longitude;
     }
 
 
@@ -220,7 +212,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
             return;
         }
-        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
+        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(hospitalName));
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
@@ -286,6 +278,45 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     }
 
+    private void bindLocationSearchItems(MapPointBounds mapPointBounds) throws Exception {
+        List<Hospital> hospitals = XMLHandler.parseSelectiveXML((readHospitalList(getApplicationContext())), mapPointBounds);
+        List<MapPOIItem> newList = new ArrayList<>();
+
+        if (checkNoResult(hospitals)) {
+            alertNoResult();
+            return;
+        }
+
+        for (Hospital hospital : hospitals) {
+            MapPOIItem mapPOIItem;
+            try {
+                switch (hospital.getClCd()) {
+                    case "01":
+                        HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
+                        break;
+                    case "11":
+                    case "21":
+                        HOSPITAL_SCALE = MIDDLE_HOSPITAL;
+                        break;
+                    case "31":
+                        HOSPITAL_SCALE = SMALL_HOSPITAL;
+                        break;
+                }
+            } catch (Exception e) {
+
+            }
+            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
+            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
+
+            newList.add(mapPOIItem);
+        }
+
+        setMarkerAnimationType();
+        clearPOI();
+        setPOIItems(newList);
+
+    }
+
     private boolean checkNoResult(List<Hospital> list) {
         return list.isEmpty();
     }
@@ -338,7 +369,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         for (MapPOIItem item : list) {
             mapView.addPOIItem(item);
             mapView.selectPOIItem(item, true);
-            mapView.setMapCenterPoint(item.getMapPoint(), false);
+            mapView.setMapCenterPoint(item.getMapPoint(), true);
         }
     }
 
