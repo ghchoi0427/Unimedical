@@ -1,8 +1,6 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.view.View;
 
 import com.sample.unimedical.domain.hospital.Hospital;
 
@@ -12,14 +10,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,8 +73,28 @@ public class XMLHandler {
 
     }
 
-    public static String readHospitalList(String city, String sigungu, String dongeupmyun, Context context) throws Exception {
-        return null;
+    public static String readHospitalList(Context context) throws Exception {
+        InputStream is = context.getResources().getAssets().open("hospital_total.xml");
+        String result = readTextFile(is);
+        return result;
+    }
+
+    private static String readTextFile(InputStream inputStream) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte buf[] = new byte[1024];
+        int length;
+
+        try {
+            while ((length = inputStream.read(buf)) != -1) {
+                outputStream.write(buf, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+        } catch (IOException e) {
+
+        }
+        return outputStream.toString();
     }
 
 }
