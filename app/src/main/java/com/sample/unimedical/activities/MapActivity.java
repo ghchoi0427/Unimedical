@@ -21,7 +21,7 @@ import com.sample.unimedical.R;
 import com.sample.unimedical.domain.hospital.Hospital;
 import com.sample.unimedical.util.ExcelHandler;
 import com.sample.unimedical.util.RequestSender;
-import com.sample.unimedical.util.XMLParser;
+import com.sample.unimedical.util.XMLHandler;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
@@ -200,7 +200,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
             return;
         }
-        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
+        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(hospitalName.trim()));
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
@@ -233,7 +233,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     private void bindLocationSearchItems(double Xpos, double Ypos) throws Exception {
-        List<Hospital> hospitals = XMLParser.processXML(RequestSender.sendHospitalRequest(Xpos, Ypos, SEARCH_RADIUS));
+        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(Xpos, Ypos, SEARCH_RADIUS));
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
