@@ -1,5 +1,9 @@
 package com.sample.unimedical.util;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.view.View;
+
 import com.sample.unimedical.domain.hospital.Hospital;
 
 import org.w3c.dom.Document;
@@ -8,17 +12,23 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class XMLParser {
+public class XMLHandler {
 
-    public static List<Hospital> processXML(String str) throws ParserConfigurationException, IOException, SAXException {    //비거래처
+    public static List<Hospital> parseXML(String str) throws ParserConfigurationException, IOException, SAXException {    //비거래처
 
         List<Hospital> newList = new ArrayList<>();
 
@@ -68,4 +78,9 @@ public class XMLParser {
         return newList;
 
     }
+
+    public static String readHospitalList(String city, String sigungu, String dongeupmyun, Context context) throws Exception {
+        return null;
+    }
+
 }
