@@ -1,8 +1,11 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sample.unimedical.domain.hospital.Hospital;
+
+import net.daum.mf.map.api.MapPointBounds;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -72,6 +75,78 @@ public class XMLHandler {
         return newList;
 
     }
+
+    public static List<Hospital> parseSelectiveXML(String xml, MapPointBounds mapPointBounds) throws ParserConfigurationException, IOException, SAXException {    //비거래처
+
+        List<Hospital> newList = new ArrayList<>();
+
+        InputSource is = new InputSource(new StringReader(xml));
+        Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+
+        double boundTop = mapPointBounds.topRight.getMapPointGeoCoord().latitude;
+        double boundBottom = mapPointBounds.bottomLeft.getMapPointGeoCoord().latitude;
+        double boundLeft = mapPointBounds.bottomLeft.getMapPointGeoCoord().longitude;
+        double boundRight = mapPointBounds.topRight.getMapPointGeoCoord().longitude;
+
+
+        NodeList nodeList = document.getElementsByTagName("item");
+        Log.d("tester", "XMLHANDLER: total == " + nodeList.getLength());
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Element nodeElement = (Element) nodeList.item(i);
+            Hospital hospital = new Hospital();
+            try {
+
+
+                if (nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue() == null || nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue() == null) {
+                    continue;
+                }
+                double Xpos = Double.parseDouble(nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue());
+                double Ypos = Double.parseDouble(nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue());
+
+                if (boundLeft <= Xpos && Xpos <= boundRight && boundBottom <= Ypos && Ypos <= boundTop) {
+
+                    NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");   //병원명
+                    hospital.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
+
+                    NodeList mdeptGdrCnt = nodeElement.getElementsByTagName("mdeptGdrCnt");   //의과일반의 총 수
+                    hospital.setMdeptGdrCnt(mdeptGdrCnt.item(0).getChildNodes().item(0).getNodeValue());
+
+                    NodeList telno = nodeElement.getElementsByTagName("telno");
+                    hospital.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
+
+                    NodeList XPos = nodeElement.getElementsByTagName("XPos");
+                    hospital.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
+
+                    NodeList YPos = nodeElement.getElementsByTagName("YPos");
+                    hospital.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
+
+
+                    NodeList clCd = nodeElement.getElementsByTagName("clCd");
+                    hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
+
+                    NodeList sgguCdNm = nodeElement.getElementsByTagName("sgguCdNm");
+                    hospital.setSgguCdNm(sgguCdNm.item(0).getChildNodes().item(0).getNodeValue());
+
+
+                    newList.add(hospital);
+                } else continue;
+
+            } catch (Exception e) {
+
+            }
+
+            //
+
+        }
+
+        Log.d("tester", "flag " + newList.size());
+
+        return newList;
+
+    }
+
 
     public static String readHospitalList(Context context) throws Exception {
         InputStream is = context.getResources().getAssets().open("hospital_total.xml");
