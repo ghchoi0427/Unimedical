@@ -244,39 +244,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
-    private void bindLocationSearchItems(double Xpos, double Ypos) throws Exception {
-        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(Xpos, Ypos, SEARCH_RADIUS));
-        List<MapPOIItem> newList = new ArrayList<>();
-
-        if (checkNoResult(hospitals)) {
-            alertNoResult();
-            return;
-        }
-
-        for (Hospital hospital : hospitals) {
-            MapPOIItem mapPOIItem;
-            switch (hospital.getClCd()) {
-                case "01":
-                    HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
-                    break;
-                case "11":
-                case "21":
-                    HOSPITAL_SCALE = MIDDLE_HOSPITAL;
-                    break;
-                case "31":
-                    HOSPITAL_SCALE = SMALL_HOSPITAL;
-                    break;
-            }
-            mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
-            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
-            newList.add(mapPOIItem);
-        }
-
-        setMarkerAnimationType();
-        clearPOI();
-        setPOIItems(newList);
-
-    }
 
     private void bindLocationSearchItems(MapPointBounds mapPointBounds) throws Exception {
         List<Hospital> hospitals = XMLHandler.parseSelectiveXML((readHospitalList(getApplicationContext())), mapPointBounds);
