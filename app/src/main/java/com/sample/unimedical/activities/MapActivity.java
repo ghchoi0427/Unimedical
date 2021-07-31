@@ -229,18 +229,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         for (Hospital hospital : hospitals) {
             MapPOIItem mapPOIItem;
-            switch (hospital.getClCd()) {
-                case "01":
-                    HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
-                    break;
-                case "11":
-                case "21":
-                    HOSPITAL_SCALE = MIDDLE_HOSPITAL;
-                    break;
-                case "31":
-                    HOSPITAL_SCALE = SMALL_HOSPITAL;
-                    break;
-            }
+            setHospitalScale(hospital.getClCd());
             mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
             mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
             newList.add(mapPOIItem);
@@ -264,18 +253,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         for (Hospital hospital : hospitals) {
             MapPOIItem mapPOIItem;
             try {
-                switch (hospital.getClCd()) {
-                    case "01":
-                        HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
-                        break;
-                    case "11":
-                    case "21":
-                        HOSPITAL_SCALE = MIDDLE_HOSPITAL;
-                        break;
-                    case "31":
-                        HOSPITAL_SCALE = SMALL_HOSPITAL;
-                        break;
-                }
+                setHospitalScale(hospital.getClCd());
+
             } catch (Exception e) {
 
             }
@@ -289,6 +268,21 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         clearPOI();
         setPOIItems(newList);
 
+    }
+
+    private void setHospitalScale(String classCode) {
+        switch (classCode) {
+            case "01":
+                HOSPITAL_SCALE = UNIVERSITY_HOSPITAL;
+                break;
+            case "11":
+            case "21":
+                HOSPITAL_SCALE = MIDDLE_HOSPITAL;
+                break;
+            case "31":
+                HOSPITAL_SCALE = SMALL_HOSPITAL;
+                break;
+        }
     }
 
     private boolean checkNoResult(List<Hospital> list) {
