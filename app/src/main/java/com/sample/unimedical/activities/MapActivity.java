@@ -47,7 +47,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private static final String REST_API_KEY = "1a3f3da66a892a6af6667f1f64638be3";
     private static String CURRENT_ADDRESS = "";
-    private static final int SEARCH_RADIUS = 1500;
     private static final int UNIVERSITY_HOSPITAL = 1;
     private static final int MIDDLE_HOSPITAL = 2;
     private static final int SMALL_HOSPITAL = 3;
@@ -202,14 +201,22 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
     }
 
+    private boolean checkEmptySearch(String keyword) {
+        if (keyword.isEmpty()) {
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
+        }
+        return keyword.isEmpty();
+
+    }
+
     private void getMapBoundary() {
         mapPointBounds = mapView.getMapPointBounds();
     }
 
 
     private void bindSearchItems(String hospitalName) throws Exception {
-        if ("".equals(hospitalName)) {
-            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
+
+        if (checkEmptySearch(hospitalName)) {
             return;
         }
         List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(hospitalName));
