@@ -13,13 +13,12 @@ import java.io.IOException;
 public class FirebaseHandler {
 
     private static FirebaseStorage storage = FirebaseStorage.getInstance("gs://medi-5dbf9.appspot.com/");
-    private static final String CUSTOMER_FILE_NAME = "customer.xls";
 
-    public static void downloadFile(Context context, String filename) throws FileNotFoundException {
+    public static void downloadFile(Context context, String localCustomerFileName, String customerFileName) throws FileNotFoundException {
         StorageReference storageReference = storage.getReference();
-        StorageReference customerRef = storageReference.child(CUSTOMER_FILE_NAME);
+        StorageReference customerRef = storageReference.child(customerFileName);
 
-        FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+        FileOutputStream fos = context.openFileOutput(localCustomerFileName, Context.MODE_PRIVATE);
 
         final long ONE_MEGABYTE = 1024 * 1024;
 
