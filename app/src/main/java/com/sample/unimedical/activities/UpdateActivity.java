@@ -29,7 +29,7 @@ public class UpdateActivity extends AppCompatActivity {
 
         btnUpdateCustomer.setOnClickListener(v -> {
             try {
-                FirebaseHandler.downloadFile(getApplicationContext());
+                FirebaseHandler.downloadFile(getApplicationContext(),getString(R.string.local_customer_file_name),getString(R.string.customer_file_name));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
