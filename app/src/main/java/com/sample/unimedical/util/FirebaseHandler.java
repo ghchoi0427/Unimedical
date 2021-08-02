@@ -1,14 +1,17 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class FirebaseHandler {
 
@@ -23,18 +26,30 @@ public class FirebaseHandler {
 
         final long ONE_MEGABYTE = 1024 * 1024;
 
-        Log.d("tester", "initiated");
         customerRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
             try {
-                Log.d("tester", "succeed");
                 fos.write(bytes);
                 fos.flush();
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).addOnFailureListener(e -> {
-            Log.d("tester", "fail");
+        }).addOnCompleteListener(task -> {
+            try {
+                readFile(context);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+    }
+
+    public static void readFile(Context context) throws IOException {
+        FileInputStream fis = context.openFileInput("test_file.xls");
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis, StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
     }
 }
