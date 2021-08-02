@@ -14,7 +14,7 @@ public class FirebaseHandler {
 
     private static FirebaseStorage storage = FirebaseStorage.getInstance("gs://medi-5dbf9.appspot.com/");
 
-    public static void downloadFile(Context context, String localCustomerFileName, String customerFileName) throws FileNotFoundException {
+    public static void downloadCustomerFile(Context context, String localCustomerFileName, String customerFileName) throws FileNotFoundException {
         StorageReference storageReference = storage.getReference();
         StorageReference customerRef = storageReference.child(customerFileName);
 

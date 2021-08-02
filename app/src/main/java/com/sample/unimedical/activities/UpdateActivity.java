@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.util.FirebaseHandler;
+import com.sample.unimedical.util.RequestSender;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class UpdateActivity extends AppCompatActivity {
 
         btnUpdateCustomer.setOnClickListener(v -> {
             try {
-                FirebaseHandler.downloadFile(getApplicationContext(),getString(R.string.local_customer_file_name),getString(R.string.customer_file_name));
+                FirebaseHandler.downloadCustomerFile(getApplicationContext(), getString(R.string.local_customer_file_name), getString(R.string.customer_file_name));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
