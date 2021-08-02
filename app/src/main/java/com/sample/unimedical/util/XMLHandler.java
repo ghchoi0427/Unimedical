@@ -146,8 +146,7 @@ public class XMLHandler {
 
     public static String readHospitalList(Context context) throws Exception {
         InputStream is = context.getResources().getAssets().open("hospital_total.xml");
-        String result = readTextFile(is);
-        return result;
+        return readTextFile(is);
     }
 
     private static String readTextFile(InputStream inputStream) {
