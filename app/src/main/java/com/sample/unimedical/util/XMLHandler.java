@@ -38,39 +38,14 @@ public class XMLHandler {
             Element nodeElement = (Element) nodeList.item(i);
             Hospital hospital = new Hospital();
             try {
-
-                NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");   //병원명
-                hospital.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList mdeptGdrCnt = nodeElement.getElementsByTagName("mdeptGdrCnt");   //의과일반의 총 수
-                hospital.setMdeptGdrCnt(mdeptGdrCnt.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList telno = nodeElement.getElementsByTagName("telno");
-                hospital.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList XPos = nodeElement.getElementsByTagName("XPos");
-                hospital.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
-
-                NodeList YPos = nodeElement.getElementsByTagName("YPos");
-                hospital.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
-
-
-                NodeList clCd = nodeElement.getElementsByTagName("clCd");
-                hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
-
-                NodeList sidoCdNm = nodeElement.getElementsByTagName("sidoCdNm");
-                hospital.setSidoCdNm(sidoCdNm.item(0).getChildNodes().item(0).getNodeValue());
-
+                setHospitalFields(nodeElement, hospital);
+                newList.add(hospital);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            newList.add(hospital);
-
         }
 
         return newList;
-
     }
 
 
@@ -94,8 +69,6 @@ public class XMLHandler {
             Element nodeElement = (Element) nodeList.item(i);
             Hospital hospital = new Hospital();
             try {
-
-
                 if (nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue() == null || nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue() == null) {
                     continue;
                 }
@@ -103,30 +76,7 @@ public class XMLHandler {
                 double Ypos = Double.parseDouble(nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue());
 
                 if (boundLeft <= Xpos && Xpos <= boundRight && boundBottom <= Ypos && Ypos <= boundTop) {
-
-                    NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");   //병원명
-                    hospital.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
-
-                    NodeList mdeptGdrCnt = nodeElement.getElementsByTagName("mdeptGdrCnt");   //의과일반의 총 수
-                    hospital.setMdeptGdrCnt(mdeptGdrCnt.item(0).getChildNodes().item(0).getNodeValue());
-
-                    NodeList telno = nodeElement.getElementsByTagName("telno");
-                    hospital.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
-
-                    NodeList XPos = nodeElement.getElementsByTagName("XPos");
-                    hospital.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
-
-                    NodeList YPos = nodeElement.getElementsByTagName("YPos");
-                    hospital.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
-
-
-                    NodeList clCd = nodeElement.getElementsByTagName("clCd");
-                    hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
-
-                    NodeList sidoCdNm = nodeElement.getElementsByTagName("sidoCdNm");
-                    hospital.setSidoCdNm(sidoCdNm.item(0).getChildNodes().item(0).getNodeValue());
-
-
+                    setHospitalFields(nodeElement, hospital);
                     newList.add(hospital);
                 } else continue;
 
@@ -140,6 +90,30 @@ public class XMLHandler {
 
         return newList;
 
+    }
+
+    public static void setHospitalFields(Element nodeElement, Hospital hospital) {
+        NodeList yadmNm = nodeElement.getElementsByTagName("yadmNm");   //병원명
+        hospital.setYadmNm(yadmNm.item(0).getChildNodes().item(0).getNodeValue());
+
+        NodeList mdeptGdrCnt = nodeElement.getElementsByTagName("mdeptGdrCnt");   //의과일반의 총 수
+        hospital.setMdeptGdrCnt(mdeptGdrCnt.item(0).getChildNodes().item(0).getNodeValue());
+
+        NodeList telno = nodeElement.getElementsByTagName("telno");
+        hospital.setTelno(telno.item(0).getChildNodes().item(0).getNodeValue());
+
+        NodeList XPos = nodeElement.getElementsByTagName("XPos");
+        hospital.setXPos(XPos.item(0).getChildNodes().item(0).getNodeValue());
+
+        NodeList YPos = nodeElement.getElementsByTagName("YPos");
+        hospital.setYPos(YPos.item(0).getChildNodes().item(0).getNodeValue());
+
+
+        NodeList clCd = nodeElement.getElementsByTagName("clCd");
+        hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
+
+        NodeList sidoCdNm = nodeElement.getElementsByTagName("sidoCdNm");
+        hospital.setSidoCdNm(sidoCdNm.item(0).getChildNodes().item(0).getNodeValue());
     }
 
 
