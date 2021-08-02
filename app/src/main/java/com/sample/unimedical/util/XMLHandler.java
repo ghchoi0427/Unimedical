@@ -1,7 +1,9 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.sample.unimedical.R;
 import com.sample.unimedical.domain.hospital.Hospital;
 
 import net.daum.mf.map.api.MapPointBounds;
@@ -139,7 +141,7 @@ public class XMLHandler {
 
 
     public static String readHospitalList(Context context) throws Exception {
-        InputStream is = context.getResources().getAssets().open("hospital_total.xml");
+        InputStream is = context.openFileInput(context.getString(R.string.local_hospital_file_name));
         return readTextFile(is);
     }
 
