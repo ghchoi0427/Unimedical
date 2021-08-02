@@ -1,7 +1,6 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.sample.unimedical.domain.hospital.Hospital;
 
@@ -61,8 +60,8 @@ public class XMLHandler {
                 NodeList clCd = nodeElement.getElementsByTagName("clCd");
                 hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
 
-                NodeList sgguCdNm = nodeElement.getElementsByTagName("sgguCdNm");
-                hospital.setSgguCdNm(sgguCdNm.item(0).getChildNodes().item(0).getNodeValue());
+                NodeList sidoCdNm = nodeElement.getElementsByTagName("sidoCdNm");
+                hospital.setSidoCdNm(sidoCdNm.item(0).getChildNodes().item(0).getNodeValue());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -90,7 +89,6 @@ public class XMLHandler {
 
 
         NodeList nodeList = document.getElementsByTagName("item");
-        Log.d("tester", "XMLHANDLER: total == " + nodeList.getLength());
 
         for (int i = 0; i < nodeList.getLength(); i++) {
 
@@ -126,8 +124,8 @@ public class XMLHandler {
                     NodeList clCd = nodeElement.getElementsByTagName("clCd");
                     hospital.setClCd(clCd.item(0).getChildNodes().item(0).getNodeValue());  // [01 상급종합: 노랑 ] [11 종합 21 병원 : 초록] [31 의원: 파랑]
 
-                    NodeList sgguCdNm = nodeElement.getElementsByTagName("sgguCdNm");
-                    hospital.setSgguCdNm(sgguCdNm.item(0).getChildNodes().item(0).getNodeValue());
+                    NodeList sidoCdNm = nodeElement.getElementsByTagName("sidoCdNm");
+                    hospital.setSidoCdNm(sidoCdNm.item(0).getChildNodes().item(0).getNodeValue());
 
 
                     newList.add(hospital);
@@ -140,8 +138,6 @@ public class XMLHandler {
             //
 
         }
-
-        Log.d("tester", "flag " + newList.size());
 
         return newList;
 
