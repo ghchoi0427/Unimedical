@@ -78,14 +78,11 @@ public class XMLHandler {
                 if (boundLeft <= Xpos && Xpos <= boundRight && boundBottom <= Ypos && Ypos <= boundTop) {
                     setHospitalFields(nodeElement, hospital);
                     newList.add(hospital);
-                } else continue;
+                }
 
             } catch (Exception e) {
 
             }
-
-            //
-
         }
 
         return newList;
@@ -125,7 +122,7 @@ public class XMLHandler {
     private static String readTextFile(InputStream inputStream) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-        byte buf[] = new byte[1024];
+        byte[] buf = new byte[1024];
         int length;
 
         try {
