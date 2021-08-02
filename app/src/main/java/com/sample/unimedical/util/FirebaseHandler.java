@@ -1,6 +1,7 @@
 package com.sample.unimedical.util;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -31,7 +32,7 @@ public class FirebaseHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }).addOnCompleteListener(v -> Toast.makeText(context, "거래처 정보 업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show());
     }
 
 
