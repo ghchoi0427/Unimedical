@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sample.unimedical.R;
 import com.sample.unimedical.domain.hospital.Hospital;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -19,7 +20,6 @@ import jxl.read.biff.BiffException;
 
 public class ExcelHandler extends AppCompatActivity {
 
-    private static final String EXCEL_CONTRACT_FILENAME = "customer.xls";
     private static final int FirstSegment = 0;
     private static final int rowIndexStart = 2;
     private static final int colHospitalLocation = 3;
@@ -27,7 +27,12 @@ public class ExcelHandler extends AppCompatActivity {
 
     public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
         try {
-            InputStream is = context.openFileInput("test_file.xls");
+            InputStream is;
+            if (context.openFileInput(context.getString(R.string.local_customer_file_name)).available() <= 0) {
+                is = context.getAssets().open(context.getString(R.string.local_customer_file_name));
+            } else {
+                is = context.openFileInput(context.getString(R.string.local_customer_file_name));
+            }
             Workbook wb = Workbook.getWorkbook(is);
 
             Sheet sheet = wb.getSheet(0);
