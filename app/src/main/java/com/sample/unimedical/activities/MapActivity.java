@@ -219,7 +219,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         if (checkEmptySearch(hospitalName)) {
             return;
         }
-        List<Hospital> hospitals = XMLHandler.parseXML(RequestSender.sendHospitalRequest(hospitalName));
+        List<Hospital> hospitals = XMLHandler.parseSelectiveXML((readHospitalList(getApplicationContext())), hospitalName);
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
