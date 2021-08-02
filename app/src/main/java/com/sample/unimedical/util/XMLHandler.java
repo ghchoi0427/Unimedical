@@ -24,11 +24,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XMLHandler {
 
-    public static List<Hospital> parseXML(String str) throws ParserConfigurationException, IOException, SAXException {    //비거래처
+    public static List<Hospital> parseXML(String xml) throws ParserConfigurationException, IOException, SAXException {    //비거래처
 
         List<Hospital> newList = new ArrayList<>();
 
-        InputSource is = new InputSource(new StringReader(str));
+        InputSource is = new InputSource(new StringReader(xml));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
         NodeList nodeList = document.getElementsByTagName("item");
