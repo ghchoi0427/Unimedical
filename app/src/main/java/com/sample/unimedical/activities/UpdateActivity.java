@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.util.FirebaseHandler;
-import com.sample.unimedical.util.RequestSender;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -26,7 +24,11 @@ public class UpdateActivity extends AppCompatActivity {
         btnUpdateCustomer = findViewById(R.id.btn_update_customer);
 
         btnUpdateHospital.setOnClickListener(v -> {
-
+            try {
+                FirebaseHandler.downloadHospitalFile(getApplicationContext(), getString(R.string.local_hospital_file_name), getString(R.string.hospital_file_name));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         btnUpdateCustomer.setOnClickListener(v -> {
