@@ -235,7 +235,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             newList.add(mapPOIItem);
         }
 
-        setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
     }
@@ -264,7 +263,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             newList.add(mapPOIItem);
         }
 
-        setMarkerAnimationType();
         clearPOI();
         setPOIItems(newList);
 
@@ -329,9 +327,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return mapPOIItem;
     }
 
-    private void setMarkerAnimationType() {
-        Arrays.stream(mapView.getPOIItems()).forEach(e -> e.setShowAnimationType(MapPOIItem.ShowAnimationType.DropFromHeaven));
-    }
+
 
     private void setPOIItems(List<MapPOIItem> list) {
         for (MapPOIItem item : list) {
