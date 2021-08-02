@@ -27,7 +27,7 @@ public class ExcelHandler extends AppCompatActivity {
 
     public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
         try {
-            InputStream is = context.getResources().getAssets().open(EXCEL_CONTRACT_FILENAME);
+            InputStream is = context.openFileInput("test_file.xls");
             Workbook wb = Workbook.getWorkbook(is);
 
             Sheet sheet = wb.getSheet(0);
