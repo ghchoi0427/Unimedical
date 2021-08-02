@@ -6,6 +6,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
+import com.sample.unimedical.util.FirebaseHandler;
+
+import java.io.FileNotFoundException;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -25,7 +28,11 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
         btnUpdateCustomer.setOnClickListener(v -> {
-
+            try {
+                FirebaseHandler.downloadFile(getApplicationContext());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
     }
