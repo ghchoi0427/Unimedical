@@ -20,6 +20,7 @@ import jxl.read.biff.BiffException;
 public class ExcelHandler extends AppCompatActivity {
 
     private static final String EXCEL_CONTRACT_FILENAME = "customer.xls";
+    private static final int FirstSegment = 0;
     private static final int rowIndexStart = 2;
     private static final int colHospitalLocation = 3;
     private static final int colHospitalName = 4;
@@ -74,7 +75,8 @@ public class ExcelHandler extends AppCompatActivity {
     private static boolean validateLocation(String hospitalCell, String sidoCodeName) {
 
         HashMap<String, String> sidoMap = new HashMap<>(DataMapper.getSidoMap());
-        return (Objects.equals(sidoMap.get(hospitalCell.split(" ")[0]), sidoCodeName));
+        return (Objects.equals(sidoMap.get(hospitalCell.split(" ")[FirstSegment]), sidoCodeName));
     }
+
 
 }
