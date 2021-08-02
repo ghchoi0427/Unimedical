@@ -20,6 +20,7 @@ import static com.sample.unimedical.util.JsonFactory.saleList;
 public class RequestSender {
 
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
+    private static final String DIAGNOSE_CODE = "05";
 
     private static final String ZONE_URL_TEST = "https://sboapi.ecount.com/OAPI/V2/Zone";
     private static final String ZONE_URL = "https://oapi.ecount.com/OAPI/V2/Zone";
@@ -44,7 +45,7 @@ public class RequestSender {
         urlBuilder.append("&").append(URLEncoder.encode("yadmNm", "UTF-8")).append("=").append(URLEncoder.encode(hospitalName, "UTF-8")); /*병원명(UTF-8 인코딩 필요)*/
         urlBuilder.append("&").append(URLEncoder.encode("zipCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*분류코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("clCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*종별코드(활용가이드 참조)*/
-        urlBuilder.append("&").append(URLEncoder.encode("dgsbjtCd", "UTF-8")).append("=").append(URLEncoder.encode("05", "UTF-8")); /*진료과목코드(활용가이드 참조)*/
+        urlBuilder.append("&").append(URLEncoder.encode("dgsbjtCd", "UTF-8")).append("=").append(URLEncoder.encode(DIAGNOSE_CODE, "UTF-8")); /*진료과목코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("xPos", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*x좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*단위 : 미터(m)*/
@@ -82,7 +83,7 @@ public class RequestSender {
         urlBuilder.append("&").append(URLEncoder.encode("yadmNm", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*병원명(UTF-8 인코딩 필요)*/
         urlBuilder.append("&").append(URLEncoder.encode("zipCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*분류코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("clCd", "UTF-8")).append("=").append(URLEncoder.encode("", "UTF-8")); /*종별코드(활용가이드 참조)*/
-        urlBuilder.append("&").append(URLEncoder.encode("dgsbjtCd", "UTF-8")).append("=").append(URLEncoder.encode("05", "UTF-8")); /*진료과목코드(활용가이드 참조)*/
+        urlBuilder.append("&").append(URLEncoder.encode("dgsbjtCd", "UTF-8")).append("=").append(URLEncoder.encode(DIAGNOSE_CODE, "UTF-8")); /*진료과목코드(활용가이드 참조)*/
         urlBuilder.append("&").append(URLEncoder.encode("xPos", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(yPos), "UTF-8")); /*x좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("yPos", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(xPos), "UTF-8")); /*y좌표(소수점 15)*/
         urlBuilder.append("&").append(URLEncoder.encode("radius", "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(radius), "UTF-8")); /*단위 : 미터(m)*/
