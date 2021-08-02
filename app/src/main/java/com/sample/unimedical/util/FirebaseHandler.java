@@ -39,9 +39,9 @@ public class FirebaseHandler {
 
         FileOutputStream fos = context.openFileOutput(localHospitalFileName, Context.MODE_PRIVATE);
 
-        final long ONE_MEGABYTE = 1024 * 1024;
+        final long TEN_MEGABYTE = 1024 * 1024 * 10;
 
-        customerRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+        customerRef.getBytes(TEN_MEGABYTE).addOnSuccessListener(bytes -> {
             try {
                 fos.write(bytes);
                 fos.flush();
