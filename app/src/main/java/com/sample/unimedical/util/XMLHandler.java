@@ -31,8 +31,6 @@ public class XMLHandler {
         InputSource is = new InputSource(new StringReader(str));
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
-
-        String s = "";
         NodeList nodeList = document.getElementsByTagName("item");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -75,7 +73,8 @@ public class XMLHandler {
 
     }
 
-    public static List<Hospital> parseSelectiveXML(String xml, MapPointBounds mapPointBounds) throws ParserConfigurationException, IOException, SAXException {    //비거래처
+
+    public static List<Hospital> parseSelectiveXML(String xml, MapPointBounds mapPointBounds) throws ParserConfigurationException, IOException, SAXException {
 
         List<Hospital> newList = new ArrayList<>();
 
