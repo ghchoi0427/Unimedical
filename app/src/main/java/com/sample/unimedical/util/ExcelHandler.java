@@ -10,6 +10,8 @@ import net.daum.mf.map.api.MapPOIItem;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Objects;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -37,7 +39,7 @@ public class ExcelHandler extends AppCompatActivity {
 
                     String hospitalName = sheet.getCell(colHospitalName, row).getContents();
                     String hospitalLocation = sheet.getCell(colHospitalLocation, row).getContents();
-                    if (validateHospital(hospitalName) && validateLocation(hospitalLocation, hospital.getSgguCdNm())) {
+                    if (validateHospital(hospitalName) && validateLocation(hospitalLocation, hospital.getSidoCdNm())) {
                         if (hospitalName.equals(hospital.getYadmNm())) {
                             hospital.setManager(sheet.getCell(1, row).getContents());
                             hospital.setDevice(sheet.getCell(9, row).getContents());
@@ -69,8 +71,10 @@ public class ExcelHandler extends AppCompatActivity {
         return true;
     }
 
-    private static boolean validateLocation(String hospitalCell, String sgguCodeName) {
-        return (hospitalCell.contains(sgguCodeName));
+    private static boolean validateLocation(String hospitalCell, String sidoCodeName) {
+
+        HashMap<String, String> sidoMap = new HashMap<>(DataMapper.getSidoMap());
+        return (Objects.equals(sidoMap.get(hospitalCell.split(" ")[0]), sidoCodeName));
     }
 
 }
