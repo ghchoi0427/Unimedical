@@ -48,6 +48,39 @@ public class XMLHandler {
         return newList;
     }
 
+    public static List<Hospital> parseSelectiveXML(String xml, String hospitalName) throws ParserConfigurationException, IOException, SAXException {
+
+        List<Hospital> newList = new ArrayList<>();
+
+        InputSource is = new InputSource(new StringReader(xml));
+        Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+
+
+        NodeList nodeList = document.getElementsByTagName("item");
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Element nodeElement = (Element) nodeList.item(i);
+            Hospital hospital = new Hospital();
+            try {
+                if (validateCoordinate(nodeElement)) {
+                    continue;
+                }
+
+                if (nodeElement.getElementsByTagName("yadmNm").item(0).getChildNodes().item(0).getNodeValue().equals(hospitalName)) {
+                    setHospitalFields(nodeElement, hospital);
+                    newList.add(hospital);
+                }
+
+            } catch (Exception e) {
+
+            }
+        }
+
+        return newList;
+
+    }
+
 
     public static List<Hospital> parseSelectiveXML(String xml, MapPointBounds mapPointBounds) throws ParserConfigurationException, IOException, SAXException {
 
@@ -69,7 +102,7 @@ public class XMLHandler {
             Element nodeElement = (Element) nodeList.item(i);
             Hospital hospital = new Hospital();
             try {
-                if (nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue() == null || nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue() == null) {
+                if (validateCoordinate(nodeElement)) {
                     continue;
                 }
                 double Xpos = Double.parseDouble(nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue());
@@ -135,6 +168,10 @@ public class XMLHandler {
 
         }
         return outputStream.toString();
+    }
+
+    private static boolean validateCoordinate(Element nodeElement) {
+        return nodeElement.getElementsByTagName("XPos").item(0).getChildNodes().item(0).getNodeValue() == null || nodeElement.getElementsByTagName("YPos").item(0).getChildNodes().item(0).getNodeValue() == null;
     }
 
 }
