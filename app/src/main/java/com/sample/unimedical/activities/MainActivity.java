@@ -11,7 +11,7 @@ import com.sample.unimedical.R;
 
 public class MainActivity extends AppCompatActivity {
     Button btnSearchEngine;
-    Button btnSearchMarket;
+    Button btnStock;
     Button btnCommunity;
     Button buttonMap;
     Button btnStatus;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
-        btnSearchMarket = findViewById(R.id.btn_stock_status);
+        btnStock = findViewById(R.id.btn_stock_status);
         btnCommunity = findViewById(R.id.btn_input_sales);
         buttonMap = findViewById(R.id.btn_map);
         btnStatus = findViewById(R.id.btn_status);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
 
-        btnSearchMarket.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MarketSearchActivity.class)));
+        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MarketSearchActivity.class)));
 
         buttonMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
 
