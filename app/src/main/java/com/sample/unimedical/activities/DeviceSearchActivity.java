@@ -42,14 +42,14 @@ public class DeviceSearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext(), FILE_NAME)));
+        searchButton.setOnClickListener(v -> processResponse(getJsonFromAssets(getApplicationContext())));
 
     }
 
-    private String getJsonFromAssets(Context context, String fileName) {
+    private String getJsonFromAssets(Context context) {
         String jsonString;
         try {
-            InputStream is = context.getAssets().open(fileName);
+            InputStream is = context.getAssets().open(DeviceSearchActivity.FILE_NAME);
 
             int size = is.available();
             byte[] buffer = new byte[size];
