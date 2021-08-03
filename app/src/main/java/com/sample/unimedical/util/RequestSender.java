@@ -113,7 +113,7 @@ public class RequestSender {
 
 
     public static String sendEcountZoneRequest(String comCode) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + URL_SUFFIX + URL_ZONE); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + URL_SUFFIX + URL_ZONE); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -146,7 +146,7 @@ public class RequestSender {
     }
 
     public static String sendEcountLoginRequest(String zoneCode, String comCode, String userID) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_LOGIN); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + zoneCode + URL_SUFFIX + URL_LOGIN); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -174,7 +174,7 @@ public class RequestSender {
     }
 
     public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, JSONArray jsonArray) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_INPUTSALE + SESSION_ID); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + zoneCode + URL_SUFFIX + URL_INPUTSALE + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -208,7 +208,7 @@ public class RequestSender {
     }
 
     public static String sendEcountStockRequest(String zoneCode, String SESSION_ID) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_STOCK + SESSION_ID); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + zoneCode + URL_SUFFIX + URL_STOCK + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
