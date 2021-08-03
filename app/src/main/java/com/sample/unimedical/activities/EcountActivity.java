@@ -20,7 +20,7 @@ import static com.sample.unimedical.util.ResponseHandler.getSessionID;
 import static com.sample.unimedical.util.ResponseHandler.getZoneCode;
 import static com.sample.unimedical.util.ResponseHandler.validateLoginJSON;
 
-public class EcountLoginActivity extends AppCompatActivity {
+public class EcountActivity extends AppCompatActivity {
 
     EditText editComCode;
     EditText editUserID;
@@ -60,7 +60,7 @@ public class EcountLoginActivity extends AppCompatActivity {
 
                 if (validateLoginJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
-                    Intent ecountLoginComplete = new Intent(EcountLoginActivity.this, InputSaleActivity.class);
+                    Intent ecountLoginComplete = new Intent(EcountActivity.this, InputSaleActivity.class);
                     ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
                     ecountLoginComplete.putExtra("ZONE_CODE", ZONE_CODE);
                     startActivity(ecountLoginComplete);

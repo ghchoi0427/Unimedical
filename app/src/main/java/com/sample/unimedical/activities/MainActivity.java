@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
 
-        btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountLoginActivity.class)));
+        btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
 
         btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
 
