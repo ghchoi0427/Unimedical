@@ -198,7 +198,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private boolean checkEmptySearch(String keyword) {
         if (keyword.isEmpty()) {
-            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색어를 입력해주세요", Toast.LENGTH_SHORT).show());
+            showAlarm("검색어를 입력해주세요");
         }
         return keyword.isEmpty();
 
@@ -218,7 +218,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
-            alertNoResult();
+            showAlarm("검색결과가 없습니다.");
             return;
         }
 
@@ -243,7 +243,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         String hospitalXml = readHospitalList(getApplicationContext());
         if (checkNullString(hospitalXml)) {
-            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "병원정보를 업데이트 해주세요", Toast.LENGTH_SHORT).show());
+            showAlarm("병원정보를 업데이트 해주세요");
             startActivity(new Intent(this, UpdateActivity.class));
             return;
         }
@@ -251,7 +251,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
-            alertNoResult();
+            showAlarm("검색결과가 없습니다.");
             return;
         }
 
@@ -293,10 +293,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return list.isEmpty();
     }
 
-    private void alertNoResult() {
-        runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show());
-    }
-
     private String setHospitalInfo(Hospital hospital) {
         return hospital.getYadmNm() + "/" + hospital.getTelno();
     }
@@ -336,6 +332,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
     }
 
+    private void showAlarm(String message) {
+        runOnUiThread(() -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show());
+    }
+
     private void clearPOI() {
         mapView.removeAllPOIItems();
     }
@@ -352,7 +352,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     private void onFinishReverseGeoCoding(String result) {
-        Toast.makeText(MapActivity.this, "Reverse Geo-coding : " + result, Toast.LENGTH_SHORT).show();
+
     }
 
     //currentLocationListener
@@ -509,8 +509,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-        Toast.makeText(this, mapPOIItem.getItemName().split("/")[0], Toast.LENGTH_SHORT).show();
-
+        showAlarm(mapPOIItem.getItemName().split("/")[0]);
     }
 
     @Override
@@ -528,7 +527,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            Toast.makeText(this, "버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            showAlarm("버튼을 한번 더 누르면 종료됩니다.");
             return;
         }
 
