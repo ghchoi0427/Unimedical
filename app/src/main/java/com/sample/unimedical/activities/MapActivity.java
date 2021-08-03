@@ -297,20 +297,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         runOnUiThread(() -> Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show());
     }
 
-    private String setHospitalInfo(Hospital hospital, boolean isClient) {
-        String result;
-        if (isClient) {
-            result = hospital.getYadmNm() + "/" + hospital.getManager() + "/" + hospital.getTelno() + "/" + hospital.getDevice();
-        } else {
-            result = hospital.getYadmNm() + "/" + hospital.getTelno();
-        }
-        return result;
+    private String setHospitalInfo(Hospital hospital) {
+        return hospital.getYadmNm() + "/" + hospital.getTelno();
     }
 
     private MapPOIItem setNonClientMarker(Hospital hospital, double Xpos, double Ypos, int hospitalScale) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(setHospitalInfo(hospital, false));
+        mapPOIItem.setItemName(setHospitalInfo(hospital));
         mapPOIItem.setMapPoint(mapPoint);
 
         switch (hospitalScale) {
@@ -349,8 +343,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     //ReverseGeoCoder
     @Override
     public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {
-        mapReverseGeoCoder.toString();
-        onFinishReverseGeoCoding(s);
+
     }
 
     @Override
