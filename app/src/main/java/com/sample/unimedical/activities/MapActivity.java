@@ -260,7 +260,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             try {
                 setHospitalScale(hospital.getClCd());
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
             mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
@@ -385,10 +385,10 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     // CalloutBalloonAdapter 인터페이스 구현
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
-        private final View mCalloutBalloon;
+        private final View calloutBalloon;
 
         public CustomCalloutBalloonAdapter() {
-            mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
+            calloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
         }
 
         @Override
@@ -397,23 +397,23 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
                 if (poiItem.getItemName().split("/").length == 2) {
 
-                    mCalloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.GONE);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_third)).setText("");
+                    calloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.GONE);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_third)).setText("");
                 }
                 if (poiItem.getItemName().split("/").length == 4) {
-                    mCalloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.VISIBLE);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_third)).setText(poiItem.getItemName().split("/")[2]);
-                    ((TextView) mCalloutBalloon.findViewById(R.id.bal_fourth)).setText(poiItem.getItemName().split("/")[3]);
+                    calloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.VISIBLE);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_third)).setText(poiItem.getItemName().split("/")[2]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_fourth)).setText(poiItem.getItemName().split("/")[3]);
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return mCalloutBalloon;
+            return calloutBalloon;
         }
 
         @Override
