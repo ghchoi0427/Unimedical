@@ -51,6 +51,9 @@ public class EcountLoginActivity extends AppCompatActivity {
     }
 
     private void login() {
+        if (ZONE_CODE.isEmpty()) {
+            return;
+        }
         new Thread(() -> {
             try {
                 String result = sendEcountLoginRequest(ZONE_CODE, editComCode.getText().toString(), editUserID.getText().toString());
