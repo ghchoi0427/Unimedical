@@ -53,6 +53,7 @@
         <activity android:name=".activities.EcountActivity" />
         <activity android:name=".activities.StatusActivity" />
         <activity android:name=".activities.UpdateActivity" />
+        <activity android:name=".activities.StockActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

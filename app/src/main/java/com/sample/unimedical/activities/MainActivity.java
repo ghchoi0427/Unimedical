@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
 
-        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
+        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "StockActivity")));
 
         btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
 
-        btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
+        btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
 
         btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
 
