@@ -60,7 +60,8 @@ public class EcountActivity extends AppCompatActivity {
 
                 if (validateLoginJSON(result)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show());
-                    Intent ecountLoginComplete = new Intent(EcountActivity.this, InputSaleActivity.class);
+
+                    Intent ecountLoginComplete = setIntent(getIntent().getStringExtra("nextActivity"));
                     ecountLoginComplete.putExtra("SESSION_ID", getSessionID(result));
                     ecountLoginComplete.putExtra("ZONE_CODE", ZONE_CODE);
                     startActivity(ecountLoginComplete);
@@ -79,6 +80,19 @@ public class EcountActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private Intent setIntent(String extra) {
+        Intent intent = new Intent();
+        if (extra.equals("InputSaleActivity")) {
+            intent = new Intent(getApplicationContext(), InputSaleActivity.class);
+        }
+
+        if (extra.equals("StockActivity")) {
+            intent = new Intent(getApplicationContext(), StockActivity.class);
+        }
+
+        return intent;
     }
 
     private void zone() {
