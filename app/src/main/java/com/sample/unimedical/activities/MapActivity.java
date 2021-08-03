@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.sample.unimedical.R;
 import com.sample.unimedical.domain.hospital.Hospital;
 import com.sample.unimedical.util.ExcelHandler;
-import com.sample.unimedical.util.RequestSender;
 import com.sample.unimedical.util.XMLHandler;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
@@ -32,7 +31,6 @@ import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.sample.unimedical.util.AnimationHandler.viewAnimationGetBack;
@@ -46,8 +44,6 @@ import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingMo
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
-    private static final String REST_API_KEY = "1a3f3da66a892a6af6667f1f64638be3";
-    private static String CURRENT_ADDRESS = "";
     private static final int UNIVERSITY_HOSPITAL = 1;
     private static final int MIDDLE_HOSPITAL = 2;
     private static final int SMALL_HOSPITAL = 3;
@@ -67,8 +63,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private boolean isViewVisible = true;
 
     private long backKeyPressedTime = 0;
-
-    MapReverseGeoCoder mapReverseGeoCoder;
 
     MapPointBounds mapPointBounds;
 
@@ -507,18 +501,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
-        mapReverseGeoCoder = new MapReverseGeoCoder(REST_API_KEY, mapPoint, new MapReverseGeoCoder.ReverseGeoCodingResultListener() {
-            @Override
-            public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String address) {
-                CURRENT_ADDRESS = address;
-            }
-
-            @Override
-            public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
-            }
-        }, this);
-        mapReverseGeoCoder.startFindingAddress();
-
         getMapBoundary();
     }
 
