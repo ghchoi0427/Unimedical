@@ -2,7 +2,6 @@ package com.sample.unimedical.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -77,7 +76,6 @@ public class MarketSearchActivity extends AppCompatActivity {
     private void searchItem(String keyword) {
 
         try {
-            Log.d("test", itemList.getItems().stream().count() + "");
             for (Device i : itemList.getItems()) {
                 if (!"".equals(i.getMaker()) && !"".equals(i.getVendor())) {
                     try {
