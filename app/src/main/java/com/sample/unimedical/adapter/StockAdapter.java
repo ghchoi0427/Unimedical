@@ -1,5 +1,6 @@
 package com.sample.unimedical.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +13,17 @@ import com.sample.unimedical.R;
 import com.sample.unimedical.domain.stock.ProductCode;
 import com.sample.unimedical.domain.stock.Stock;
 
-import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
-    public ArrayList<Stock> stockArrayList = new ArrayList<>();
+    public ArrayList<Stock> stocks = new ArrayList<>();
 
     @NonNull
-    @NotNull
     @Override
-    public StockAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View stockView = layoutInflater.inflate(R.layout.stock_item, parent, false);
 
@@ -30,21 +31,36 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull StockAdapter.ViewHolder holder, int position) {
-        Stock stock = stockArrayList.get(position);
+    public void onBindViewHolder(@NonNull StockAdapter.ViewHolder holder, int position) {
+        Stock stock = stocks.get(position);
         holder.setItem(stock);
     }
 
     @Override
     public int getItemCount() {
-        return stockArrayList.size();
+        return stocks.size();
+    }
+
+    public void addItem(Stock stock) {
+        stocks.add(stock);
+    }
+
+    public void addItems(JSONArray jsonArray) throws JSONException {
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Stock stock = new Stock();
+            stock.setPROD_CD(jsonArray.getJSONObject(i).getString("PROD_CD"));
+            stock.setBAL_QTY(jsonArray.getJSONObject(i).getString("BAL_QTY"));
+
+            stocks.add(stock);
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textStockName;
         TextView textStockCount;
 
-        public ViewHolder(@NonNull @NotNull View stockView) {
+        public ViewHolder(@NonNull View stockView) {
             super(stockView);
             textStockCount = stockView.findViewById(R.id.text_stock_name);
             textStockCount = stockView.findViewById(R.id.text_stock_count);
@@ -53,7 +69,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         public void setItem(Stock stock) {
 
             textStockName.setText(mapper(stock.getPROD_CD()));
-            textStockName.setText(stock.getBAL_QTY());
+            textStockCount.setText(stock.getBAL_QTY());
         }
 
         private String mapper(String key) {

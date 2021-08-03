@@ -1,5 +1,8 @@
 package com.sample.unimedical.util;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +27,13 @@ public class ResponseHandler {
         JSONObject jsonChildObject = (JSONObject) jsonObject.get("Data");
 
         return jsonChildObject.getString("Message");
+    }
+
+    public static JSONArray getProductResults(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject jsonData = (JSONObject) jsonObject.get("Data");
+        JSONArray result = (JSONArray) jsonData.get("Result");
+        return result;
     }
 
     public static String getSessionID(String response) throws JSONException {
