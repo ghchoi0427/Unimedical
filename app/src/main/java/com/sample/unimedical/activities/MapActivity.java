@@ -1,6 +1,7 @@
 package com.sample.unimedical.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -239,9 +240,20 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         setPOIItems(newList);
     }
 
+    private boolean checkNullString(String input) {
+        return input.isEmpty();
+    }
+
 
     private void bindLocationSearchItems(MapPointBounds mapPointBounds) throws Exception {
-        List<Hospital> hospitals = XMLHandler.parseSelectiveXML((readHospitalList(getApplicationContext())), mapPointBounds);
+
+        String hospitalXml = readHospitalList(getApplicationContext());
+        if (checkNullString(hospitalXml)) {
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "병원정보를 업데이트 해주세요", Toast.LENGTH_SHORT).show());
+            startActivity(new Intent(this, UpdateActivity.class));
+            return;
+        }
+        List<Hospital> hospitals = XMLHandler.parseSelectiveXML(hospitalXml, mapPointBounds);
         List<MapPOIItem> newList = new ArrayList<>();
 
         if (checkNoResult(hospitals)) {
@@ -326,7 +338,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         return mapPOIItem;
     }
-
 
 
     private void setPOIItems(List<MapPOIItem> list) {
