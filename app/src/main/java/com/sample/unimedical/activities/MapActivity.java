@@ -527,7 +527,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            showAlarm("버튼을 한번 더 누르면 종료됩니다.");
+            showAlarm(getString(R.string.msg_quit));
             return;
         }
 

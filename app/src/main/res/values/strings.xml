@@ -20,4 +20,5 @@
     <string name="local_hospital_file_name">local_hospital.xml</string>
     <string name="customer_file_name">customer.xls</string>
     <string name="hospital_file_name">hospital.xml</string>
+    <string name="msg_quit">버튼을 한번 더 누르면 종료됩니다.</string>
 </resources>
