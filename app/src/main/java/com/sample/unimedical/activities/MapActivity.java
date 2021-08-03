@@ -44,6 +44,7 @@ import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingMo
 
 public class MapActivity extends FragmentActivity implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
+    private static final int INDEX_HOSPITAL_NAME = 0;
     private static final int UNIVERSITY_HOSPITAL = 1;
     private static final int MIDDLE_HOSPITAL = 2;
     private static final int SMALL_HOSPITAL = 3;
@@ -509,7 +510,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-        showAlarm(mapPOIItem.getItemName().split("/")[0]);
+        showAlarm(mapPOIItem.getItemName().split("/")[INDEX_HOSPITAL_NAME]);
     }
 
     @Override
