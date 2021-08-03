@@ -12,8 +12,8 @@ import com.sample.unimedical.R;
 public class MainActivity extends AppCompatActivity {
     Button btnSearchEngine;
     Button btnStock;
-    Button btnCommunity;
-    Button buttonMap;
+    Button btnInputSale;
+    Button btnMap;
     Button btnStatus;
     Button btnUpdate;
 
@@ -26,18 +26,18 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
         btnStock = findViewById(R.id.btn_stock_status);
-        btnCommunity = findViewById(R.id.btn_input_sales);
-        buttonMap = findViewById(R.id.btn_map);
+        btnInputSale = findViewById(R.id.btn_input_sales);
+        btnMap = findViewById(R.id.btn_map);
         btnStatus = findViewById(R.id.btn_status);
         btnUpdate = findViewById(R.id.btn_update);
 
         btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
 
-        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MarketSearchActivity.class)));
+        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
 
-        buttonMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
+        btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
 
-        btnCommunity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
+        btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class)));
 
         btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
 
