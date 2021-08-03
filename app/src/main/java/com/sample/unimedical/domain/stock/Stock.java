@@ -68,7 +68,7 @@ public class Stock {
         productCodeMap.put("00132", "OCEANFIX-압박스타킹-종아리형 발막힘 L (급여코드:K7301514)");
         productCodeMap.put("00133", "OCEANFIX-압박스타킹-종아리형 발막힘 XL (급여코드:K7301514)");
         productCodeMap.put("00141", "Balance Gun (밸런스건)");
-        productCodeMap.put("3021", "	surgical regular skin marker [T3021]");
+        productCodeMap.put("3021", "surgical regular skin marker [T3021]");
         productCodeMap.put("3022", "surgical fine skin marker [T3022]");
         productCodeMap.put("3023", "surgical twin skin marker [T3023]");
         productCodeMap.put("3024", "surgical regular skin marker [T3024]");
@@ -109,9 +109,9 @@ public class Stock {
         productCodeMap.put("에코보조기-소좌	", "k8102135 ecosplint 단상지 에코(보조기)소 좌");
         productCodeMap.put("에코보조기-중우	", "k8102135 ecosplint 단상지 에코(보조기)중 우");
         productCodeMap.put("에코보조기-중좌	", "k8102135 ecosplint 단상지 에코(보조기)중 좌");
-        productCodeMap.put("ECOFINGER[대]", "	k8102035 ECOSPLINT 손가락 [대]");
-        productCodeMap.put("ECOFINGER[소]", "	k8102035 ECOSPLINT 손가락 [소]");
-        productCodeMap.put("ECOFINGER[중]", "	k8102035 ECOSPLINT 손가락 [중]");
+        productCodeMap.put("ECOFINGER[대]", "k8102035 ECOSPLINT 손가락 [대]");
+        productCodeMap.put("ECOFINGER[소]", "k8102035 ECOSPLINT 손가락 [소]");
+        productCodeMap.put("ECOFINGER[중]", "k8102035 ECOSPLINT 손가락 [중]");
         productCodeMap.put("finger", "QPLINT 손가락 단품");
         productCodeMap.put("K1000-QWLL", "K8103535 QPLINT 단상지 엄지고정 [대 좌]");
         productCodeMap.put("K1000-QWLR", "K8103535 QPLINT 단상지 엄지고정 [대 우]");
