@@ -22,15 +22,12 @@ public class RequestSender {
     private static final String API_KEY = "uhPZ+yjcUrJD5qN1Q6Wf1+o63BmTtVFSTTKYCRPT0JY7HN934bPpj4S5f2QQng+LHjCADIGxjrHTUE0pGXJfGA==";
     private static final String DIAGNOSE_CODE = "05";
 
-    private static final String ZONE_URL_TEST = "https://sboapi.ecount.com/OAPI/V2/Zone";
-    private static final String ZONE_URL = "https://oapi.ecount.com/OAPI/V2/Zone";
-
-    private static final String LOGIN_URL_TEST = "https://sboapiBA.ecount.com/OAPI/V2/OAPILogin";
-    private static final String LOGIN_URL = "https://oapiBA.ecount.com/OAPI/V2/OAPILogin";
-
-    private static final String UPLOAD_URL_TEST = "https://sboapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=";
-    private static final String UPLOAD_URL = "https://oapiBA.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=";
-
+    private static final String TEST_URL_PREFIX = "https://sboapi";
+    private static final String URL_PREFIX = "https://oapi.ecount";
+    private static final String URL_SUFFIX = ".ecount.com/OAPI/V2/";
+    private static final String URL_ZONE = "ZONE";
+    private static final String URL_LOGIN = "OAPILogin";
+    private static final String URL_INPUTSALE = "Sale/SaveSale?SESSION_ID=";
 
     public static String sendHospitalRequest(String hospitalName) throws Exception {
 
@@ -111,7 +108,7 @@ public class RequestSender {
 
 
     public static String sendEcountZoneRequest(String comCode) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(ZONE_URL_TEST); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + URL_SUFFIX + URL_ZONE); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -139,7 +136,7 @@ public class RequestSender {
     }
 
     public static String sendEcountLoginRequest(String zoneCode, String comCode, String userID) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder("https://sboapi" + zoneCode + ".ecount.com/OAPI/V2/OAPILogin"); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + zoneCode + URL_SUFFIX + URL_LOGIN); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -167,7 +164,7 @@ public class RequestSender {
     }
 
     public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, JSONArray jsonArray) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder("https://sboapi" + zoneCode + ".ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + SESSION_ID); /*URL*/
+        StringBuilder urlBuilder = new StringBuilder(TEST_URL_PREFIX + zoneCode + URL_SUFFIX + URL_INPUTSALE + SESSION_ID); /*URL*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
