@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
-        btnSearchMarket = findViewById(R.id.btn_search_market);
+        btnSearchMarket = findViewById(R.id.btn_stock_status);
         btnCommunity = findViewById(R.id.btn_input_sales);
         buttonMap = findViewById(R.id.btn_map);
         btnStatus = findViewById(R.id.btn_status);

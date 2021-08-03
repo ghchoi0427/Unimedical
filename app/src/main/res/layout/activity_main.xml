@@ -38,15 +38,15 @@
             android:textSize="17dp" />
 
         <Button
-            android:id="@+id/btn_search_market"
+            android:id="@+id/btn_stock_status"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:background="@drawable/radius_theme"
-            android:drawableTop="@drawable/icon_hospital"
+            android:drawableTop="@drawable/icon_checklist"
             android:padding="10dp"
-            android:text="의료기기\n업체검색"
+            android:text="재고현황"
             android:textColor="@color/white"
             android:textSize="17dp" />
     </LinearLayout>
