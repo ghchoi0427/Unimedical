@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
     public ArrayList<Stock> stocks = new ArrayList<>();
+    private static final String PRODUCT_NAME = "품목명: ";
+    private static final String PRODUCT_QUANTITY = "재고수량: ";
 
     @NonNull
     @Override
@@ -70,8 +72,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         public void setItem(Stock stock) {
             try {
                 if (!stock.getPROD_CD().isEmpty()) {
-                    textStockName.setText(mapper(stock.getPROD_CD()));
-                    textStockCount.setText(stock.getBAL_QTY());
+                    textStockName.setText(String.format("%s%s", PRODUCT_NAME, mapper(stock.getPROD_CD())));
+                    textStockCount.setText(String.format("%s%s", PRODUCT_QUANTITY, stock.getBAL_QTY()));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
