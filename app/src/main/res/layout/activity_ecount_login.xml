@@ -15,8 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="회사 코드"
-            android:text="310316" />
+            android:hint="회사 코드" />
 
     </LinearLayout>
 
@@ -31,8 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="ID"
-            android:text="양예림" />
+            android:hint="ID" />
 
         <Button
             android:id="@+id/btn_ecount_login"
