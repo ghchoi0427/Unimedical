@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
+import java.io.IOException;
+
+import static com.sample.unimedical.util.FirebaseHandler.getPassword;
+
 public class MainActivity extends AppCompatActivity {
     Button btnSearchEngine;
     Button btnStock;
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AUTH = getIntent().getBooleanExtra("authentication",false);
+        AUTH = getIntent().getBooleanExtra("authentication", false);
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
         btnStock = findViewById(R.id.btn_stock_status);
@@ -34,17 +38,16 @@ public class MainActivity extends AppCompatActivity {
         btnStatus = findViewById(R.id.btn_status);
         btnUpdate = findViewById(R.id.btn_update);
 
-        btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
-
-        btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "StockActivity")));
-
-        btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
-
-        btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
-
-        btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
-
-        btnUpdate.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UpdateActivity.class)));
+        if (AUTH) {
+            btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
+            btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "StockActivity")));
+            btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
+            btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
+            btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
+            btnUpdate.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UpdateActivity.class)));
+        } else {
+            btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
+        }
     }
 
     @Override
