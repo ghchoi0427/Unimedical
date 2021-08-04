@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,8 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> {
             if (validatePassword(editPassword.getText().toString().trim())) {
-                startActivity(new Intent(this, MainActivity.class).putExtra("authentification", "true"));
+                startActivity(new Intent(this, MainActivity.class).putExtra("authentication", "true"));
                 finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
