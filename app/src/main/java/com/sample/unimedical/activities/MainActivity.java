@@ -18,11 +18,14 @@ public class MainActivity extends AppCompatActivity {
     Button btnUpdate;
 
     private long backKeyPressedTime = 0;
+    private String AUTH = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AUTH = getIntent().getStringExtra("authentication");
 
         btnSearchEngine = findViewById(R.id.btn_search_engine);
         btnStock = findViewById(R.id.btn_stock_status);
