@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class JsonFactory {
 
-    private static final String ECOUNT_API_KEY_TEST = "3e533429870154db68acac0e662825e193";
+    private static final String ECOUNT_API_KEY_TEST = "1c094684933044c359e060feed0db93b31";
     private static final String ECOUNT_API_KEY = "1952f97f0a12f48f690c708ff9b28fe0b1";
 
     private static final String WH_CD = "00001";
@@ -24,7 +24,7 @@ public class JsonFactory {
         return new JSONObject()
                 .put("COM_CODE", comCode)
                 .put("USER_ID", userID)
-                .put("API_CERT_KEY", ECOUNT_API_KEY_TEST)
+                .put("API_CERT_KEY", ECOUNT_API_KEY)
                 .put("LAN_TYPE", "ko-KR")
                 .put("ZONE", "BA");
     }
