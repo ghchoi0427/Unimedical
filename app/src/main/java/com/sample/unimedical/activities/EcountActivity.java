@@ -25,7 +25,6 @@ public class EcountActivity extends AppCompatActivity {
     EditText editComCode;
     EditText editUserID;
     Button ecountLogin;
-    TextView textEcountLoginResult;
 
     private String ZONE_CODE = "";
 
@@ -37,19 +36,22 @@ public class EcountActivity extends AppCompatActivity {
         editComCode = findViewById(R.id.edit_com_code);
         editUserID = findViewById(R.id.edit_user_id);
         ecountLogin = findViewById(R.id.btn_ecount_login);
-        textEcountLoginResult = findViewById(R.id.text_ecount_login_result);
 
         Thread loginThread = new Thread(() -> login());
         Thread zoneThread = new Thread(() -> zone());
 
         ecountLogin.setOnClickListener(view -> {
-            zoneThread.start();
             try {
-                zoneThread.join();
-            } catch (InterruptedException e) {
+                zoneThread.start();
+                try {
+                    zoneThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                loginThread.start();
+            } catch (IllegalThreadStateException e) {
                 e.printStackTrace();
             }
-            loginThread.start();
         });
 
     }
