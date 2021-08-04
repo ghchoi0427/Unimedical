@@ -33,6 +33,7 @@
                 android:ems="10"
                 android:hint="  병원명 검색"
                 android:inputType="textPersonName"
+                android:imeOptions="actionSearch"
                 android:textColor="#000000"
                 android:textColorHint="#6A404040" />
 
