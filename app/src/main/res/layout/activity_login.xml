@@ -48,6 +48,6 @@
         android:background="@color/transparent"
         android:textColor="#606060"
         android:text="비회원 로그인"
-        android:textSize="9sp" />
+        android:textSize="10sp" />
 
 </LinearLayout>
