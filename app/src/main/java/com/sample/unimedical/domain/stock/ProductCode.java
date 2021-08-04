@@ -100,12 +100,12 @@ public class ProductCode {
         productCodeMap.put("60045501", "[Stryker] oval bur 5.5 (60045501) [AQ]");
         productCodeMap.put("61035501", "[Linvatec] round bur 5.5 (61035501) [AQ]");
         productCodeMap.put("61045501", "[Linvatec] oval bur 5.5 (61045501) [AQ]");
-        productCodeMap.put("에코보조기-대우	", "k8102135 ecosplint 단상지 에코(보조기)대 우");
-        productCodeMap.put("에코보조기-대좌	", "k8102135 ecosplint 단상지 에코(보조기)대 좌");
-        productCodeMap.put("에코보조기-소우	", "k8102135 ecosplint 단상지 에코(보조기)소 우");
-        productCodeMap.put("에코보조기-소좌	", "k8102135 ecosplint 단상지 에코(보조기)소 좌");
-        productCodeMap.put("에코보조기-중우	", "k8102135 ecosplint 단상지 에코(보조기)중 우");
-        productCodeMap.put("에코보조기-중좌	", "k8102135 ecosplint 단상지 에코(보조기)중 좌");
+        productCodeMap.put("에코보조기-대우", "k8102135 ecosplint 단상지 에코(보조기)대 우");
+        productCodeMap.put("에코보조기-대좌", "k8102135 ecosplint 단상지 에코(보조기)대 좌");
+        productCodeMap.put("에코보조기-소우", "k8102135 ecosplint 단상지 에코(보조기)소 우");
+        productCodeMap.put("에코보조기-소좌", "k8102135 ecosplint 단상지 에코(보조기)소 좌");
+        productCodeMap.put("에코보조기-중우", "k8102135 ecosplint 단상지 에코(보조기)중 우");
+        productCodeMap.put("에코보조기-중좌", "k8102135 ecosplint 단상지 에코(보조기)중 좌");
         productCodeMap.put("ECOFINGER[대]", "k8102035 ECOSPLINT 손가락 [대]");
         productCodeMap.put("ECOFINGER[소]", "k8102035 ECOSPLINT 손가락 [소]");
         productCodeMap.put("ECOFINGER[중]", "k8102035 ECOSPLINT 손가락 [중]");
@@ -170,6 +170,9 @@ public class ProductCode {
         productCodeMap.put("K3010-QWS", "K8103435 QPLINT 단하지 단하지 통합 [소]");
         productCodeMap.put("K3010-QWSF", "K8103435 QPLINT 단하지 단하지 통합 [기능성 소]");
         productCodeMap.put("K3010-QWSL", "K8103435 QPLINT 단하지 단하지 [소 좌]");
+        productCodeMap.put("K3010-QWSLF", "K8103435 QPLINT 단하지 기능성 [소 좌]");
+        productCodeMap.put("K3010-QWSR", "K8103435 QPLINT 단하지 단하지 [소 우]");
+        productCodeMap.put("K3010-QWSRF", "K8103435 QPLINT 단하지 기능성 [소 우]");
         productCodeMap.put("K4010-QWLL", "K8103235 QPLINT 장하지 장하지 [대 좌]");
         productCodeMap.put("K4010-QWLR", "K8103235 QPLINT 장하지 장하지 [대 우]");
         productCodeMap.put("K4010-QWML", "K8103235 QPLINT 장하지 장하지 [중 좌]");
