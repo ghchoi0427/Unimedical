@@ -15,8 +15,8 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/icon_launcher_medi" />
+            android:layout_height="196dp"
+            app:srcCompat="@drawable/logo_main" />
     </LinearLayout>
 
     <LinearLayout
@@ -30,14 +30,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="numberPassword" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="로그인" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login_visitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/transparent"
+        android:textColor="#606060"
+        android:text="비회원 로그인"
+        android:textSize="9sp" />
 
 </LinearLayout>
