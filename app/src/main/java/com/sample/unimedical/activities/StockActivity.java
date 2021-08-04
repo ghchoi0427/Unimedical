@@ -2,6 +2,7 @@ package com.sample.unimedical.activities;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ public class StockActivity extends AppCompatActivity {
     RecyclerView recyclerViewStock;
     StockAdapter stockAdapter;
     Button btnStockUpdate;
+    private long backKeyPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,6 @@ public class StockActivity extends AppCompatActivity {
             clearStockList(stockAdapter);
             showItems();
         });
-
     }
 
     private void showItems() {
@@ -63,5 +64,19 @@ public class StockActivity extends AppCompatActivity {
 
     private void clearStockList(StockAdapter stockAdapter) {
         stockAdapter.clearItem();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, getString(R.string.msg_quit), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            finish();
+        }
     }
 }
