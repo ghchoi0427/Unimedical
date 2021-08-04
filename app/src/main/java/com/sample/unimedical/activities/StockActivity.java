@@ -1,8 +1,6 @@
 package com.sample.unimedical.activities;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,10 +40,9 @@ public class StockActivity extends AppCompatActivity {
 
         btnStockUpdate = findViewById(R.id.btn_stock_update);
 
-        showItems();
-        stockAdapter.notifyDataSetChanged();
         btnStockUpdate.setOnClickListener(v -> {
-
+            clearStockList(stockAdapter);
+            showItems();
         });
 
     }
@@ -55,11 +52,16 @@ public class StockActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 stockAdapter.addItems(getProductResults(sendEcountStockRequest(ZONE_CODE, SESSION_ID)));
-                Log.d("tester", stockAdapter.stocks.get(0).getPROD_CD() + "");
+                runOnUiThread(() -> stockAdapter.notifyDataSetChanged());
+
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
         }).start();
 
+    }
+
+    private void clearStockList(StockAdapter stockAdapter) {
+        stockAdapter.clearItem();
     }
 }

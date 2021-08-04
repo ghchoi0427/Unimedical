@@ -1,6 +1,5 @@
 package com.sample.unimedical.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,14 +45,16 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
     }
 
     public void addItems(JSONArray jsonArray) throws JSONException {
-
         for (int i = 0; i < jsonArray.length(); i++) {
             Stock stock = new Stock();
             stock.setPROD_CD(jsonArray.getJSONObject(i).getString("PROD_CD"));
             stock.setBAL_QTY(jsonArray.getJSONObject(i).getString("BAL_QTY"));
-
             stocks.add(stock);
         }
+    }
+
+    public void clearItem() {
+        stocks.clear();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,14 +63,19 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View stockView) {
             super(stockView);
-            textStockCount = stockView.findViewById(R.id.text_stock_name);
+            textStockName = stockView.findViewById(R.id.text_stock_name);
             textStockCount = stockView.findViewById(R.id.text_stock_count);
         }
 
         public void setItem(Stock stock) {
-
-            textStockName.setText(mapper(stock.getPROD_CD()));
-            textStockCount.setText(stock.getBAL_QTY());
+            try {
+                if (!stock.getPROD_CD().isEmpty()) {
+                    textStockName.setText(mapper(stock.getPROD_CD()));
+                    textStockCount.setText(stock.getBAL_QTY());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         private String mapper(String key) {
