@@ -9,10 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sample.unimedical.R;
 
-import java.io.IOException;
-
-import static com.sample.unimedical.util.FirebaseHandler.getPassword;
-
 public class MainActivity extends AppCompatActivity {
     Button btnSearchEngine;
     Button btnStock;
