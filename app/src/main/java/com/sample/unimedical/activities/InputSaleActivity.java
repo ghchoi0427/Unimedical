@@ -3,6 +3,7 @@ package com.sample.unimedical.activities;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 import static com.sample.unimedical.util.JsonFactory.createSaleItem;
 import static com.sample.unimedical.util.RequestSender.sendEcountInputSaleRequest;
+import static com.sample.unimedical.util.ResponseHandler.isSuccess;
 
 public class InputSaleActivity extends AppCompatActivity {
 
@@ -90,7 +92,10 @@ public class InputSaleActivity extends AppCompatActivity {
 
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
-                String response = sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, jsonArray);
+                JSONObject response = new JSONObject(sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, jsonArray));
+                if (isSuccess((JSONObject) response)) {
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
