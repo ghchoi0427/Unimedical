@@ -349,10 +349,6 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     @Override
     public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
-        onFinishReverseGeoCoding("Fail");
-    }
-
-    private void onFinishReverseGeoCoding(String result) {
 
     }
 
