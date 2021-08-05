@@ -64,11 +64,11 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
         public void setItem(JSONObject saleItem) {
             try {
                 JSONObject bulkDatas = (JSONObject) saleItem.get("BulkDatas");
-                textSaleItemCode.setText("품목코드: " + bulkDatas.getString("PROD_CD"));
-                textSaleItemQuantity.setText("수량: " + bulkDatas.getString("QTY"));
-                textSaleItemUploadSerialNo.setText("순번: " + bulkDatas.getString("UPLOAD_SER_NO"));
-                textSaleItemRemarks.setText("적요: " + bulkDatas.getString("REMARKS"));
-                textSaleItemPrice.setText("가격: " + bulkDatas.getString("PRICE"));
+                textSaleItemCode.setText(String.format("품목코드: %s", bulkDatas.getString("PROD_CD")));
+                textSaleItemQuantity.setText(String.format("수량: %s", bulkDatas.getString("QTY")));
+                textSaleItemUploadSerialNo.setText(String.format("순번: %s", bulkDatas.getString("UPLOAD_SER_NO")));
+                textSaleItemRemarks.setText(String.format("적요: %s", bulkDatas.getString("REMARKS")));
+                textSaleItemPrice.setText(String.format("가격: %s", bulkDatas.getString("PRICE")));
 
             } catch (Exception e) {
 
