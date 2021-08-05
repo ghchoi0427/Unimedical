@@ -20,9 +20,9 @@ public class FirebaseHandler {
 
         FileOutputStream fos = context.openFileOutput(localCustomerFileName, Context.MODE_PRIVATE);
 
-        final long ONE_MEGABYTE = 1024 * 1024;
+        final long TEN_MEGABYTE = 1024 * 1024 * 10;
 
-        customerRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+        customerRef.getBytes(TEN_MEGABYTE).addOnSuccessListener(bytes -> {
             try {
                 fos.write(bytes);
                 fos.flush();
@@ -30,7 +30,8 @@ public class FirebaseHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).addOnCompleteListener(v -> Toast.makeText(context, "정보 업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(v -> Toast.makeText(context, "정보 업데이트 실패", Toast.LENGTH_SHORT).show())
+                .addOnCompleteListener(v -> Toast.makeText(context, "정보 업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show());
     }
 
     public static void downloadHospitalFile(Context context, String localHospitalFileName, String hospitalFileName) throws FileNotFoundException {
