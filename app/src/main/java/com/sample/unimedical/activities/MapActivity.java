@@ -76,15 +76,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         mapView.setCurrentLocationEventListener(this);
 
         searchHospital = findViewById(R.id.edit_search_hospital);
-
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
         btnSearchFromMap = findViewById(R.id.btn_search_from_map);
         btnGPS = findViewById(R.id.button_gps);
+
         ImageButton btnZoomIn = findViewById(R.id.btn_zoom_in);
         ImageButton btnZoomOut = findViewById(R.id.btn_zoom_out);
 
         progressBar = findViewById(R.id.progress_bar_search);
-
 
         btnSearchHospital.setOnClickListener(view -> new Thread(() -> {
             try {
