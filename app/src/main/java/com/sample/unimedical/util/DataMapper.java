@@ -213,4 +213,51 @@ public class DataMapper {
 
         return productCodeMap;
     }
+
+    public static String getManagerCode(String key) {
+
+        HashMap<String, String> managerMap = new HashMap<>();
+        managerMap.put("임재만 대표", "00001");
+        managerMap.put("김성환 부장", "00009");
+        managerMap.put("임의석 이사", "00010");
+        managerMap.put("조한원 대리", "00016");
+        managerMap.put("거래중지", "00021");
+        managerMap.put("대리점", "00022");
+        managerMap.put("임주안 대리", "00025");
+        managerMap.put("한윤성 차장", "00026");
+        managerMap.put("정아사달 과장", "00028");
+        managerMap.put("박용 사원", "00029");
+        managerMap.put("관리부", "00031");
+        managerMap.put("한동진 과장", "00032");
+        managerMap.put("홍종휘 주임", "00034");
+        managerMap.put("단타", "00035");
+        managerMap.put("★★★★", "00036");
+        managerMap.put("준종합★★★★", "00037");
+        managerMap.put("영업관리부", "00038");
+        managerMap.put("병원급", "00043");
+        managerMap.put("영업팀", "00046");
+        managerMap.put("영업팀-수도권", "00047");
+        managerMap.put("영업팀-강원도", "00048");
+        managerMap.put("영업팀-충청도", "00049");
+        managerMap.put("영업팀-전라도", "00050");
+        managerMap.put("영업팀-제주도", "00051");
+        managerMap.put("영업팀-경상도", "00052");
+        managerMap.put("영업팀-서울", "00053");
+        managerMap.put("방문중지", "00054");
+        managerMap.put("박윤호 과장", "00056");
+        managerMap.put("현준범 주임", "00057");
+        managerMap.put("영업팀-수도권(박윤호 과장)", "00058");
+        managerMap.put("영업팀-수도권(현준범 주임)", "00059");
+        managerMap.put("영업팀-서울(박윤호 과장)", "00060");
+        managerMap.put("영업팀-서울(현준범 주임)", "00061");
+        managerMap.put("서민주 주임", "00065");
+        managerMap.put("김학준", "00067");
+        managerMap.put("김종호 실습생", "00068");
+        managerMap.put("발주정지", "00072");
+        managerMap.put("강민욱 주임", "00075");
+        managerMap.put("이수진 실습생", "00076");
+        managerMap.put("유준서 주임", "00077");
+        return managerMap.get(key);
+
+    }
 }
