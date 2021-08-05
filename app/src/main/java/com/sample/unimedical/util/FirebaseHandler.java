@@ -30,7 +30,7 @@ public class FirebaseHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).addOnCompleteListener(v -> Toast.makeText(context, "거래처 정보 업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show());
+        }).addOnCompleteListener(v -> Toast.makeText(context, "정보 업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show());
     }
 
     public static void downloadHospitalFile(Context context, String localHospitalFileName, String hospitalFileName) throws FileNotFoundException {
