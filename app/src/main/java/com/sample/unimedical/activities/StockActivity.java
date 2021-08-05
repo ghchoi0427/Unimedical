@@ -19,8 +19,8 @@ import static com.sample.unimedical.util.RequestSender.sendEcountStockRequest;
 import static com.sample.unimedical.util.ResponseHandler.getProductResults;
 
 public class StockActivity extends AppCompatActivity {
-    private String SESSION_ID = "";
-    private String ZONE_CODE = "";
+    private String SESSION_ID;
+    private String ZONE_CODE;
     RecyclerView recyclerViewStock;
     StockAdapter stockAdapter;
     Button btnStockUpdate;
