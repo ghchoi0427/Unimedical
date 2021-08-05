@@ -48,7 +48,6 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.DeviceSearchActivity" />
         <activity android:name=".activities.MapActivity" />
-        <activity android:name=".activities.MarketSearchActivity" />
         <activity android:name=".activities.InputSaleActivity" />
         <activity android:name=".activities.EcountActivity" />
         <activity android:name=".activities.StatusActivity" />
