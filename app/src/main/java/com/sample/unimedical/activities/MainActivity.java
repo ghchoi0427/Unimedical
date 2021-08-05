@@ -10,29 +10,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sample.unimedical.R;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnSearchEngine;
-    Button btnStock;
-    Button btnInputSale;
-    Button btnMap;
-    Button btnStatus;
-    Button btnUpdate;
 
     private long backKeyPressedTime = 0;
-    private boolean AUTH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AUTH = getIntent().getBooleanExtra("authentication", false);
+        boolean AUTH = getIntent().getBooleanExtra("authentication", false);
 
-        btnSearchEngine = findViewById(R.id.btn_search_engine);
-        btnStock = findViewById(R.id.btn_stock_status);
-        btnInputSale = findViewById(R.id.btn_input_sales);
-        btnMap = findViewById(R.id.btn_map);
-        btnStatus = findViewById(R.id.btn_status);
-        btnUpdate = findViewById(R.id.btn_update);
+        Button btnSearchEngine = findViewById(R.id.btn_search_engine);
+        Button btnStock = findViewById(R.id.btn_stock_status);
+        Button btnInputSale = findViewById(R.id.btn_input_sales);
+        Button btnMap = findViewById(R.id.btn_map);
+        Button btnStatus = findViewById(R.id.btn_status);
+        Button btnUpdate = findViewById(R.id.btn_update);
 
         if (AUTH) {
             btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
