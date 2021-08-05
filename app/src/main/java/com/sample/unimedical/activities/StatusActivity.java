@@ -60,7 +60,7 @@ public class StatusActivity extends AppCompatActivity {
         File statFile = new File(getApplicationContext().getFilesDir() + "/" + FILE_NAME);
         if (!statFile.exists()) {
             try {
-                FirebaseHandler.downloadCustomerFile(getApplicationContext(), FILE_NAME, FILE_NAME);
+                FirebaseHandler.downloadFile(getApplicationContext(), FILE_NAME, FILE_NAME);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
