@@ -70,8 +70,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
                 List<String> list = status.getAllAttributes();
                 for (String s : list) {
 
-                    prefixBuilder.append(s.split("/")[0] + "\n");
-                    contentBuilder.append(s.split("/")[1] + "\n");
+                    prefixBuilder.append(s.split("/")[0]).append("\n");
+                    contentBuilder.append(s.split("/")[1]).append("\n");
                 }
 
                 textStatusPrefix.setText(prefixBuilder.toString());
