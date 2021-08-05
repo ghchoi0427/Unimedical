@@ -51,13 +51,11 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private static int HOSPITAL_SCALE = 1;
 
     private MapView mapView;
-    EditText searchHospital;
-    Button btnSearchHospital;
-    ImageButton btnGPS;
-    ImageButton btnZoomIn;
-    ImageButton btnZoomOut;
-    Button btnSearchFromMap;
-    ProgressBar progressBar;
+    private EditText searchHospital;
+    private Button btnSearchHospital;
+    private ImageButton btnGPS;
+    private Button btnSearchFromMap;
+    private ProgressBar progressBar;
 
     private int GPS_MODE = 0;
     private int CURRENT_ZOOM_LEVEL = 7;
@@ -65,7 +63,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
     private long backKeyPressedTime = 0;
 
-    MapPointBounds mapPointBounds;
+    private MapPointBounds mapPointBounds;
 
 
     @Override
@@ -82,8 +80,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         btnSearchHospital = findViewById(R.id.btn_search_hospital);
         btnSearchFromMap = findViewById(R.id.btn_search_from_map);
         btnGPS = findViewById(R.id.button_gps);
-        btnZoomIn = findViewById(R.id.btn_zoom_in);
-        btnZoomOut = findViewById(R.id.btn_zoom_out);
+        ImageButton btnZoomIn = findViewById(R.id.btn_zoom_in);
+        ImageButton btnZoomOut = findViewById(R.id.btn_zoom_out);
 
         progressBar = findViewById(R.id.progress_bar_search);
 
