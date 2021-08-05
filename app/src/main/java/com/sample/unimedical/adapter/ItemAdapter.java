@@ -53,19 +53,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName;
-        TextView primaryCode;
-        TextView midClass;
-        TextView midCode;
-        TextView size;
-        TextView unit;
-        TextView maker;
-        TextView material;
-        TextView vendor;
-        TextView priceMax;
-        TextView update;
-        TextView validFrom;
-        TextView remark;
+        private final TextView itemName;
+        private final TextView primaryCode;
+        private final TextView midClass;
+        private final TextView midCode;
+        private final TextView size;
+        private final TextView unit;
+        private final TextView maker;
+        private final TextView material;
+        private final TextView vendor;
+        private final TextView priceMax;
+        private final TextView update;
+        private final TextView validFrom;
+        private final TextView remark;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,7 +83,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             update = itemView.findViewById(R.id.text_update);
             validFrom = itemView.findViewById(R.id.text_validfrom);
             remark = itemView.findViewById(R.id.text_remark);
-
         }
 
         public void setItem(Device device) {
