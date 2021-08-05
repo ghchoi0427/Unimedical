@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import static com.sample.unimedical.util.DataMapper.getManagerCode;
 import static com.sample.unimedical.util.JsonFactory.createSaleItem;
 import static com.sample.unimedical.util.RequestSender.sendEcountInputSaleRequest;
 import static com.sample.unimedical.util.ResponseHandler.isSuccess;
@@ -73,7 +74,7 @@ public class InputSaleActivity extends AppCompatActivity {
             try {
                 JSONObject individualSaleItem = createSaleItem(
                         uploadSerialNumber.getText().toString(),
-                        productCode.getText().toString(),
+                        getManagerCode(productCode.getText().toString()),
                         remarks.getText().toString(),
                         quantity.getText().toString(),
                         price.getText().toString());
