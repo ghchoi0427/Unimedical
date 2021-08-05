@@ -1,7 +1,5 @@
 package com.sample.unimedical.util;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,8 +47,4 @@ public class ResponseHandler {
         return BulkDatas.getString("PROD_CD");
     }
 
-    public static String getProductQuantity(JSONObject jsonObject) throws JSONException {
-        JSONObject BulkDatas = (JSONObject) jsonObject.get("BulkDatas");
-        return BulkDatas.getString("QTY");
-    }
 }

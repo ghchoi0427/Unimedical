@@ -25,30 +25,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XMLHandler {
 
-    public static List<Hospital> parseXML(String xml) throws ParserConfigurationException, IOException, SAXException {    //비거래처
-
-        List<Hospital> newList = new ArrayList<>();
-
-        InputSource is = new InputSource(new StringReader(xml));
-        Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
-
-        NodeList nodeList = document.getElementsByTagName("item");
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-
-            Element nodeElement = (Element) nodeList.item(i);
-            Hospital hospital = new Hospital();
-            try {
-                setHospitalFields(nodeElement, hospital);
-                newList.add(hospital);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return newList;
-    }
-
     public static List<Hospital> parseSelectiveXML(String xml, String hospitalName) throws ParserConfigurationException, IOException, SAXException {
         List<Hospital> newList = new ArrayList<>();
 
