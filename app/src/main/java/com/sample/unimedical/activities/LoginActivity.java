@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editPassword;
     Button btnLogin;
     Button btnVisitorLogin;
-    String password = "1234";
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnVisitorLogin = findViewById(R.id.btn_login_visitor);
         editPassword = findViewById(R.id.edit_login_code);
-
+        password = getString(R.string.pw);
         btnLogin.setOnClickListener(v -> {
             if (validatePassword(editPassword.getText().toString().trim())) {
                 startActivity(new Intent(this, MainActivity.class).putExtra("authentication", true));
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btnVisitorLogin.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class).putExtra("authentification", false));
+            startActivity(new Intent(this, MainActivity.class).putExtra("authentication", false));
             finish();
         });
 
