@@ -16,9 +16,14 @@ import com.google.gson.Gson;
 import com.sample.unimedical.R;
 import com.sample.unimedical.adapter.StatusAdapter;
 import com.sample.unimedical.domain.status.StatusList;
+import com.sample.unimedical.util.FirebaseHandler;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static com.sample.unimedical.util.XMLHandler.readTextFile;
 
 public class StatusActivity extends AppCompatActivity {
 
@@ -51,15 +56,21 @@ public class StatusActivity extends AppCompatActivity {
         cityAdapter = ArrayAdapter.createFromResource(this, R.array.city, android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(cityAdapter);
 
+
+        File statFile = new File(getApplicationContext().getFilesDir() + "/" + FILE_NAME);
+        if (!statFile.exists()) {
+            try {
+                FirebaseHandler.downloadCustomerFile(getApplicationContext(), FILE_NAME, FILE_NAME);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CITY_NAME = parent.getItemAtPosition(position).toString();
-                try {
-                    processResponse(getJsonFromAssets(getApplicationContext()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                processResponse(getJsonFromAssets(getApplicationContext()));
             }
 
             @Override
@@ -69,15 +80,11 @@ public class StatusActivity extends AppCompatActivity {
         });
     }
 
-    private String getJsonFromAssets(Context context) throws IOException {
+    private String getJsonFromAssets(Context context) {
         String jsonString;
         try {
-            InputStream is = context.getAssets().open(FILE_NAME);
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-
-            jsonString = new String(buffer, "UTF-8");
+            InputStream is = context.openFileInput(FILE_NAME);
+            jsonString = readTextFile(is);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
