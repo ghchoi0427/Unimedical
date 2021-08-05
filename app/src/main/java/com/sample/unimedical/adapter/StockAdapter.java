@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
-import com.sample.unimedical.domain.stock.ProductCode;
 import com.sample.unimedical.domain.stock.Stock;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
+import static com.sample.unimedical.util.DataMapper.getProductNameByCode;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
     public ArrayList<Stock> stocks = new ArrayList<>();
@@ -81,8 +82,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         }
 
         private String mapper(String key) {
-            ProductCode productCode = new ProductCode();
-            return productCode.getProductCodeMap().get(key);
+            return getProductNameByCode().get(key);
         }
     }
 }
