@@ -48,10 +48,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         this.devices = devices;
     }
 
-    public Device getItem(int position) {
-        return devices.get(position);
-    }
-
     public void clearItem() {
         devices.clear();
     }
@@ -94,22 +90,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
             try {
                 itemName.setText(device.getProductName());
-                primaryCode.setText("코드 : "+ device.getPrimaryCode());
-                midClass.setText("중분류 : "+ device.getMidClass());
-                midCode.setText("중분류코드 : "+ device.getMidCode() + "");
-                size.setText("규격 : "+ device.getSize());
-                unit.setText("단위 : "+ device.getUnit());
-                maker.setText("제조회사 : "+ device.getMaker());
-                material.setText("재질 : "+ device.getMaterial());
-                vendor.setText("수입업소 : "+ device.getVendor());
-                priceMax.setText("상한금액 : "+ device.getPriceMax());
-                update.setText("최초등재일 : "+ device.getUpdate());
-                validFrom.setText("적용일자 : "+ device.getValidFrom());
-                remark.setText("비고 : "+ device.getRemark());
+                primaryCode.setText(String.format("코드 : %s", device.getPrimaryCode()));
+                midClass.setText(String.format("중분류 : %s", device.getMidClass()));
+                midCode.setText(String.format("중분류코드 : %d", device.getMidCode()));
+                size.setText(String.format("규격 : %s", device.getSize()));
+                unit.setText(String.format("단위 : %s", device.getUnit()));
+                maker.setText(String.format("제조회사 : %s", device.getMaker()));
+                material.setText(String.format("재질 : %s", device.getMaterial()));
+                vendor.setText(String.format("수입업소 : %s", device.getVendor()));
+                priceMax.setText(String.format("상한금액 : %s", device.getPriceMax()));
+                update.setText(String.format("최초등재일 : %s", device.getUpdate()));
+                validFrom.setText(String.format("적용일자 : %s", device.getValidFrom()));
+                remark.setText(String.format("비고 : %s", device.getRemark()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
         }
     }
