@@ -31,8 +31,7 @@ public class RequestSender {
     private static final String URL_STOCK = "InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=";
 
     public static String sendEcountZoneRequest(String comCode) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + URL_SUFFIX + URL_ZONE); /*URL*/
-        URL url = new URL(urlBuilder.toString());
+        URL url = new URL(/*URL*/URL_PREFIX + URL_SUFFIX + URL_ZONE);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
@@ -64,8 +63,7 @@ public class RequestSender {
     }
 
     public static String sendEcountLoginRequest(String zoneCode, String comCode, String userID) throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_LOGIN); /*URL*/
-        URL url = new URL(urlBuilder.toString());
+        URL url = new URL(/*URL*/URL_PREFIX + zoneCode + URL_SUFFIX + URL_LOGIN);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
@@ -92,8 +90,7 @@ public class RequestSender {
     }
 
     public static String sendEcountInputSaleRequest(String zoneCode, String SESSION_ID, JSONArray jsonArray) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_INPUTSALE + SESSION_ID); /*URL*/
-        URL url = new URL(urlBuilder.toString());
+        URL url = new URL(/*URL*/URL_PREFIX + zoneCode + URL_SUFFIX + URL_INPUTSALE + SESSION_ID);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
@@ -126,8 +123,7 @@ public class RequestSender {
     }
 
     public static String sendEcountStockRequest(String zoneCode, String SESSION_ID) throws IOException, JSONException {
-        StringBuilder urlBuilder = new StringBuilder(URL_PREFIX + zoneCode + URL_SUFFIX + URL_STOCK + SESSION_ID); /*URL*/
-        URL url = new URL(urlBuilder.toString());
+        URL url = new URL(/*URL*/URL_PREFIX + zoneCode + URL_SUFFIX + URL_STOCK + SESSION_ID);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-type", "application/json");
