@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Unimedical</string>
+    <string name="app_name">메디닷컴</string>
     <string name="hint_input_keyword">검색어를 입력하세요</string>
     <string name="search">search</string>
     <string name="sub_title">유엔아이메디컬</string>
