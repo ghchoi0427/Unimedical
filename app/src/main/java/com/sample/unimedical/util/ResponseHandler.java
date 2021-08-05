@@ -47,4 +47,10 @@ public class ResponseHandler {
         return BulkDatas.getString("PROD_CD");
     }
 
+    public static boolean isSuccess(JSONObject jsonObject) throws JSONException {
+        JSONObject Data = (JSONObject) jsonObject.get("Data");
+        JSONObject ResultDetails = (JSONObject) ((JSONArray) Data.get("ResultDetails")).get(0);
+        return (boolean) ResultDetails.get("IsSuccess");
+    }
+
 }
