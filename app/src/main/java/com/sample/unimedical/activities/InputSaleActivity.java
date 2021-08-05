@@ -97,9 +97,7 @@ public class InputSaleActivity extends AppCompatActivity {
                 if (isSuccess((JSONObject) response)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
         }).start());
