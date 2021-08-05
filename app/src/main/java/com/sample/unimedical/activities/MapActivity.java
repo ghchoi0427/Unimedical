@@ -294,14 +294,14 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         return list.isEmpty();
     }
 
-    private String setHospitalInfo(Hospital hospital) {
+    private String getHospitalInfo(Hospital hospital) {
         return hospital.getYadmNm() + "/" + hospital.getTelno();
     }
 
     private MapPOIItem setNonClientMarker(Hospital hospital, double Xpos, double Ypos, int hospitalScale) {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Ypos, Xpos);
         MapPOIItem mapPOIItem = new MapPOIItem();
-        mapPOIItem.setItemName(setHospitalInfo(hospital));
+        mapPOIItem.setItemName(getHospitalInfo(hospital));
         mapPOIItem.setMapPoint(mapPoint);
 
         switch (hospitalScale) {
@@ -329,7 +329,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         for (MapPOIItem item : list) {
             mapView.addPOIItem(item);
             mapView.selectPOIItem(item, true);
-            mapView.setMapCenterPoint(item.getMapPoint(), true);
+            //mapView.setMapCenterPoint(item.getMapPoint(), true);
         }
     }
 
