@@ -65,7 +65,7 @@ public class ExcelHandler extends AppCompatActivity {
         return mapPOIItem;
     }
 
-    private static boolean isFileExist(Context context, String filename) throws IOException {
+    public static boolean isFileExist(Context context, String filename) throws IOException {
         return context.openFileInput(filename).available() > 0;
     }
 
