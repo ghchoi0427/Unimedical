@@ -20,11 +20,11 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 public class DeviceSearchActivity extends AppCompatActivity {
-    EditText editText;
-    ImageButton searchButton;
-    RecyclerView recyclerView;
-    ItemAdapter adapter;
-    ItemList itemList;
+    private EditText editText;
+    private ImageButton searchButton;
+    private RecyclerView recyclerView;
+    private ItemAdapter adapter;
+    private ItemList itemList;
 
 
     private static final String FILE_NAME = "device_data_0712.json";
