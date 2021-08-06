@@ -75,10 +75,7 @@ public class ExcelHandler extends AppCompatActivity {
 
 
     private static boolean validateHospital(String hospitalCell) {
-        if (hospitalCell.contains("폐업") || hospitalCell.contains("거래중지") || hospitalCell.contains("(주)") || hospitalCell.contains("주식회사") || hospitalCell.equals("")) {
-            return false;
-        }
-        return true;
+        return !hospitalCell.contains("폐업") && !hospitalCell.contains("거래중지") && !hospitalCell.contains("(주)") && !hospitalCell.contains("주식회사") && !hospitalCell.equals("");
     }
 
     private static boolean validateLocation(String hospitalCell, String sidoCodeName) {
