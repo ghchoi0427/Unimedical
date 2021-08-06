@@ -28,10 +28,10 @@ public class ExcelHandler extends AppCompatActivity {
     public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
         try {
             InputStream is;
-            if (context.openFileInput(context.getString(R.string.local_customer_file_name)).available() <= 0) {
-                is = context.getAssets().open(context.getString(R.string.local_customer_file_name));
-            } else {
+            if (isFileExist(context, context.getString(R.string.local_customer_file_name))) {
                 is = context.openFileInput(context.getString(R.string.local_customer_file_name));
+            } else {
+                is = context.getAssets().open(context.getString(R.string.local_customer_file_name));
             }
             Workbook wb = Workbook.getWorkbook(is);
 
@@ -63,6 +63,10 @@ public class ExcelHandler extends AppCompatActivity {
         }
 
         return mapPOIItem;
+    }
+
+    private static boolean isFileExist(Context context, String filename) throws IOException {
+        return context.openFileInput(filename).available() > 0;
     }
 
     private static String setHospitalInfo(Hospital hospital) {
