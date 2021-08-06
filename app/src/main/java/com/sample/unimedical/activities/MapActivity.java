@@ -224,7 +224,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
             MapPOIItem mapPOIItem;
             setHospitalScale(hospital.getClCd());
             mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
-            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
+            ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
             newList.add(mapPOIItem);
         }
 
@@ -262,7 +262,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
 
             }
             mapPOIItem = setNonClientMarker(hospital, Double.parseDouble(hospital.getXPos()), Double.parseDouble(hospital.getYPos()), HOSPITAL_SCALE);
-            mapPOIItem = ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
+            ExcelHandler.setContract(hospital, mapPOIItem, getApplicationContext());
 
             newList.add(mapPOIItem);
         }

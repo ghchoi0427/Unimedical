@@ -25,7 +25,7 @@ public class ExcelHandler extends AppCompatActivity {
     private static final int colHospitalLocation = 3;
     private static final int colHospitalName = 4;
 
-    public static MapPOIItem setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
+    public static void setContract(Hospital hospital, MapPOIItem mapPOIItem, Context context) {
         try {
             InputStream is;
             if (isFileExist(context, context.getString(R.string.local_customer_file_name))) {
@@ -61,8 +61,6 @@ public class ExcelHandler extends AppCompatActivity {
         } catch (IOException | BiffException e) {
             e.printStackTrace();
         }
-
-        return mapPOIItem;
     }
 
     public static boolean isFileExist(Context context, String filename) throws IOException {
