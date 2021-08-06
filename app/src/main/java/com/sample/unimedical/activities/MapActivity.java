@@ -387,6 +387,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
                     calloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.GONE);
                     ((TextView) calloutBalloon.findViewById(R.id.bal_first)).setText(poiItem.getItemName().split("/")[0]);
                     ((TextView) calloutBalloon.findViewById(R.id.bal_second)).setText(poiItem.getItemName().split("/")[1]);
+                    ((TextView) calloutBalloon.findViewById(R.id.bal_third)).setText("");
                 }
                 if (poiItem.getItemName().split("/").length == 4) {
                     calloutBalloon.findViewById(R.id.bal_fourth).setVisibility(View.VISIBLE);
