@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnMap = findViewById(R.id.btn_map);
         Button btnStatus = findViewById(R.id.btn_status);
         Button btnUpdate = findViewById(R.id.btn_update);
+        Button btnTutorial = findViewById(R.id.btn_tutorial);
 
         if (AUTH) {
             btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
             btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
             btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
             btnUpdate.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UpdateActivity.class)));
+            btnTutorial.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TutorialActivity.class)));
         } else {
             btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
+            btnTutorial.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TutorialActivity.class)));
         }
     }
 
