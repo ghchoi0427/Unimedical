@@ -37,23 +37,25 @@ public class ExcelHandler extends AppCompatActivity {
 
             Sheet sheet = wb.getSheet(0);
 
-            if (sheet != null) {
-                int colTotal = sheet.getColumns();
-                int rowTotal = sheet.getColumn(colTotal - 1).length;
+            if (sheet == null) {
+                return;
+            }
 
-                for (int row = rowIndexStart; row < rowTotal; row++) {
+            int colTotal = sheet.getColumns();
+            int rowTotal = sheet.getColumn(colTotal - 1).length;
 
-                    String hospitalName = sheet.getCell(colHospitalName, row).getContents();
-                    String hospitalLocation = sheet.getCell(colHospitalLocation, row).getContents();
-                    if (validateHospital(hospitalName) && validateLocation(hospitalLocation, hospital.getSidoCdNm())) {
-                        if (hospitalName.equals(hospital.getYadmNm())) {
-                            hospital.setManager(sheet.getCell(1, row).getContents());
-                            hospital.setDevice(sheet.getCell(9, row).getContents());
+            for (int row = rowIndexStart; row < rowTotal; row++) {
 
-                            mapPOIItem.setItemName(setHospitalInfo(hospital));
-                            mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
-                            mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-                        }
+                String hospitalName = sheet.getCell(colHospitalName, row).getContents();
+                String hospitalLocation = sheet.getCell(colHospitalLocation, row).getContents();
+                if (validateHospital(hospitalName) && validateLocation(hospitalLocation, hospital.getSidoCdNm())) {
+                    if (hospitalName.equals(hospital.getYadmNm())) {
+                        hospital.setManager(sheet.getCell(1, row).getContents());
+                        hospital.setDevice(sheet.getCell(9, row).getContents());
+
+                        mapPOIItem.setItemName(setHospitalInfo(hospital));
+                        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
+                        mapPOIItem.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                     }
                 }
             }
