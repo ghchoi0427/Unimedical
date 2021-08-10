@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#03A9F4"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
@@ -30,10 +30,10 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableTop="@drawable/icon_injection"
             android:text="의료기기\n검색엔진"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="17dp" />
 
         <Button
@@ -42,11 +42,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableTop="@drawable/icon_checklist"
             android:padding="10dp"
-            android:text="재고현황"
-            android:textColor="@color/white"
+            android:text="이카운트\n재고현황"
+            android:textColor="@color/black"
             android:textSize="17dp" />
     </LinearLayout>
 
@@ -66,11 +66,11 @@
             android:layout_marginHorizontal="8dp"
 
             android:layout_weight="1"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableTop="@drawable/icon_map"
             android:paddingTop="15dp"
             android:text="병원찾기\n주변검색"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="17dp" />
 
         <Button
@@ -79,11 +79,11 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableTop="@drawable/icon_database"
             android:paddingTop="15dp"
-            android:text="판매입력"
-            android:textColor="@color/white"
+            android:text="이카운트\n판매입력"
+            android:textColor="@color/black"
             android:textSize="17dp" />
 
     </LinearLayout>
@@ -92,17 +92,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableLeft="@drawable/icon_salesman"
             android:paddingHorizontal="110dp"
             android:text="영업현황"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -111,17 +112,18 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:drawableLeft="@drawable/icon_update"
             android:paddingHorizontal="110dp"
             android:text="업데이트"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -136,10 +138,10 @@
             android:id="@+id/btn_tutorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_theme"
+            android:background="@color/transparent"
             android:paddingHorizontal="110dp"
             android:text="교육영상"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="17sp" />
     </LinearLayout>
 
