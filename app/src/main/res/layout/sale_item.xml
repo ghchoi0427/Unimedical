@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="4dp"
-        android:background="@drawable/radius_dark_green"
+        android:background="@color/white"
         android:orientation="vertical">
 
 
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="TextView"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/text_sale_item_code"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="TextView"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/text_sale_item_quantity"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="TextView"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/text_item_price"
