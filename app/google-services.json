@@ -1,18 +1,35 @@
 {
   "project_info": {
     "project_number": "358861986527",
+    "firebase_url": "https://medi-5dbf9-default-rtdb.firebaseio.com",
     "project_id": "medi-5dbf9",
     "storage_bucket": "medi-5dbf9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:358861986527:android:ff937df5ecfa999a45676a",
+        "mobilesdk_app_id": "1:358861986527:android:4de692e9142d1ea345676a",
         "android_client_info": {
           "package_name": "com.sample.unimedical"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "358861986527-5ns94aqqriqhko3btrj8lc5tibmgj8o2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sample.unimedical",
+            "certificate_hash": "4a7c3d0d933fc53aef32c61bd44cd43c1ea80776"
+          }
+        },
+        {
+          "client_id": "358861986527-b5iagbiibmuue2311ht45jimknc706t2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sample.unimedical",
+            "certificate_hash": "cce49d9885eb0d7e25437f15aada5e5a7657eab6"
+          }
+        },
         {
           "client_id": "358861986527-bq0vabpl1ufpepaarlkmd8u3lvvddbl7.apps.googleusercontent.com",
           "client_type": 3
