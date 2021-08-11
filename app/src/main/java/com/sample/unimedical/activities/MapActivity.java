@@ -68,6 +68,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     private MapPointBounds mapPointBounds;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,6 +210,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void bindSearchItems(String hospitalName) throws Exception {
 
         if (checkEmptySearch(hospitalName)) {
@@ -239,6 +241,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void bindLocationSearchItems(MapPointBounds mapPointBounds) throws Exception {
 
         String hospitalXml = readHospitalList(getApplicationContext());
@@ -270,6 +273,7 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
 
         clearPOI();
+        calibrateOverlap(newList);
         setPOIItems(newList);
 
     }
@@ -324,19 +328,30 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
+    private void calibrateOverlap(List<MapPOIItem> list) {
+        if (isOverlap(list)) {
+            scatterPOIItems(list);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void scatterPOIItems(List<MapPOIItem> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getMapPoint().getMapPointGeoCoord() == list.get(j).getMapPoint().getMapPointGeoCoord()) {
-                    moveCoordinate();
+                if (list.get(i).getMapPoint().getMapPointGeoCoord().latitude == list.get(j).getMapPoint().getMapPointGeoCoord().latitude
+                        && list.get(i).getMapPoint().getMapPointGeoCoord().longitude == list.get(j).getMapPoint().getMapPointGeoCoord().longitude) {
+
+                    moveCoordinate(list.get(i));
                 }
             }
         }
-
     }
 
-    private void moveCoordinate(){
+    private void moveCoordinate(MapPOIItem mapPOIItem) {
+        double longitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().longitude + 0.00001;
+        double latitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().latitude + 0.00001;
 
+        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
