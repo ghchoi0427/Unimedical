@@ -1,7 +1,6 @@
 package com.sample.unimedical.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +12,6 @@ import com.sample.unimedical.R;
 public class MainActivity extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
-    private static final String URL_TUTORIAL = "https://m.blog.naver.com/PostList.naver?blogId=unimedical777&categoryNo=42&logCode=0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
