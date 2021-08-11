@@ -348,8 +348,8 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
     }
 
     private void moveCoordinate(MapPOIItem mapPOIItem) {
-        double longitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().longitude + 0.00001;
-        double latitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().latitude + 0.00001;
+        double longitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().longitude + 0.00006;
+        double latitude = mapPOIItem.getMapPoint().getMapPointGeoCoord().latitude + 0.00006;
 
         mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
     }
