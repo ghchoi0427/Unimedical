@@ -3,6 +3,7 @@ package com.sample.unimedical.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -319,6 +321,27 @@ public class MapActivity extends FragmentActivity implements MapView.MapViewEven
         }
 
         return mapPOIItem;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void scatterPOIItems(List<MapPOIItem> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i).getMapPoint().getMapPointGeoCoord() == list.get(j).getMapPoint().getMapPointGeoCoord()) {
+                    moveCoordinate();
+                }
+            }
+        }
+
+    }
+
+    private void moveCoordinate(){
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private boolean isOverlap(List<MapPOIItem> list) {
+        return list.stream().map(e -> e.getMapPoint().getMapPointGeoCoord()) != list.stream().map(e -> e.getMapPoint().getMapPointGeoCoord()).distinct();
     }
 
 
