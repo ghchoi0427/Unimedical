@@ -1,10 +1,12 @@
 package com.sample.unimedical.activities;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
 
     private static final String FILE_NAME = "device_data_0712.json";
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
         return jsonString;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void processResponse(String response) {
         Gson gson = new Gson();
         itemList = gson.fromJson(response, ItemList.class);
@@ -75,6 +79,7 @@ public class DeviceSearchActivity extends AppCompatActivity {
         notifyDataSetChanged(adapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void searchItem(String keyword) {
 
         try {
