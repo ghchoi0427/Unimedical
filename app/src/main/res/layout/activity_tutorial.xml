@@ -6,75 +6,111 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="80dp">
 
         <Button
             android:id="@+id/btn_lec01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="회사 소개" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="회사 소개"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec02"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="큐플린트 교육 영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="큐플린트 교육 영상"
+            android:textSize="20sp" />
+
 
         <Button
             android:id="@+id/btn_lec03"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="쿨밴드 교육 영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="쿨밴드 교육 영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec04"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="압박스타킹 교육 영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="압박스타킹 교육 영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec05"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="압박밴드(아대) 교육영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="압박밴드(아대) 교육영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec06"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="스킨마커 교육영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="스킨마커 교육영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec07"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="쉐이버 블레이드 교육영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="쉐이버 블레이드 교육영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec08"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="수액필터 교육영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="수액필터 교육영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec09"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="목 부목 교육영상" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="목 부목 교육영상"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec10"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="심평원 치료재료대 신고 방법" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="심평원 치료재료대 신고 방법"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_lec11"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="의사랑 묶음 코드 연결 방법" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="-0.1"
+            android:text="의사랑 묶음 코드 연결 방법"
+            android:textSize="20sp" />
+
 
     </LinearLayout>
 
