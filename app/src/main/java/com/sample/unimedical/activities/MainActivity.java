@@ -3,6 +3,7 @@ package com.sample.unimedical.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,20 +21,22 @@ public class MainActivity extends AppCompatActivity {
 
         boolean AUTH = getIntent().getBooleanExtra("authentication", false);
 
-        Button btnSearchEngine = findViewById(R.id.btn_search_engine);
-        Button btnStock = findViewById(R.id.btn_stock_status);
-        Button btnInputSale = findViewById(R.id.btn_input_sales);
-        Button btnMap = findViewById(R.id.btn_map);
-        Button btnStatus = findViewById(R.id.btn_status);
-        Button btnUpdate = findViewById(R.id.btn_update);
-        Button btnTutorial = findViewById(R.id.btn_tutorial);
+        ImageButton btnLogo = findViewById(R.id.btn_logo);
+        ImageButton btnSearchEngine = findViewById(R.id.btn_search_engine);
+        ImageButton btnStock = findViewById(R.id.btn_stock_status);
+        ImageButton btnMap = findViewById(R.id.btn_map);
+        ImageButton btnCalendar = findViewById(R.id.btn_calendar);
+        ImageButton btnSaleStatus = findViewById(R.id.btn_sale_status);
+        //ImageButton btnInputSale = findViewById(R.id.btn_input_sales);
+        ImageButton btnUpdate = findViewById(R.id.btn_update);
+        ImageButton btnTutorial = findViewById(R.id.btn_tutorial);
 
         if (AUTH) {
             btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
             btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "StockActivity")));
             btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
-            btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
-            btnStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
+            //btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
+            btnSaleStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
             btnUpdate.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UpdateActivity.class)));
             btnTutorial.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TutorialActivity.class)));
         } else {
