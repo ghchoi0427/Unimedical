@@ -4,145 +4,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/banner"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/sub_logo_description"
-        app:srcCompat="@drawable/logo_main" />
+    android:orientation="vertical"
+    android:paddingBottom="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.85"
+        android:background="@color/white"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/btn_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo2" />
+    </LinearLayout>
 
-        <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_weight="0.7"
+        android:orientation="horizontal">
+
+        <ImageButton
             android:id="@+id/btn_search_engine"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/icon_injection"
-            android:text="의료기기\n검색엔진"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/search_device" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_stock_status"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/icon_checklist"
-            android:padding="10dp"
-            android:text="이카운트\n재고현황"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/stock_status" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="bottom"
+        android:layout_marginVertical="5dp"
+        android:layout_weight="0.83"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/icon_map"
-            android:paddingTop="15dp"
-            android:text="병원찾기\n주변검색"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-
-        <Button
-            android:id="@+id/btn_input_sales"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/icon_database"
-            android:paddingTop="15dp"
-            android:text="이카운트\n판매입력"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_status"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:drawableLeft="@drawable/icon_salesman"
-            android:paddingHorizontal="110dp"
-            android:text="영업현황"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/find_hospital" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_weight="0.8"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_update"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/btn_calendar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:drawableLeft="@drawable/icon_update"
-            android:paddingHorizontal="110dp"
-            android:text="업데이트"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/calendar" />
+
+        <ImageButton
+            android:id="@+id/btn_sale_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/sale_status" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.8"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_tutorial"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:paddingHorizontal="110dp"
-            android:text="교육영상"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-    </LinearLayout>
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/tutorial" />
 
+        <ImageButton
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/update_data" />
+    </LinearLayout>
 </LinearLayout>
