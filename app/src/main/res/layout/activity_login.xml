@@ -15,9 +15,10 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="196dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
+            android:scaleType="fitCenter"
+            android:scaleX="2.5"
             app:srcCompat="@drawable/logo_main" />
     </LinearLayout>
 
@@ -39,8 +40,8 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_stroke_white"
             android:layout_weight="1"
+            android:background="@drawable/radius_stroke_white"
             android:text="로그인" />
     </LinearLayout>
 
@@ -50,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@color/transparent"
-        android:textColor="#606060"
         android:text="비회원 로그인"
+        android:textColor="#606060"
         android:textSize="10sp" />
 
 </LinearLayout>
