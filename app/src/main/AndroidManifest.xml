@@ -54,6 +54,7 @@
         <activity android:name=".activities.UpdateActivity" />
         <activity android:name=".activities.StockActivity" />
         <activity android:name=".activities.TutorialActivity" />
+        <activity android:name=".activities.CalendarActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
