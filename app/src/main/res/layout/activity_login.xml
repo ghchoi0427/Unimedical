@@ -29,11 +29,21 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edit_login_code"
+            android:id="@+id/edit_login_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="ID"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edit_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Password"
             android:inputType="numberPassword" />
 
         <Button
@@ -44,6 +54,15 @@
             android:background="@drawable/radius_stroke_white"
             android:text="로그인" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="회원가입"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/btn_login_visitor"
