@@ -2,9 +2,14 @@ package com.sample.unimedical.util;
 
 import android.util.Log;
 
+import com.sample.unimedical.domain.stock.Stock;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonFactory {
 
@@ -24,7 +29,7 @@ public class JsonFactory {
         return new JSONObject()
                 .put("COM_CODE", comCode)
                 .put("USER_ID", userID)
-                .put("API_CERT_KEY", ECOUNT_API_KEY)
+                .put("API_CERT_KEY", ECOUNT_API_KEY_TEST)
                 .put("LAN_TYPE", "ko-KR")
                 .put("ZONE", "BA");
     }
@@ -47,6 +52,17 @@ public class JsonFactory {
 
     public static JSONObject saleList(JSONArray salesItems) throws JSONException {
         return new JSONObject().put("SaleList", salesItems);
+    }
+
+    public static List<Stock> JsonArrayToStockList(JSONArray jsonArray) throws JSONException {
+        List<Stock> newList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Stock stock = new Stock();
+            stock.setPROD_CD(jsonArray.getJSONObject(i).getString("PROD_CD"));
+            stock.setBAL_QTY(jsonArray.getJSONObject(i).getString("BAL_QTY"));
+            newList.add(stock);
+        }
+        return newList;
     }
 
 }
