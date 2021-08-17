@@ -23,15 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
         boolean AUTH = getIntent().getBooleanExtra("authentication", false);
 
-        ImageButton btnLogo = findViewById(R.id.btn_logo);
-        ImageButton btnSearchEngine = findViewById(R.id.btn_search_engine);
-        ImageButton btnStock = findViewById(R.id.btn_stock_status);
-        ImageButton btnMap = findViewById(R.id.btn_map);
-        ImageButton btnCalendar = findViewById(R.id.btn_calendar);
-        ImageButton btnSaleStatus = findViewById(R.id.btn_sale_status);
+        Button btnLogo = findViewById(R.id.btn_logo);
+        Button btnSearchEngine = findViewById(R.id.btn_search_engine);
+        Button btnStock = findViewById(R.id.btn_stock_status);
+        Button btnMap = findViewById(R.id.btn_map);
+        Button btnCalendar = findViewById(R.id.btn_calendar);
+        Button btnSaleStatus = findViewById(R.id.btn_sale_status);
+        Button btnUpdate = findViewById(R.id.btn_update);
+        Button btnTutorial = findViewById(R.id.btn_tutorial);
         //ImageButton btnInputSale = findViewById(R.id.btn_input_sales);
-        ImageButton btnUpdate = findViewById(R.id.btn_update);
-        ImageButton btnTutorial = findViewById(R.id.btn_tutorial);
 
         if (AUTH) {
             btnLogo.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(HOMEPAGE_URL))));
