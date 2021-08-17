@@ -44,7 +44,7 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/shadow_theme"
+                android:background="@drawable/radius_theme"
                 android:text="검색"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -57,7 +57,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/radius_theme_transparent"
+            android:background="@drawable/radius_theme"
             android:drawableLeft="@drawable/icon_refresh"
             android:padding="-10dp"
             android:paddingLeft="10dp"
