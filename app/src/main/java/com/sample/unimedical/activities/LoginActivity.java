@@ -18,7 +18,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText editPassword;
     Button btnLogo;
     Button btnLogin;
-    Button btnRegister;
     Button btnVisitorLogin;
     private FirebaseAuth auth;
 
@@ -30,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogo = findViewById(R.id.btn_logo);
         btnLogin = findViewById(R.id.btn_login);
-        btnRegister = findViewById(R.id.btn_register);
         btnVisitorLogin = findViewById(R.id.btn_login_visitor);
         editId = findViewById(R.id.edit_login_id);
         editPassword = findViewById(R.id.edit_login_password);
@@ -39,11 +37,6 @@ public class LoginActivity extends AppCompatActivity {
             backdoor(editId.getText().toString().trim());
             signIn(editId.getText().toString().trim(), editPassword.getText().toString().trim());
         });
-
-        btnRegister.setOnClickListener(v -> {
-            startActivity(new Intent(this, RegisterActivity.class));
-        });
-
 
         btnVisitorLogin.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class).putExtra("authentication", false));
@@ -80,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void backdoor(String key) {
-        if (key.equals("")) {
+        if (key.equals("backdoor")) {
             startActivity(new Intent(this, MainActivity.class).putExtra("authentication", true));
         }
     }
