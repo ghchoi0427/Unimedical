@@ -1,7 +1,5 @@
 package com.sample.unimedical.util;
 
-import android.util.Log;
-
 import com.sample.unimedical.domain.stock.Stock;
 
 import org.json.JSONArray;
@@ -29,7 +27,7 @@ public class JsonFactory {
         return new JSONObject()
                 .put("COM_CODE", comCode)
                 .put("USER_ID", userID)
-                .put("API_CERT_KEY", ECOUNT_API_KEY_TEST)
+                .put("API_CERT_KEY", ECOUNT_API_KEY)
                 .put("LAN_TYPE", "ko-KR")
                 .put("ZONE", "BA");
     }
