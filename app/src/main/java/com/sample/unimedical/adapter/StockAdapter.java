@@ -10,16 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sample.unimedical.R;
 import com.sample.unimedical.domain.stock.Stock;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.sample.unimedical.util.DataMapper;
 
 import java.util.ArrayList;
-
-import static com.sample.unimedical.util.DataMapper.getProductNameByCode;
+import java.util.List;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
-    public ArrayList<Stock> stocks = new ArrayList<>();
+    public List<Stock> stocks = new ArrayList<>();
     private static final String PRODUCT_NAME = "품목명: ";
     private static final String PRODUCT_QUANTITY = "재고수량: ";
 
@@ -47,13 +44,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         stocks.add(stock);
     }
 
-    public void addItems(JSONArray jsonArray) throws JSONException {
-        for (int i = 0; i < jsonArray.length(); i++) {
-            Stock stock = new Stock();
-            stock.setPROD_CD(jsonArray.getJSONObject(i).getString("PROD_CD"));
-            stock.setBAL_QTY(jsonArray.getJSONObject(i).getString("BAL_QTY"));
-            stocks.add(stock);
-        }
+
+    public void addItems(List<Stock> stockList) {
+        stocks = stockList;
     }
 
     public void clearItem() {
@@ -82,7 +75,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         }
 
         private String mapper(String key) {
-            return getProductNameByCode().get(key);
+            DataMapper dataMapper = new DataMapper();
+            return dataMapper.getProductNameByCode(key);
         }
     }
 }
