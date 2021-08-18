@@ -20,19 +20,9 @@
             android:layout_weight="1"
             android:backgroundTint="@color/black"
             android:drawableTop="@drawable/icon_download"
-            android:text="병원정보\n업데이트"
+            android:text="병원 및 거래처\n업데이트"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/btn_update_customer"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/black"
-            android:drawableTop="@drawable/icon_download"
-            android:text="거래처\n업데이트"
-            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>
