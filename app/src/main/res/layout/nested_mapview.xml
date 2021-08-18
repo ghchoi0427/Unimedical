@@ -80,7 +80,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/transparent_white"
-                android:indeterminateTint="@color/theme_light"
+                android:indeterminateTint="@color/theme"
                 android:padding="150dp"
                 android:paddingBottom="120dp"
                 android:visibility="gone" />
