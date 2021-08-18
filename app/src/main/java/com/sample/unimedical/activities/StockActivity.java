@@ -47,7 +47,6 @@ public class StockActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewStock.setLayoutManager(layoutManager);
         recyclerViewStock.setAdapter(stockAdapter);
-        List<Stock> stockList = new ArrayList<>();
 
         SESSION_ID = getIntent().getStringExtra("SESSION_ID");
         ZONE_CODE = getIntent().getStringExtra("ZONE_CODE");
