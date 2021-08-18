@@ -36,8 +36,8 @@ public class EcountActivity extends AppCompatActivity {
         editUserID = findViewById(R.id.edit_user_id);
         ecountLogin = findViewById(R.id.btn_ecount_login);
 
-        Thread loginThread = new Thread(() -> login());
-        Thread zoneThread = new Thread(() -> zone());
+        Thread loginThread = new Thread(this::login);
+        Thread zoneThread = new Thread(this::zone);
 
         ecountLogin.setOnClickListener(view -> {
             try {
