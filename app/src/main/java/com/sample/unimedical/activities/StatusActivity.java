@@ -1,6 +1,7 @@
 package com.sample.unimedical.activities;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +69,7 @@ public class StatusActivity extends AppCompatActivity {
         }
 
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CITY_NAME = parent.getItemAtPosition(position).toString();
@@ -93,6 +96,7 @@ public class StatusActivity extends AppCompatActivity {
         return jsonString;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void processResponse(String response) {
         Gson gson = new Gson();
         statusList = gson.fromJson(response, StatusList.class);
@@ -104,6 +108,7 @@ public class StatusActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void searchItem(String keyword) {
         try {
             statusList.getStatuses().stream().filter(e -> e.getAddress().contains(keyword)).forEach(adapter::addItem);
