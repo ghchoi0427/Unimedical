@@ -69,7 +69,7 @@ public class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
                 textSaleItemRemarks.setText(String.format("적요: %s", bulkDatas.getString("REMARKS")));
                 textSaleItemPrice.setText(String.format("가격: %s", bulkDatas.getString("PRICE")));
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
