@@ -94,7 +94,7 @@ public class InputSaleActivity extends AppCompatActivity {
         uploadSale.setOnClickListener(view -> new Thread(() -> {
             try {
                 JSONObject response = new JSONObject(sendEcountInputSaleRequest(ZONE_CODE, SESSION_ID, jsonArray));
-                if (isSuccess((JSONObject) response)) {
+                if (isSuccess(response)) {
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show());
                 }
             } catch (IOException | JSONException e) {

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnSaleStatus = findViewById(R.id.btn_sale_status);
         Button btnUpdate = findViewById(R.id.btn_update);
         Button btnTutorial = findViewById(R.id.btn_tutorial);
-        //ImageButton btnInputSale = findViewById(R.id.btn_input_sales);
 
         if (AUTH) {
             btnLogo.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(HOMEPAGE_URL))));
             btnSearchEngine.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DeviceSearchActivity.class)));
             btnStock.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "StockActivity")));
             btnMap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapActivity.class)));
-            //btnInputSale.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EcountActivity.class).putExtra("nextActivity", "InputSaleActivity")));
             btnSaleStatus.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StatusActivity.class)));
             btnUpdate.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UpdateActivity.class)));
             btnTutorial.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TutorialActivity.class)));
